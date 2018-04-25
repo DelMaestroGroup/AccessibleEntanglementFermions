@@ -99,7 +99,6 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #Negative energies subplot
     ax1 = plt.subplot(gs[0])
-    #ax1 = fig.add_subplot(221)
     ax1.axvline(x=-2,color='#cccccc')   #Grey vertical line at transition point
     ax1.plot(energiesNEG_M30N15, s1NEG_M30N15, 'o',  label='1, 15', markersize = 3, markerfacecolor = blue[1], markeredgewidth = '0.25', color='#2B5080')
     ax1.plot(energiesNEG_M26N13, s1NEG_M26N13, 's', label='1, 13', markersize = 3, markerfacecolor = blue[2], markeredgewidth = '0.25',color='#2B5080')
