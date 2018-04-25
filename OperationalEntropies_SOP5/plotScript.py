@@ -23,8 +23,10 @@ for i,c in enumerate(alpha):
 #entanglement converges at +- infinity interaction strength.
 xNEG = np.linspace(-10,-100,1000)
 xPOS = np.linspace(10,100,1000)
-exactNEG = xNEG - xNEG + 14/15*np.log(2)
-exactPOS = xPOS - xPOS + np.log(2)
+a = 2
+N = 15
+exactNEG1 = xNEG - xNEG + (a/(1-a))*np.log((N-1)/N * 2**((1-a)/a) + 1/N)
+exactPOS = 0
 
 with plt.style.context('../IOP_large.mplstyle2'):
 
@@ -92,6 +94,8 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #Set height ratios for subplots
     gs = gridspec.GridSpec(2, 2, height_ratios=[1, 1])
+    
+    print(exactNEG1[-1],s2NEG_M30N15[-1] )
 
     #Negative energies subplot
     ax1 = plt.subplot(gs[0])
@@ -103,14 +107,14 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax1.plot(energiesNEG_M30N15, s2NEG_M30N15, 'o',  label='2, 15', markersize = 3, markerfacecolor = orange[1], markeredgewidth = '0.25',color='#CC7000')
     ax1.plot(energiesNEG_M26N13, s2NEG_M26N13, 's', label='2, 13', markersize = 3, markerfacecolor = orange[2], markeredgewidth = '0.25',color='#CC7000')
     ax1.plot(energiesNEG_M22N11, s2NEG_M22N11, '^',  label='2, 11', markersize = 3, markerfacecolor = orange[3], markeredgewidth = '0.25',color='#CC7000')
-    ax1.plot(xNEG, exactNEG, '-', markersize = 3, markerfacecolor = 'k', markeredgewidth = '0.25',color='k',linewidth=0.6)
+    ax1.plot(xNEG, exactNEG1, '-', markersize = 3, markerfacecolor = 'k', markeredgewidth = '0.25',color='k',linewidth=0.6)
     ax1.set_xlim(-energies_M22N11[-1], -energies_M22N11[0])
     ax1.set_ylim(0,0.85)
-    ax1.set_ylabel(r'$S_{\alpha}^{\rm{op}(5)}(\ell)$')
+    ax1.set_ylabel(r'$S_{\alpha}^{\rm{op}}(\ell)$')
     ax1.set_xscale('symlog', linthreshx = 0.000001)       #symlog necessary to plot negative values with log scale
     ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction='in')
     ax1.set_xlabel(' ')
-#    ax1.annotate(r'$\frac{14}{15}\ln{2}$', xy=(-30, 0.7 ), xytext=(-80, 0.67))
+    ax1.annotate(r'$-2\ln{[\frac{14}{15}2^{-\frac{1}{2}} + \frac{1}{15}]}$', xy=(-30, 0.7 ), xytext=(-95, 0.67), size=11)
 
     #Legend
     lgnd = plt.legend(loc=(0.06,0.04),fontsize=7,handlelength=3,handleheight=2, title= r'$\alpha$, $N$', frameon=False)
@@ -143,6 +147,15 @@ with plt.style.context('../IOP_large.mplstyle2'):
     
 #Bottom Plot: Operational entanglement entropies for even number of particles
 
+    #Make a line indicating the value at which operational
+    #entanglement converges at +- infinity interaction strength.
+    xNEG = np.linspace(-10,-100,1000)
+    xPOS = np.linspace(10,100,1000)
+    a = 2
+    N = 16
+    exactNEG = xNEG - xNEG + (a/(1-a))*np.log((N-1)/N * 2**((1-a)/a) + 1/N)
+    exactPOS = xPOS - xPOS + np.log(2)
+    
     #Load data
 
     #12 particles
@@ -202,6 +215,9 @@ with plt.style.context('../IOP_large.mplstyle2'):
     
     #Negative energies subplot
     ax4 = plt.subplot(gs[2], sharex=ax1)
+    
+    print(exactNEG[-1],s2NEG_M32N16[-1] )
+
 
     #ax4 = fig.add_subplot(223)
     ax4.axvline(x=-2,color='#cccccc')   #Grey vertical line at transition point
@@ -214,10 +230,10 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax4.plot(xNEG, exactNEG, '-', markersize = 3, markerfacecolor = 'k', markeredgewidth = '0.25',color='k',linewidth=0.6)
     ax4.set_xlim(-energies_M22N11[-1], -energies_M22N11[0])
     ax4.set_ylim(0,0.85)
-    ax4.set_ylabel(r'$S_{\alpha}^{\rm{op}(5)}(\ell)$')
+    ax4.set_ylabel(r'$S_{\alpha}^{\rm{op}}(\ell)$')
     ax4.set_xscale('symlog', linthreshx = 0.000001)
     ax4.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction='in')
-#    ax4.annotate(r'$\frac{15}{16}\ln{2}$', xy=(-30, 0.7 ), xytext=(-80, 0.67))
+    ax4.annotate(r'$-2\ln{[\frac{15}{16}2^{-\frac{1}{2}} + \frac{1}{16}]}$', xy=(-30, 0.7 ), xytext=(-95, 0.67),size=11)
 
     
     #Legend
@@ -228,9 +244,6 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #Positive energies subplot
     ax5 = plt.subplot(gs[3], sharex=ax2)
-
-
-
 
     #ax5 = fig.add_subplot(224)
     ax5.axvline(x=2,color='#cccccc')   #Grey vertical line at transition point
@@ -246,17 +259,14 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax5.set_xlim(energies_M22N11[0], energies_M22N11[-1])
     ax5.set_ylim(0,0.85)
     ax5.set_xscale('symlog', linthreshx = 0.000001)  #symlog necessary for log scale on negative values
-    #ax5.annotate(r'$\ln{2}$', xy=(30, 0.7 ), xytext=(18, 0.73))
+    ax5.annotate(r'$\ln{2}$', xy=(30, 0.7 ), xytext=(18, 0.73), size=12)
     plt.xlabel(r'$V/t$',x=0)
-
 
     #Remove numbers from real axes of top plots
     plt.setp(ax1.get_xticklabels(), visible=False)
     plt.setp(ax2.get_xticklabels(), visible=False)
     # remove vertical gap between subplots
     plt.subplots_adjust(hspace=0.023)
-    
-
 
     #Adjust space between subplots
     plt.subplots_adjust(wspace = 0.030)
