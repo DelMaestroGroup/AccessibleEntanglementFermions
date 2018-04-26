@@ -19,13 +19,6 @@ for i,c in enumerate(alpha):
         orange.append(colors.get_alpha_hex(orange[0],beta[i]))
         blue.append(colors.get_alpha_hex(blue[0],beta[i]))
 
-#Make a line indicating the value at which operational
-#entanglement converges at +- infinity interaction strength.
-xNEG = np.linspace(-10,-100,1000)
-xPOS = np.linspace(10,100,1000)
-exactNEG = xNEG - xNEG + 14/15*np.log(2)
-exactPOS = xPOS - xPOS + np.log(2)
-
 with plt.style.context('../IOP_large.mplstyle2'):
 
     #Top Plot: One Particle Entanglement entropy dependence on the interaction potential
@@ -92,7 +85,14 @@ with plt.style.context('../IOP_large.mplstyle2'):
     
     #Set height ratios for subplots
     gs = gridspec.GridSpec(2, 2, height_ratios=[1, 1])
-    
+
+    #Make a line indicating the value at which operational
+    #entanglement converges at +- infinity interaction strength.
+    xNEG = np.linspace(-10,-100,1000)
+    xPOS = np.linspace(10,100,1000)
+    exactNEG = xNEG - xNEG + 14/15*np.log(2)
+    exactPOS = xPOS - xPOS + np.log(2)
+
     #Negative energies subplot
     ax1 = plt.subplot(gs[0])
     #ax1 = fig.add_subplot(221)
@@ -200,6 +200,11 @@ with plt.style.context('../IOP_large.mplstyle2'):
     s2NEG_M32N16 = dataNEG_M32N16[:,5]
     s2_M32N16 = data_M32N16[:,5]
 
+    #Make a line indicating the value at which operational
+    #entanglement converges at +- infinity interaction strength.
+    exactNEG = xNEG - xNEG + 15/16*np.log(2)
+    exactPOS = xPOS - xPOS + np.log(2)
+    
     #Negative energies subplot
     ax4 = plt.subplot(gs[2], sharex=ax1)
 

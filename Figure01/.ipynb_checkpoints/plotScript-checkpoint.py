@@ -19,15 +19,6 @@ for i,c in enumerate(alpha):
         orange.append(colors.get_alpha_hex(orange[0],beta[i]))
         blue.append(colors.get_alpha_hex(blue[0],beta[i]))
 
-#Make a line indicating the value at which operational
-#entanglement converges at +- infinity interaction strength.
-xNEG = np.linspace(-10,-100,1000)
-xPOS = np.linspace(10,100,1000)
-a = 2
-N = 15
-exactNEG1 = xNEG - xNEG + (a/(1-a))*np.log((N-1)/N * 2**((1-a)/a) + 1/N)
-exactPOS = 0
-
 with plt.style.context('../IOP_large.mplstyle2'):
 
 #Top Plot: One Particle Entanglement entropy dependence on the interaction potential
@@ -95,25 +86,31 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Set height ratios for subplots
     gs = gridspec.GridSpec(2, 2, height_ratios=[1, 1])
     
-    print(exactNEG1[-1],s2NEG_M30N15[-1] )
+    #Make a line indicating the value at which operational
+    #entanglement converges at +- infinity interaction strength.
+    xNEG = np.linspace(-10,-100,1000)
+    xPOS = np.linspace(10,100,1000)
+    N = 15
+    exactNEG = xNEG - xNEG + (N-1)/N * np.log(2)
+    exactPOS = 0
 
     #Negative energies subplot
     ax1 = plt.subplot(gs[0])
     ax1.axvline(x=-2,color='#cccccc')   #Grey vertical line at transition point
-    ax1.plot(energiesNEG_M30N15, s1NEG_M30N15, 'o',  label='1, 15', markersize = 3, markerfacecolor = blue[1], markeredgewidth = '0.25', color='#2B5080')
+    ax1.plot(energiesNEG_M30N15, s1NEG_M30N15, 'o',  label='1, 15', markersize = 3, markerfacecolor = blue[1], markeredgewidth = '0.25', color='#2B5080',zorder=4)
     ax1.plot(energiesNEG_M26N13, s1NEG_M26N13, 's', label='1, 13', markersize = 3, markerfacecolor = blue[2], markeredgewidth = '0.25',color='#2B5080')
     ax1.plot(energiesNEG_M22N11, s1NEG_M22N11, '^',  label='1, 11', markersize = 3, markerfacecolor = blue[3], markeredgewidth = '0.25',color='#2B5080')
-    ax1.plot(energiesNEG_M30N15, s2NEG_M30N15, 'o',  label='2, 15', markersize = 3, markerfacecolor = orange[1], markeredgewidth = '0.25',color='#CC7000')
+    ax1.plot(energiesNEG_M30N15, s2NEG_M30N15, 'o',  label='2, 15', markersize = 3, markerfacecolor = orange[1], markeredgewidth = '0.25',color='#CC7000',zorder=4)
     ax1.plot(energiesNEG_M26N13, s2NEG_M26N13, 's', label='2, 13', markersize = 3, markerfacecolor = orange[2], markeredgewidth = '0.25',color='#CC7000')
     ax1.plot(energiesNEG_M22N11, s2NEG_M22N11, '^',  label='2, 11', markersize = 3, markerfacecolor = orange[3], markeredgewidth = '0.25',color='#CC7000')
-    ax1.plot(xNEG, exactNEG1, '-', markersize = 3, markerfacecolor = 'k', markeredgewidth = '0.25',color='k',linewidth=0.6)
+    ax1.plot(xNEG, exactNEG, '-', markersize = 3, markerfacecolor = 'k', markeredgewidth = '0.25',color='k',linewidth=0.6,zorder=5)
     ax1.set_xlim(-energies_M22N11[-1], -energies_M22N11[0])
     ax1.set_ylim(0,0.85)
     ax1.set_ylabel(r'$S_{\alpha}^{\rm{op}}(\ell)$')
     ax1.set_xscale('symlog', linthreshx = 0.000001)       #symlog necessary to plot negative values with log scale
     ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction='in')
     ax1.set_xlabel(' ')
-    ax1.annotate(r'$-2\ln{[\frac{14}{15}2^{-\frac{1}{2}} + \frac{1}{15}]}$', xy=(-30, 0.7 ), xytext=(-95, 0.67), size=11)
+    ax1.annotate(r'$\frac{14}{15}\ln{2}$', xy=(-30, 0.7 ), xytext=(-80, 0.67))
 
     #Legend
     lgnd = plt.legend(loc=(0.06,0.04),fontsize=7,handlelength=3,handleheight=2, title= r'$\alpha$, $N$', frameon=False)
@@ -127,10 +124,10 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #ax2 = fig.add_subplot(222)
     ax2.axvline(x=2, color='#cccccc')
     ax2.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction='in')
-    ax2.plot(energies_M30N15, s1_M30N15, 'o',  label=r'$1, 15$', markersize = 3, markerfacecolor = blue[1], markeredgewidth = '0.25', color='#2B5080')
+    ax2.plot(energies_M30N15, s1_M30N15, 'o',  label=r'$1, 15$', markersize = 3, markerfacecolor = blue[1], markeredgewidth = '0.25', color='#2B5080',zorder=4)
     ax2.plot(energies_M26N13, s1_M26N13, 's', label=r'$1, 13$', markersize = 3, markerfacecolor =  blue[2], markeredgewidth = '0.25',color='#2B5080')
     ax2.plot(energies_M22N11, s1_M22N11, '^', label=r'$1, 11$', markersize = 3, markerfacecolor = blue[3], markeredgewidth = '0.25',color='#2B5080')
-    ax2.plot(energies_M30N15, s2_M30N15, 'o',  label=r'$2, 15$', markersize = 3, markerfacecolor = orange[1], markeredgewidth = '0.25',color='#CC7000')
+    ax2.plot(energies_M30N15, s2_M30N15, 'o',  label=r'$2, 15$', markersize = 3, markerfacecolor = orange[1], markeredgewidth = '0.25',color='#CC7000',zorder=4)
     ax2.plot(energies_M26N13, s2_M26N13, 's', label=r'$2, 13$', markersize = 3, markerfacecolor =  orange[2], markeredgewidth = '0.25',color='#CC7000')
     ax2.plot(energies_M22N11, s2_M22N11, '^', label=r'$2, 11$', markersize = 3, markerfacecolor =  orange[3], markeredgewidth = '0.25',color='#CC7000')
     ax2.text(0.04,0.78,r'$N$ Odd')
@@ -212,27 +209,32 @@ with plt.style.context('../IOP_large.mplstyle2'):
     s2NEG_M32N16 = dataNEG_M32N16[:,8]
     s2_M32N16 = data_M32N16[:,8]
     
+    #Make a line indicating the value at which operational
+    #entanglement converges at +- infinity interaction strength.
+    xNEG = np.linspace(-10,-100,1000)
+    xPOS = np.linspace(10,100,1000)
+    N = 16
+    exactNEG = xNEG - xNEG + (N-1)/N * np.log(2)
+    exactPOS = np.ones(np.size(xPOS))*np.log(2)
+    
     #Negative energies subplot
     ax4 = plt.subplot(gs[2], sharex=ax1)
-    
-    print(exactNEG[-1],s2NEG_M32N16[-1] )
-
 
     #ax4 = fig.add_subplot(223)
     ax4.axvline(x=-2,color='#cccccc')   #Grey vertical line at transition point
-    ax4.plot(energiesNEG_M32N16, s1NEG_M32N16, 'o',  label='1, 16', markersize = 3, markerfacecolor = blue[1], markeredgewidth = '0.25',color='#2B5080')
+    ax4.plot(energiesNEG_M32N16, s1NEG_M32N16, 'o',  label='1, 16', markersize = 3, markerfacecolor = blue[1], markeredgewidth = '0.25',color='#2B5080',zorder=4)
     ax4.plot(energiesNEG_M28N14, s1NEG_M28N14, 's', label='1, 14', markersize = 3, markerfacecolor = blue[2], markeredgewidth = '0.25',color='#2B5080')
     ax4.plot(energiesNEG_M24N12, s1NEG_M24N12, '^',  label='1, 12', markersize = 3, markerfacecolor = blue[3], markeredgewidth = '0.25',color='#2B5080')
-    ax4.plot(energiesNEG_M32N16, s2NEG_M32N16, 'o',  label='2, 16', markersize = 3, markerfacecolor = orange[1], markeredgewidth = '0.25',color='#CC7000')
+    ax4.plot(energiesNEG_M32N16, s2NEG_M32N16, 'o',  label='2, 16', markersize = 3, markerfacecolor = orange[1], markeredgewidth = '0.25',color='#CC7000',zorder=4)
     ax4.plot(energiesNEG_M28N14, s2NEG_M28N14, 's', label='2, 14', markersize = 3, markerfacecolor = orange[2], markeredgewidth = '0.25',color='#CC7000')
     ax4.plot(energiesNEG_M24N12, s2NEG_M24N12, '^',  label='2, 12', markersize = 3, markerfacecolor = orange[3], markeredgewidth = '0.25',color='#CC7000')
-    ax4.plot(xNEG, exactNEG, '-', markersize = 3, markerfacecolor = 'k', markeredgewidth = '0.25',color='k',linewidth=0.6)
+    ax4.plot(xNEG, exactNEG, '-', markersize = 3, markerfacecolor = 'k', markeredgewidth = '0.25',color='k',linewidth=0.6,zorder=5)
     ax4.set_xlim(-energies_M22N11[-1], -energies_M22N11[0])
     ax4.set_ylim(0,0.85)
     ax4.set_ylabel(r'$S_{\alpha}^{\rm{op}}(\ell)$')
     ax4.set_xscale('symlog', linthreshx = 0.000001)
     ax4.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction='in')
-    ax4.annotate(r'$-2\ln{[\frac{15}{16}2^{-\frac{1}{2}} + \frac{1}{16}]}$', xy=(-30, 0.7 ), xytext=(-95, 0.67),size=11)
+    ax4.annotate(r'$\frac{15}{16}\ln{2}$', xy=(-30, 0.7 ), xytext=(-80, 0.67))
 
     
     #Legend
@@ -247,13 +249,13 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #ax5 = fig.add_subplot(224)
     ax5.axvline(x=2,color='#cccccc')   #Grey vertical line at transition point
     ax5.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction='in')
-    ax5.plot(energies_M32N16, s1_M32N16, 'o',  label=r'$1, 16$', markersize = 3, markerfacecolor = blue[1], markeredgewidth = '0.25',color='#2B5080')
+    ax5.plot(energies_M32N16, s1_M32N16, 'o',  label=r'$1, 16$', markersize = 3, markerfacecolor = blue[1], markeredgewidth = '0.25',color='#2B5080',zorder=4)
     ax5.plot(energies_M28N14, s1_M28N14, 's', label=r'$1, 14$', markersize = 3, markerfacecolor = blue[2], markeredgewidth = '0.25',color='#2B5080')
     ax5.plot(energies_M24N12, s1_M24N12, '^', label=r'$1, 12$', markersize = 3, markerfacecolor = blue[3], markeredgewidth = '0.25',color='#2B5080')
-    ax5.plot(energies_M32N16, s2_M32N16, 'o',  label=r'$2, 16$', markersize = 3, markerfacecolor = orange[1], markeredgewidth = '0.25',color='#CC7000')
+    ax5.plot(energies_M32N16, s2_M32N16, 'o',  label=r'$2, 16$', markersize = 3, markerfacecolor = orange[1], markeredgewidth = '0.25',color='#CC7000',zorder=4)
     ax5.plot(energies_M28N14, s2_M28N14, 's', label=r'$2, 14$', markersize = 3, markerfacecolor =  orange[2], markeredgewidth = '0.25',color='#CC7000')
     ax5.plot(energies_M24N12, s2_M24N12, '^', label=r'$2, 12$', markersize = 3, markerfacecolor = orange[3], markeredgewidth = '0.25',color='#CC7000')
-    ax5.plot(xPOS, exactPOS, '-', markersize = 3, markerfacecolor = 'k', markeredgewidth = '0.25',color='k',linewidth=0.6)
+    ax5.plot(xPOS, exactPOS, '-', markersize = 3, markerfacecolor = 'k', markeredgewidth = '0.25',color='k',linewidth=0.6,zorder=5)
     ax5.text(0.04,0.78,r'$N$ Even')
     ax5.set_xlim(energies_M22N11[0], energies_M22N11[-1])
     ax5.set_ylim(0,0.85)
