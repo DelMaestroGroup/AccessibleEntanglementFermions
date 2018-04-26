@@ -331,7 +331,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Adjust space between subplots
     plt.subplots_adjust(wspace = 0.030)
 
-    plt.savefig('higherAlphaFluctuations_N13N14_fullRange.pdf', transparent=False)
+    plt.savefig('higherAlphaDeltaS_N13N14_fullRange.pdf', transparent=False)
     #plt.savefig('higherAlphaFluctuations_N13N14_LLPhase.pdf', transparent=False)
 
     plt.show()
