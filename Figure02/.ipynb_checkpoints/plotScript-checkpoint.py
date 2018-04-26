@@ -1,4 +1,4 @@
-#Calculates the difference between the Von Neumann and Von Neumann Operational
+#Calculates the difference between the Von Neumann and Von Neumann Opearational
 #Entanglement Entropies
 
 import numpy as np
@@ -19,6 +19,8 @@ for i,c in enumerate(alpha):
 
 with plt.style.context('../IOP_large.mplstyle2'):
     
+#Load the files
+
     sigma2FF= 0.4447369456644643  
     #sigma2FF is calculated using the correlation matrix method
 
@@ -59,45 +61,39 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #Negative energies subplot
     ax1 = plt.subplot(gs[0])
-    ax1.axvline(x=-2,color='#cccccc',zorder=0)   #Grey vertical line at transition point
-    ax1.plot(energiesNEG[0::2], dsNEG[0::2], '.', label=r'$S_{1}-S_{1}^{\rm{op}}$', linewidth = 1, color='#4173b3', markerfacecolor = blue[3], markeredgewidth = '0.5', markersize=9,zorder=0)
-    ax1.plot(energiesNEG[0::2], sigma2NEG[0::2], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color='#4173b3', markerfacecolor = 'None', markeredgecolor = blue[0], markeredgewidth = '0.5',markersize=4.0,zorder=2)
-    ax1.plot(energiesNEG, dsNEGLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e K\sigma^2_{FF})}$',linewidth = 1, color=blue[0], markerfacecolor = 'w', markeredgewidth = '0.5',zorder=1)
+    ax1.axvline(x=-2,color='#cccccc',zorder=-1)   #Grey vertical line at transition point
+    ax1.plot(energiesNEG[0::2], dsNEG[0::2], '.', label=r'$S_{1}-S_{1}^{\rm{op}}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax1.plot(energiesNEG[0::2], sigma2NEG[0::2], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax1.plot(energiesNEG, dsNEGLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e K\sigma^2_{FF})}$',linewidth = 1, color=blue[0], markerfacecolor = blue[0], markeredgewidth = '0.5',zorder=1)
     ax1.set_xlim(-energies[-1], -energies[0])
     ax1.set_ylabel(r'$\Delta S_{1}$')
     ax1.set_xscale('symlog', linthreshx = 0.000001)       #symlog necessary to plot negative values with log scale
     ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction = 'in')
     ax1.set_xscale('symlog', linthreshx = 0.000001)
-    ax1.set_ylim(-0.51,3)
+    ax1.set_ylim(-0.51,3.0)
     ax1.set_xlim(-100,-0.029)
     #ax1.set_ylim(-0.15,7.8)
 
     #Legend
-    lgnd = plt.legend(loc=(0.17,0.097),fontsize=8,handlelength=1,handleheight=1, frameon=True)
+    lgnd = plt.legend(loc=(0.20,0.0998),fontsize=7,handlelength=1,handleheight=1, frameon=True)
     frame = lgnd.get_frame()
-    frame.set_facecolor('white')
     frame.set_edgecolor('#cccccc')
-    frame.set_height(100)
-    frame.set_alpha(1)
-    lgnd.set_zorder(4)
-
-
+    frame.set_alpha(1.0)
+    
     #Positive energies subplot
     ax2 = plt.subplot(gs[1])
-    ax2.axvline(x=2, color='#cccccc',zorder=0)
+    ax2.axvline(x=2, color='#cccccc',zorder=-1)
     ax2.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction = 'in')
-    ax2.plot(energies[0::2], ds[0::2], '.', label='1, 13', linewidth = 1, color='#4173b3', markerfacecolor = blue[3], markeredgewidth = '0.5', markersize=9,zorder=0)
-    ax2.plot(energies[0::2], sigma2[0::2], '.', linewidth = 1, color='#4173b3', markerfacecolor = 'None', markeredgewidth = '0.5', markersize=4,zorder=2)
-    ax2.plot(energies, dsLL, '-', linewidth = 1, color=blue[0], markerfacecolor = 'w', markeredgewidth = '0.5',zorder=1)
+    ax2.plot(energies[0::2], ds[0::2], '.', label='1, 13', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax2.plot(energies[0::2], sigma2[0::2], '.', linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax2.plot(energies, dsLL, '-', linewidth = 1, color=blue[0],markerfacecolor = blue[0], markeredgewidth = '0.5',zorder=1)
     ax2.set_xlim(energies[0], energies[-1])
     ax2.set_xscale('symlog', linthreshx = 0.000001)
-    ax2.set_ylim(-0.51,3)
+    ax2.set_ylim(-0.51,3.0)
     ax2.set_xlim(0.029,100)
-    ax2.text(0.04,2.7,r'$N=13$')
+    ax2.text(0.04,2.65,r'$N=13$')
 
-    ######################################
-    
-    #N=14
+    ################################
     
     sigma2FF=0.4515333623486861
     #sigma2FF is calculated using the correlation matrix method
@@ -134,31 +130,30 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #Negative energies subplot
     ax4 = plt.subplot(gs[2])
-    ax4.axvline(x=-2,color='#cccccc',zorder=0)   #Grey vertical line at transition point
-    ax4.plot(energiesNEG[0::2], dsNEG[0::2], '.', label=r'$\Delta s = s_{1}-s_{1}^{op}$', linewidth = 1, color='#4173b3', markerfacecolor = blue[3], markeredgewidth = '0.5', markersize=9,zorder=0)
-    ax4.plot(energiesNEG[0::2], sigma2NEG[0::2], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color='#4173b3', markerfacecolor = 'None', markeredgewidth = '0.5', markersize=4,zorder=2)
-    ax4.plot(energiesNEG, dsNEGLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',zorder=1)
+    ax4.axvline(x=-2,color='#cccccc',zorder=-1)   #Grey vertical line at transition point
+    ax4.plot(energiesNEG[0::2], dsNEG[0::2], '.', label=r'$\Delta s = s_{1}-s_{1}^{op}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax4.plot(energiesNEG[0::2], sigma2NEG[0::2], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax4.plot(energiesNEG, dsNEGLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'w', markeredgewidth = '0.5',zorder=1)
     ax4.set_xlim(-energies[-1], -energies[0])
     ax4.set_ylabel(r'$\Delta S_{1}$')
     ax4.set_xscale('symlog', linthreshx = 0.000001)       #symlog necessary to plot negative values with log scale
     ax4.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction = 'in')
     ax4.set_xscale('symlog', linthreshx = 0.000001)
-    ax4.set_ylim(-0.51,3)
+    ax4.set_ylim(-0.51,3.0)
     ax4.set_xlim(-100,-0.029)
 
     #Positive energies subplot
     ax5 = plt.subplot(gs[3])
-    ax5.axvline(x=2, color='#cccccc',zorder=0)
+    ax5.axvline(x=2, color='#cccccc',zorder=-1)
     ax5.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction = 'in')
-    ax5.plot(energies[0::2], ds[0::2], '.', label='1, 13', linewidth = 1, color='#4173b3', markerfacecolor = blue[3], markeredgewidth = '0.5', markersize=9,zorder=0)
-    ax5.plot(energies[0::2], sigma2[0::2], '.', linewidth = 1, color='#4173b3', markerfacecolor = 'None', markeredgewidth = '0.5', markersize=4,zorder=2)
+    ax5.plot(energies[0::2], ds[0::2], '.', label='1, 13', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax5.plot(energies[0::2], sigma2[0::2], '.', linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
     ax5.plot(energies, dsLL, '-', linewidth = 1, color=blue[0], markerfacecolor = 'w', markeredgewidth = '0.5',zorder=1)
     ax5.set_xlim(energies[0], energies[-1])
     ax5.set_xscale('symlog', linthreshx = 0.000001)
-    ax5.set_ylim(-0.51,3)
+    ax5.set_ylim(-0.51,3.0)
     ax5.set_xlim(0.029,100)
-    ax5.text(0.04,2.7,r'$N=14$')
-    plt.xlabel(r'$V/t$',x=0)
+    ax5.text(0.04,2.65,r'$N=14$')
 
 
     #Remove numbers from real axes of top plots
@@ -166,6 +161,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     plt.setp(ax2.get_xticklabels(), visible=False)
     # remove vertical gap between subplots
     plt.subplots_adjust(hspace=0.023)
+    plt.xlabel(r'$V/t$',x=0)
 
     #Adjust space between subplots
     plt.subplots_adjust(wspace = 0.030)
