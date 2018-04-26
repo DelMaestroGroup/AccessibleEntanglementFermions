@@ -170,7 +170,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Legend 
     
     #lgnd = plt.legend(loc=(0.060,0.45),fontsize=4.5,handlelength=1,handleheight=2, title= r'$\alpha$, $\Delta S$', frameon=False)
-    lgnd = plt.legend(loc=(0.00,0.45),fontsize=7,handlelength=1,handleheight=2, frameon=False)
+    lgnd = plt.legend(loc=(0.01,0.40),fontsize=7,handlelength=1,handleheight=2, frameon=False)
     
     #plt.xlabel(r'$V/t$',x=0)
     
