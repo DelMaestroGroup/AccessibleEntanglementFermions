@@ -57,7 +57,7 @@ with plt.style.context('../IOP_large.mplstyle'):
     ax1.set_xlim(fillingFractions[0]-0.01, fillingFractions[-1]+0.01)
     ax1.set_ylim(-0.1, 1.1)
     ax1.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='off', labelleft='on', direction = 'in',labelsize='4',labelbottom='off')
-    ax1.set_ylabel(r'$S$')
+    ax1.set_ylabel(r'$S_{\alpha}^{\rm{op}}$')
     ax1.text(0.085,0.99, r'$V/t=-100,\ell = N$', fontsize=4)
  
     ax2 = plt.subplot(gs[1])
@@ -92,7 +92,7 @@ with plt.style.context('../IOP_large.mplstyle'):
     ax4.set_ylim(-0.1, 1.1)
     ax4.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in',labelsize='4')
     ax4.set_xlabel(r'$f$')
-    ax4.set_ylabel(r'$S$')
+    ax4.set_ylabel(r'$S_{\alpha}^{\rm{op}}$')
     ax4.text(0.085,0.99, r'$V/t=-100,\ell = L/2$', fontsize=4)
 
     ax5 = plt.subplot(gs[4])
