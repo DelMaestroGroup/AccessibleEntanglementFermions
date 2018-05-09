@@ -1,8 +1,9 @@
-#Top Plot: One Particle Entanglement entropy dependence on the interaction potential
-#Bottom Plot: Entanglement entropies for equal particle number bipartitions at various system sizes
+#Plot probability distributions as a function of
+#subsystem particle number in the tV-Model at
+#different V/t and alphas.
 
 #NOTE: IOP_large.mplstyle2 being used instead of IOP_large.mplstyle.
-#This script technically generates two figures and combines them vertically into a single figure.
+#Top Plot: One Particle Entanglement entropy dependence on the interaction potential
 
 import numpy as np
 import matplotlib.pyplot as plt

@@ -13,7 +13,7 @@ import colors
 
 orange = ["#4173b3"]  #Actually blue
 blue = ["#ff8c00"]    #Actually orange
-green = ["#d669b0"]
+green = ["#66cdaa"]
 red = ["#e85c47"]
 
 alpha = [0.2,0.1,0.0]
