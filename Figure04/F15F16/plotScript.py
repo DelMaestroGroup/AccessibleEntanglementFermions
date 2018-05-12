@@ -78,10 +78,14 @@ with plt.style.context('../IOP_large.mplstyle2'):
     pntoa15_VNEG10a5 = data_n15_VNEG10a5[:,1]
     pntoa15_VNEG10a5 = pn15_VNEG10
     pna15_VNEG10a5 = data_n15_VNEG10a5[:,2]
+    pna15_VNEG10a5 = pna15_VNEG10a5**(1/5)
+    pna15_VNEG10a5 /= np.sum(pna15_VNEG10a5)
     
     pntoa15_VNEG10a10 = data_n15_VNEG10a10[:,1]
     pntoa15_VNEG10a10 = pn15_VNEG10
     pna15_VNEG10a10 = data_n15_VNEG10a10[:,2]
+    pna15_VNEG10a10 = pna15_VNEG10a10**(1/10)
+    pna15_VNEG10a10 /= np.sum(pna15_VNEG10a10)
 
 
     #V/t = -1.5
@@ -95,57 +99,91 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     pntoa15_VNEG1d5a5 = data_n15_VNEG1d5a5[:,1]
     pna15_VNEG1d5a5 = data_n15_VNEG1d5a5[:,2]
+    pna15_VNEG1d5a5 = pna15_VNEG1d5a5**(1/5)
+    pna15_VNEG1d5a5 /= np.sum(pna15_VNEG1d5a5)
     
     pntoa15_VNEG1d5a10 = data_n15_VNEG1d5a10[:,1]
     pna15_VNEG1d5a10 = data_n15_VNEG1d5a10[:,2]
+    pna15_VNEG1d5a10 = pna15_VNEG1d5a10**(1/10)
+    pna15_VNEG1d5a10 /= np.sum(pna15_VNEG1d5a10)
 
     #V/t = 10
     pntoa15_V10a2 = data_n16_V10a2[:,1]
     pn15_V10 = pntoa15_V10a2**(1/2)
     pn15_V10 /= np.sum(pn15_V10)
     pntoa15_V10a2 = pn15_V10
-   # pna15_V10a2 = data_n15_V10a2[:,2]
-    pna15_V10a2 = data_n16_V10a10[:,1]
-    pna15_V10a2 = pna15_V10a2**(1/10)
+    pna15_V10a2 = data_n15_V10a2[:,2]
+    pna15_V10a2 = pna15_V10a2**(1/2)
     pna15_V10a2 /= np.sum(pna15_V10a2)
 
     pntoa15_V10a5 = data_n15_V10a5[:,1]
     pna15_V10a5 = data_n15_V10a5[:,2]
+    pna15_V10a5 = pna15_V10a5**(1/5)
+    pna15_V10a5 /= np.sum(pna15_V10a5)
     
     pntoa15_V10a10 = data_n15_V10a10[:,1]
     pna15_V10a10 = data_n15_V10a10[:,2]
+    pna15_V10a10 = pna15_V10a10**(1/10)
+    pna15_V10a10 /= np.sum(pna15_V10a10)
 
     #16 particles
     #V/t = -10
-    pntoa16_VNEG10a2 = data_n15_VNEG10a2[:,1]
-    pna16_VNEG10a2 = data_n15_VNEG10a2[:,2]
+    pntoa16_VNEG10a2 = data_n16_VNEG10a2[:,1]
+    pn16_VNEG10 = pntoa16_VNEG10a2**(1/2)
+    pn16_VNEG10 /= np.sum(pn16_VNEG10)
+    pntoa16_VNEG10a2 = pn16_VNEG10
+    pna16_VNEG10a2 = data_n16_VNEG10a2[:,2]
+    pna16_VNEG10a2 = pna16_VNEG10a2**(1/2)
+    pna16_VNEG10a2 /= np.sum(pna16_VNEG10a2)
 
-    pntoa16_VNEG10a5 = data_n15_VNEG10a5[:,1]
-    pna16_VNEG10a5 = data_n15_VNEG10a5[:,2]
+    pntoa16_VNEG10a5 = data_n16_VNEG10a5[:,1]
+    pna16_VNEG10a5 = data_n16_VNEG10a5[:,2]
+    pna16_VNEG10a5 = pna16_VNEG10a5**(1/5)
+    pna16_VNEG10a5 /= np.sum(pna16_VNEG10a5)
     
-    pntoa16_VNEG10a10 = data_n15_VNEG10a10[:,1]
-    pna16_VNEG10a10 = data_n15_VNEG10a10[:,2]
+    pntoa16_VNEG10a10 = data_n16_VNEG10a10[:,1]
+    pna16_VNEG10a10 = data_n16_VNEG10a10[:,2]
+    pna16_VNEG10a10 = pna16_VNEG10a10**(1/10)
+    pna16_VNEG10a10 /= np.sum(pna16_VNEG10a10)
 
 
     #V/t = -1.5
     pntoa16_VNEG1d5a2 = data_n16_VNEG1d5a2[:,1]
+    pn16_VNEG1d5 = pntoa16_VNEG1d5a2**(1/2)
+    pn16_VNEG1d5 /= np.sum(pn16_VNEG1d5)
+    pntoa16_VNEG1d5a2 = pn16_VNEG1d5
     pna16_VNEG1d5a2 = data_n16_VNEG1d5a2[:,2]
+    pna16_VNEG1d5a2 = pna16_VNEG1d5a2**(1/2)
+    pna16_VNEG1d5a2 /= np.sum(pna16_VNEG1d5a2)
 
     pntoa16_VNEG1d5a5 = data_n16_VNEG1d5a5[:,1]
     pna16_VNEG1d5a5 = data_n16_VNEG1d5a5[:,2]
+    pna16_VNEG1d5a5 = pna16_VNEG1d5a5**(1/5)
+    pna16_VNEG1d5a5 /= np.sum(pna16_VNEG1d5a5)
     
     pntoa16_VNEG1d5a10 = data_n16_VNEG1d5a10[:,1]
     pna16_VNEG1d5a10 = data_n16_VNEG1d5a10[:,2]
+    pna16_VNEG1d5a10 = pna16_VNEG1d5a10**(1/10)
+    pna16_VNEG1d5a10 /= np.sum(pna16_VNEG1d5a10)
 
     #V/t = 10
     pntoa16_V10a2 = data_n16_V10a2[:,1]
+    pn16_V10 = pntoa16_V10a2**(1/2)
+    pn16_V10 /= np.sum(pn16_V10)
+    pntoa16_V10a2 = pn16_V10
     pna16_V10a2 = data_n16_V10a2[:,2]
+    pna16_V10a2 = pna16_V10a2**(1/2)
+    pna16_V10a2 /= np.sum(pna16_V10a2)
 
     pntoa16_V10a5 = data_n16_V10a5[:,1]
     pna16_V10a5 = data_n16_V10a5[:,2]
+    pna16_V10a5 = pna16_V10a5**(1/5)
+    pna16_V10a5 /= np.sum(pna16_V10a5)
     
     pntoa16_V10a10 = data_n16_V10a10[:,1]
     pna16_V10a10 = data_n16_V10a10[:,2]
+    pna16_V10a10 = pna16_V10a10**(1/10)
+    pna16_V10a10 /= np.sum(pna16_V10a10)
 
     #Fit Quadratic to test Gaussian Hypothesis
     ############################################################################################################
@@ -420,10 +458,10 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #plt.show()
 
-    fig = plt.figure()
-    ax1 = plt.subplot(111)
-    ax1.plot(n16List,np.log(pn15_V10),mfc='None',marker='o')
-    ax1.plot(n16List,np.log(pna15_V10a2),'*')
-    print(np.sum(pn15_V10))
-    print(np.sum(pna15_V10a2))
-    plt.savefig('testing.pdf')
+    #fig = plt.figure()
+    #ax1 = plt.subplot(111)
+    #ax1.plot(n16List,np.log(pn15_V10),mfc='None',marker='o',color='red')
+    #ax1.plot(n16List,np.log(pna15_V10a2),'*')
+    #print(np.sum(pn15_V10))
+    #print(np.sum(pna15_V10a2))
+    #plt.savefig('testing.pdf')
