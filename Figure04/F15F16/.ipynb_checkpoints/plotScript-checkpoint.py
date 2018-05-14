@@ -261,7 +261,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax3.set_yscale('log')
     ax3.set_ylim(1E-27,1E+01)
     
-    plt.legend(loc=(0.276,0.20), fontsize=9,ncol=1,frameon=False,handletextpad=0.08)
+    plt.legend(loc=(0.236,0.058), fontsize=11,ncol=1,frameon=False,handletextpad=0.08)
 
     #V/t=-1.5 , N=16
     ax4 = plt.subplot(gs[3])
@@ -281,7 +281,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax4.set_yscale('log')
     ax4.set_ylim(1E-27,1E+01)
     
-    plt.legend(loc=(0.276,0.20), fontsize=9,ncol=1,frameon=False,handletextpad=0.08)
+    #plt.legend(loc=(0.236,0.058), fontsize=11,ncol=1,frameon=False,handletextpad=0.08)
 
     #V/t=-10 , N=15
     ax5 = plt.subplot(gs[4])
@@ -327,31 +327,32 @@ with plt.style.context('../IOP_large.mplstyle2'):
     plt.subplots_adjust(wspace = 0.030)
 
     #Inlude annotations denoting the interaction strength V/t
-    x1,y1 = 0.365,0.050
+    x1,y1 = 0.355,0.085
     x2,y2 = 0.5,0.5
-    ax1.annotate(r'$\frac{V}{t}=10$',
-            xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points',
-            )
+    fs = 13
+    #ax1.annotate(r'$\frac{V}{t}=10$',
+    #        xy=(x1, y1), xycoords='axes fraction',
+    #        xytext=(x2, y2), textcoords='offset points',
+    #        )
     ax2.annotate(r'$\frac{V}{t}=10$',
             xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points',
+            xytext=(x2, y2), textcoords='offset points', fontsize = fs
             )
-    ax3.annotate(r'$\frac{V}{t}=-1.5$',
-            xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points',
-            )
+    #ax3.annotate(r'$\frac{V}{t}=-1.5$',
+    #        xy=(x1, y1), xycoords='axes fraction',
+    #        xytext=(x2, y2), textcoords='offset points',
+    #        )
     ax4.annotate(r'$\frac{V}{t}=-1.5$',
             xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points',
+            xytext=(x2, y2), textcoords='offset points', fontsize = fs
             )
-    ax5.annotate(r'$\frac{V}{t}=-10$',
-            xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points',
-            )
+    #ax5.annotate(r'$\frac{V}{t}=-10$',
+    #        xy=(x1, y1), xycoords='axes fraction',
+    #        xytext=(x2, y2), textcoords='offset points',
+    #        )
     ax6.annotate(r'$\frac{V}{t}=-10$',
             xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points',
+            xytext=(x2, y2), textcoords='offset points', fontsize = fs
             )
     
     #Inlude annotations denoting the interaction strength V/t
