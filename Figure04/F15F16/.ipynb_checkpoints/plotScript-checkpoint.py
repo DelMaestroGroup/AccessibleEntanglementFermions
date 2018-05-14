@@ -259,7 +259,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     
     ax3.tick_params(axis='both', which='both', right='off', top='off',labelright='off', labelleft='on', direction='in')
     ax3.set_yscale('log')
-    ax3.set_ylim(1E-24,1E+01)
+    ax3.set_ylim(1E-27,1E+01)
     
     plt.legend(loc=(0.276,0.20), fontsize=9,ncol=1,frameon=False,handletextpad=0.08)
 
@@ -279,7 +279,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax4.tick_params(axis='both', which='both', right='off', top='off',labelright='off', labelleft='off', direction='in')
     ax4.xaxis.set_ticks(np.arange(0, 17, 4))
     ax4.set_yscale('log')
-    ax4.set_ylim(1E-24,1E+01)
+    ax4.set_ylim(1E-27,1E+01)
     
     plt.legend(loc=(0.276,0.20), fontsize=9,ncol=1,frameon=False,handletextpad=0.08)
 
