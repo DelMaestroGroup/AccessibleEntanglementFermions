@@ -45,8 +45,9 @@ with plt.style.context('../IOP_large.mplstyle2'):
     n15List = data_n15_VNEG1d5a2[:,0]
     n16List = data_n16_VNEG1d5a2[:,0]
 
-    VotList = [-1.5,-1.0,0.0,1.0,1.5]                  #Interaction Strength
-    k = [np.pi/(2*np.arccos(-Vot/2)) for Vot in VotList] #Luttinger Parameter
+    #Lists of Interaction Strengths and Luttinger Parameters
+    VotList = [-1.5,-1.0,0.0,1.0,1.5]       
+    k = [np.pi/(2*np.arccos(-Vot/2)) for Vot in VotList] 
     
     #Save probabilities and rescale with Luttinger Parameter
     
@@ -112,11 +113,13 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ms = ['Nan',2.50,5.25,8.00,10.75,13.50]
 
     #alpha=2
-    ax1.plot(n15List, pna15_V1d5a2, 'o', label=r'$K(1.5)$', markersize = ms[5], markerfacecolor = blue[5], markeredgewidth = '0.25',color=blue[0],zorder=4)
-    ax1.plot(n15List, pna15_V1a2, 'o', label=r'$K(1.0)$', markersize = ms[4], markerfacecolor = blue[4], markeredgewidth = '0.25',color=blue[0],zorder=4)
-    ax1.plot(n15List, pna15_V0a2, 'o', label=r'$K(0.0)$', markersize = ms[3], markerfacecolor = blue[3], markeredgewidth = '0.25',color=blue[0],zorder=4)
-    ax1.plot(n15List, pna15_VNEG1a2, 'o', label=r'$K(-1.0)$', markersize = ms[2], markerfacecolor = blue[2], markeredgewidth = '0.25',color=blue[0],zorder=4)
-    ax1.plot(n15List, pna15_VNEG1d5a2, 'o', label=r'$K(-1.5)$', markersize = ms[1], markerfacecolor = blue[1], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax1.plot(n15List, pna15_V1d5a2, 'o', label=r'$%.2f, 1.5$'%(k[4]), markersize = ms[5], markerfacecolor = blue[5], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax1.plot(n15List, pna15_V1a2, 'o', label=r'$%.2f, 1.0$'%(k[3]), markersize = ms[4], markerfacecolor = blue[4], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax1.plot(n15List, pna15_V0a2, 'o', label=r'$%.2f, 0.0$'%(k[2]), markersize = ms[3], markerfacecolor = blue[3], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax1.plot(n15List, pna15_VNEG1a2, 'o', label=r'$%.2f, -1.0$'%(k[1]), markersize = ms[2], markerfacecolor = blue[2], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax1.plot(n15List, pna15_VNEG1d5a2, 'o', label=r'$%.2f, -1.5$'%(k[0]), markersize = ms[1], markerfacecolor = blue[1], markeredgewidth = '0.25',color=blue[0],zorder=4)
+
+
 
     ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off',labelleft='on', direction='in')
     ax1.xaxis.set_ticks(np.arange(0, 16, 3))
@@ -124,7 +127,8 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax1.set_ylabel(r'$(P_{n,2,K})^{K}$')
     #ax1.set_ylim(1E-35,1E+02)
     
-    plt.legend(loc=(0.355,0.125), fontsize=11,ncol=1,frameon=False,handletextpad=0.08)
+    lgnd = plt.legend(loc=(0.355,0.125), fontsize=11,ncol=1,frameon=False,handletextpad=0.08,title=r'$K, V/t$')
+    lgnd.get_title().set_position((7.0,0))
   
     #N=16
     ax2 = plt.subplot(gs[1])
