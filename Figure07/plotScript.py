@@ -52,7 +52,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax1.plot(fillingFractions, s2opV100M28l14, '-', linewidth = 0.5, color='#ff8c00',markeredgewidth='0.5')
     ax1.set_xlim(fillingFractions[0], fillingFractions[-1])
     ax1.set_ylim(0.0, 0.95)
-    ax1.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in',labelsize='4',labelbottom='off')
+    ax1.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in',labelbottom='off')
     ax1.set_ylabel(r'$S_{\alpha}^{\rm{op}}$')
     
     #Legend
@@ -65,7 +65,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.plot(fillingFractions, s2opV100M28lN, '-', linewidth = 0.5, color='#ff8c00',markeredgewidth='0.5')
     ax2.set_xlim(fillingFractions[0], fillingFractions[-1])
     ax2.set_ylim(0.0, 0.95)
-    ax2.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='off', direction = 'in',labelsize='4',labelbottom='off')
+    ax2.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='off', direction = 'in',labelbottom='off')
         
     ax3 = plt.subplot(gs[2])
     ax3.plot(fillingFractions, s1opVNEG1d5M28l14, '.', label=r'$S_{1}^{op}$', linewidth = 1, color='#4173b3',markeredgewidth='0.5',mfc= blue[2],zorder=10)
@@ -74,7 +74,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax3.plot(fillingFractions, s2opVNEG1d5M28l14, '-', label=r'$S_{2}^{op}$', linewidth = 0.5, color='#ff8c00',markeredgewidth='0.5')
     ax3.set_xlim(fillingFractions[0], fillingFractions[-1])
     ax3.set_ylim(0.0, 0.23)
-    ax3.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in',labelsize='4',labelbottom='off')
+    ax3.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in',labelbottom='off')
     ax3.set_ylabel(r'$S_{\alpha}^{\rm{op}}$')
     
     ax4 = plt.subplot(gs[3])
@@ -84,7 +84,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax4.plot(fillingFractions, s2opVNEG1d5M28lN, '-', linewidth = 0.5, color='#ff8c00',markeredgewidth='0.5')
     ax4.set_xlim(fillingFractions[0], fillingFractions[-1])
     ax4.set_ylim(0.0, 0.23)
-    ax4.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='off', direction = 'in',labelsize='4',labelbottom='off')
+    ax4.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='off', direction = 'in',labelbottom='off')
 
     ax5 = plt.subplot(gs[4])
     ax5.plot(fillingFractions, s1opVNEG100M28l14, '.', label=r'$S_{1}^{\rm op}$', linewidth = 1, color='#4173b3',markeredgewidth='0.5',mfc= blue[2],zorder=10)
@@ -93,7 +93,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax5.plot(fillingFractions, s2opVNEG100M28l14, '-', linewidth = 0.5, color='#ff8c00',markeredgewidth='0.5')
     ax5.set_xlim(fillingFractions[0], fillingFractions[-1])
     ax5.set_ylim(0.0, 0.65)
-    ax5.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in',labelsize='4')
+    ax5.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in')
     ax5.set_xlabel(r'$f$')
     ax5.set_ylabel(r'$S_{\alpha}^{\rm{op}}$')
     
@@ -104,7 +104,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax6.plot(fillingFractions, s2opVNEG100M28lN, '-', label=r'$S_{2}^{\rm{op}}$', linewidth = 0.5, color='#ff8c00',markeredgewidth='0.5')
     ax6.set_xlim(fillingFractions[0], fillingFractions[-1])
     ax6.set_ylim(0.0, 0.65)
-    ax6.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='off', direction = 'in',labelsize='4')
+    ax6.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='off', direction = 'in')
     ax6.set_xlabel(r'$f$')
     
     #Annotations for the interaction strength and type of partition
