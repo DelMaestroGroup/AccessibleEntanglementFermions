@@ -11,7 +11,7 @@ from matplotlib import gridspec
 import numpy as np
 import colors
 
-orange = ["#9370db"]  #Actually violet
+orange = ["#4173b3"]  #Actually blue
 blue = ["#ff8c00"]    #Actually orange
 green = ["#66cdaa"]
 red = ["#e85c47"]

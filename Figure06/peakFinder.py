@@ -1,7 +1,7 @@
 #Do a quadratic fitting of given array of data
 import numpy as np
 
-data = np.loadtxt('EOPP26F13l13VT4.49_4.79.dat')
+data = np.loadtxt('EOPP6F3l3a2.dat')
 
 quadFit = np.polyfit(data[:,0],data[:,3],deg=2)
 
