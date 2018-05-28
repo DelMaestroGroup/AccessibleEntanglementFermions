@@ -100,9 +100,11 @@ with plt.style.context('../IOP_large.mplstyle'):
     ax1.plot(N[3]**(-c2),Vmax[3],'d',mfc=blue[3],label='9',color=blue[1],zorder=1)
     ax1.plot(N[4]**(-c2),Vmax[4],'^',mfc=blue[3],label='11',color=blue[1],zorder=1)
     ax1.plot(N[5]**(-c2),Vmax[5],'s',mfc=blue[3],label='13',color=blue[1],zorder=1)
-    ax1.plot(N[6]**(-c2),Vmax[6],'o',mfc=blue[3],label='15',color=blue[1],zorder=1)   
+    ax1.plot(N[6]**(-c2),Vmax[6],'o',mfc=blue[3],label='15',color=blue[1],zorder=1) 
+    
     #Set legend
-    ax1.legend(loc=(0.67,0.075),fontsize=10,frameon=False,handlelength=1,handleheight=1,title=r'$N$',ncol=2)
+    ax1.legend(loc=(0.67,0.05),fontsize=10,frameon=False,handlelength=1,handleheight=1,title=r'$N$',ncol=2)
+    
     ax1.plot(Nfit**(-c2),Vmaxfit,'-',label=r'$%.4f N^{-%.4f}+%.4f$'%(c1,c2,c3),color=blue[1],zorder=0)
     ax1.set_xlim(0,0.80)
     ax1.set_xlabel(r'$N^{%.4f}$'%(-c2))
@@ -126,7 +128,7 @@ with plt.style.context('../IOP_large.mplstyle'):
     xN13, yN13 = dataN13[:,0], dataN13[:,3]
     xN15, yN15 = dataN15[:,0], dataN15[:,3]
     
-    left,bottom,width,height = [0.22,0.507,0.36,0.36]
+    left,bottom,width,height = [0.217,0.507,0.36,0.36]
     ax2 = fig.add_axes([left,bottom,width,height])
     ax2.plot(xN3,yN3,label='5',color=blue[1])
     ax2.plot(xN5,yN5,label='5',color=blue[1])
