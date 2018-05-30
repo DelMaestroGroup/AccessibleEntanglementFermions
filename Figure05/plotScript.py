@@ -126,6 +126,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax1.set_yscale('log')
     ax1.set_ylabel(r'$(P_{n,2,K})^{K}$')
     #ax1.set_ylim(1E-35,1E+02)
+    ax1.text(13,1E-06,r'$N=15$')
     
     lgnd = plt.legend(loc=(0.355,0.125), fontsize=11,ncol=1,frameon=False,handletextpad=0.08,title=r'$K, V/t$')
     lgnd.get_title().set_position((7.0,0))
@@ -146,6 +147,8 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.set_xlabel(r'$n$')
     ax2.set_ylabel(r'$(P_{n,2,K})^{K}$')
     #ax2.set_ylim(1E-35,1E+02)
+    ax2.text(13.9,1E-06,r'$N=16$')
+
           
     # remove vertical gap between subplots
     plt.subplots_adjust(hspace=0.15)
