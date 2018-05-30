@@ -146,6 +146,7 @@ with plt.style.context('../IOP_large.mplstyle'):
     ax2.plot(2.9842038317092805,0.4634960193349440,marker='p',mfc=blue[3],color=blue[1],label='7')
     ax2.plot(3.0716932401905814,0.3720450303814098,marker='X',mfc=blue[3],color=blue[1],label='5')
     ax2.plot(3.1903119454707949,0.2335959173839680,marker='*',mfc=blue[3],color=blue[1],label='3')
+    ax2.axvline(x=2,color='#cccccc',zorder=-1)
     ax2.set_xlabel(r'$\frac{V}{t}$')
     ax2.set_ylabel(r'$S_{1}^{\mathrm{op}}$')
     ax2.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in')
