@@ -94,8 +94,8 @@ with plt.style.context('../IOP_large.mplstyle'):
     #Create the figure
     fig = plt.figure()
     ax1 = fig.add_subplot(111)
-    ax1.plot(N[0]**(-c2),Vmax[0],'*',mfc=blue[3],label='3',color=blue[1],zorder=1)
-    ax1.plot(N[1]**(-c2),Vmax[1],'X',mfc=blue[3],label='5',color=blue[1],zorder=1)
+    ax1.plot(N[0]**(-c2),Vmax[0],'>',mfc=blue[3],label='3',color=blue[1],zorder=1)
+    ax1.plot(N[1]**(-c2),Vmax[1],'<',mfc=blue[3],label='5',color=blue[1],zorder=1)
     ax1.plot(N[2]**(-c2),Vmax[2],'p',mfc=blue[3],label='7',color=blue[1],zorder=1)
     ax1.plot(N[3]**(-c2),Vmax[3],'d',mfc=blue[3],label='9',color=blue[1],zorder=1)
     ax1.plot(N[4]**(-c2),Vmax[4],'^',mfc=blue[3],label='11',color=blue[1],zorder=1)
@@ -105,10 +105,10 @@ with plt.style.context('../IOP_large.mplstyle'):
     #Set legend
     ax1.legend(loc=(0.67,0.05),fontsize=10,frameon=False,handlelength=1,handleheight=1,title=r'$N$',ncol=2)
     
-    ax1.plot(Nfit**(-c2),Vmaxfit,'-',label=r'$%.4f N^{-%.4f}+%.4f$'%(c1,c2,c3),color=blue[1],zorder=0)
+    ax1.plot(Nfit**(-c2),Vmaxfit,'-',label=r'$%.4f N^{-%.4f}+%.4f$'%(c1,c2,c3),color=blue[1],zorder=0,linewidth=0.75)
     ax1.set_xlim(0,0.80)
     ax1.set_xlabel(r'$N^{%.4f}$'%(-c2))
-    ax1.set_ylabel(r'$\frac{V}{t}\vert_{Max}$')
+    ax1.set_ylabel(r'$V/t \vert_{\mathrm{Max}}$')
     ax1.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in')
    
     #Inset Plot
@@ -130,13 +130,13 @@ with plt.style.context('../IOP_large.mplstyle'):
     
     left,bottom,width,height = [0.217,0.507,0.36,0.36]
     ax2 = fig.add_axes([left,bottom,width,height])
-    ax2.plot(xN3,yN3,label='5',color=blue[1])
-    ax2.plot(xN5,yN5,label='5',color=blue[1])
-    ax2.plot(xN7,yN7,label='7',color=blue[1])
-    ax2.plot(xN9,yN9,label='9',color=blue[1])
-    ax2.plot(xN11,yN11,label='11',color=blue[1])
-    ax2.plot(xN13,yN13,label='13',color=blue[1])
-    ax2.plot(xN15,yN15,label='15',color=blue[1])
+    ax2.plot(xN3,yN3,label='5',color=blue[1],linewidth=0.75)
+    ax2.plot(xN5,yN5,label='5',color=blue[1],linewidth=0.75)
+    ax2.plot(xN7,yN7,label='7',color=blue[1],linewidth=0.75)
+    ax2.plot(xN9,yN9,label='9',color=blue[1],linewidth=0.75)
+    ax2.plot(xN11,yN11,label='11',color=blue[1],linewidth=0.75)
+    ax2.plot(xN13,yN13,label='13',color=blue[1],linewidth=0.75)
+    ax2.plot(xN15,yN15,label='15',color=blue[1],linewidth=0.75)
     
     #Add marker at the peaks
     ax2.plot(2.7928168485370364,0.6689827690493597,marker='o',mfc=blue[3],color=blue[1],label='15')
@@ -144,10 +144,10 @@ with plt.style.context('../IOP_large.mplstyle'):
     ax2.plot(2.8721517043926008,0.5856038496253868,marker='^',mfc=blue[3],color=blue[1],label='11')
     ax2.plot(2.9211898989895535,0.5315254430302333,marker='d',mfc=blue[3],color=blue[1],label='9')
     ax2.plot(2.9842038317092805,0.4634960193349440,marker='p',mfc=blue[3],color=blue[1],label='7')
-    ax2.plot(3.0716932401905814,0.3720450303814098,marker='X',mfc=blue[3],color=blue[1],label='5')
-    ax2.plot(3.1903119454707949,0.2335959173839680,marker='*',mfc=blue[3],color=blue[1],label='3')
+    ax2.plot(3.0716932401905814,0.3720450303814098,marker='<',mfc=blue[3],color=blue[1],label='5')
+    ax2.plot(3.1903119454707949,0.2335959173839680,marker='>',mfc=blue[3],color=blue[1],label='3')
     ax2.axvline(x=2,color='#cccccc',zorder=-1)
-    ax2.set_xlabel(r'$\frac{V}{t}$')
+    ax2.set_xlabel(r'$V/t$')
     ax2.set_ylabel(r'$S_{1}^{\mathrm{op}}$')
     ax2.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in')
     ax2.set_aspect(1.618033*4)
