@@ -47,8 +47,8 @@ with plt.style.context('../IOP_large.mplstyle2'):
     gs = gridspec.GridSpec(3, 2)
         
     ax1 = plt.subplot(gs[0])
-    ax1.plot(fillingFractions, s1opV100M28l14, '.', label=r'$S_{1}^{op}$', linewidth = 1, color='#4173b3',markeredgewidth='0.5',mfc= blue[2],zorder=10)
-    ax1.plot(fillingFractions, s2opV100M28l14, '.', label=r'$S_{2}^{op}$', linewidth = 1, color='#ff8c00',markeredgewidth='0.5',mfc= orange[2],zorder=10)
+    ax1.plot(fillingFractions, s1opV100M28l14, '.', label=r'$S_{1}^{\mathrm{op}}$', linewidth = 1, color='#4173b3',markeredgewidth='0.5',mfc= blue[2],zorder=10)
+    ax1.plot(fillingFractions, s2opV100M28l14, '.', label=r'$S_{2}^{\mathrm{op}}$', linewidth = 1, color='#ff8c00',markeredgewidth='0.5',mfc= orange[2],zorder=10)
     ax1.plot(fillingFractions, s1opV100M28l14, ':', linewidth = 0.5, color='#4173b3',markeredgewidth='0.5')
     ax1.plot(fillingFractions, s2opV100M28l14, ':', linewidth = 0.5, color='#ff8c00',markeredgewidth='0.5')
     ax1.set_xlim(fillingFractions[0], fillingFractions[-1])
