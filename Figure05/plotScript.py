@@ -103,8 +103,8 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #ax1.set_ylim(1E-11,1E+04)
     ax1.text(13,1E-06,r'$N=15$')
     
-    #lgnd = plt.legend(loc=(0.355,0.125), fontsize=11,ncol=1,frameon=False,handletextpad=0.08,title=r'$K, V/t$')
-    #lgnd.get_title().set_position((7.0,0))
+    lgnd = plt.legend(loc=(0.355,0.125), fontsize=11,ncol=1,frameon=False,handletextpad=0.08,title=r'$K, V/t$')
+    lgnd.get_title().set_position((7.0,0))
   
     #N=16
     ax2 = plt.subplot(gs[1])
