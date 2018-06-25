@@ -26,20 +26,20 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Top Plot: Probabilities vs Particle Number in Subsystem Size (For N=15); N=Total Number of Particles   
        
     #V/t = +-1.5
-    data_n15_V1d5a2 = np.loadtxt("M30F15V1.5a2Probs.dat")
-    data_n16_V1d5a2 = np.loadtxt("M32F16V1.5a2Probs.dat")
-    data_n15_VNEG1d5a2 = np.loadtxt("M30F15VNEG1.5a2Probs.dat")
-    data_n16_VNEG1d5a2 = np.loadtxt("M32F16VNEG1.5a2Probs.dat")
+    data_n15_V1d5a2 = np.loadtxt("M30F15V1.5a2Probs_toK.dat")
+    data_n16_V1d5a2 = np.loadtxt("M32F16V1.5a2Probs_toK.dat")
+    data_n15_VNEG1d5a2 = np.loadtxt("M30F15VNEG1.5a2Probs_toK.dat")
+    data_n16_VNEG1d5a2 = np.loadtxt("M32F16VNEG1.5a2Probs_toK.dat")
     
     #V/t = +- 1.0
-    data_n15_V1a2 = np.loadtxt("M30F15V1.0a2Probs.dat")
-    data_n16_V1a2 = np.loadtxt("M32F16V1.0a2Probs.dat")
-    data_n15_VNEG1a2 = np.loadtxt("M30F15VNEG1.0a2Probs.dat")
-    data_n16_VNEG1a2 = np.loadtxt("M32F16VNEG1.0a2Probs.dat")
+    data_n15_V1a2 = np.loadtxt("M30F15V1.0a2Probs_toK.dat")
+    data_n16_V1a2 = np.loadtxt("M32F16V1.0a2Probs_toK.dat")
+    data_n15_VNEG1a2 = np.loadtxt("M30F15VNEG1.0a2Probs_toK.dat")
+    data_n16_VNEG1a2 = np.loadtxt("M32F16VNEG1.0a2Probs_toK.dat")
 
     #V/t = 0
-    data_n15_V0a2 = np.loadtxt("M30F15V0.0a2Probs.dat")
-    data_n16_V0a2 = np.loadtxt("M32F16V0.0a2Probs.dat")
+    data_n15_V0a2 = np.loadtxt("M30F15V0.0a2Probs_toK.dat")
+    data_n16_V0a2 = np.loadtxt("M32F16V0.0a2Probs_toK.dat")
 
     #Load particle numbers 
     n15List = data_n15_VNEG1d5a2[:,0]
@@ -53,52 +53,27 @@ with plt.style.context('../IOP_large.mplstyle2'):
     
     #15 particles
     #V/t = +-1.5
-    pna15_V1d5a2 = data_n15_V1d5a2[:,2]
-    pna15_V1d5a2 = pna15_V1d5a2**(k[4])
-    pna15_V1d5a2 /= np.sum(pna15_V1d5a2)
-     
-    pna15_VNEG1d5a2 = data_n15_VNEG1d5a2[:,2]
-    pna15_VNEG1d5a2 = pna15_VNEG1d5a2**(k[0])
-    pna15_VNEG1d5a2 /= np.sum(pna15_VNEG1d5a2)
+    pna15_V1d5a2 = data_n15_V1d5a2[:,1]
+    pna15_VNEG1d5a2 = data_n15_VNEG1d5a2[:,1]
     
     #V/t = +-1.0
-    pna15_V1a2 = data_n15_V1a2[:,2]
-    pna15_V1a2 = pna15_V1a2**(k[3])
-    pna15_V1a2 /= np.sum(pna15_V1a2)
-    
-    pna15_VNEG1a2 = data_n15_VNEG1a2[:,2]
-    pna15_VNEG1a2 = pna15_VNEG1a2**(k[1])
-    pna15_VNEG1a2 /= np.sum(pna15_VNEG1a2)
+    pna15_V1a2 = data_n15_V1a2[:,1]
+    pna15_VNEG1a2 = data_n15_VNEG1a2[:,1]
 
     #V/t = 0.0
-    pna15_V0a2 = data_n15_V0a2[:,2]
-    pna15_V0a2 = pna15_V0a2**(k[2])
-    pna15_V0a2 /= np.sum(pna15_V0a2)
+    pna15_V0a2 = data_n15_V0a2[:,1]
 
-    
     #16 particles
     #V/t = +-1.5
-    pna16_V1d5a2 = data_n16_V1d5a2[:,2]
-    pna16_V1d5a2 = pna16_V1d5a2**(k[4])
-    pna16_V1d5a2 /= np.sum(pna16_V1d5a2)
-    
-    pna16_VNEG1d5a2 = data_n16_VNEG1d5a2[:,2]
-    pna16_VNEG1d5a2 = pna16_VNEG1d5a2**(k[0])
-    pna16_VNEG1d5a2 /= np.sum(pna16_VNEG1d5a2)
+    pna16_V1d5a2 = data_n16_V1d5a2[:,1]
+    pna16_VNEG1d5a2 = data_n16_VNEG1d5a2[:,1]
     
     #V/t = +-1.0
-    pna16_V1a2 = data_n16_V1a2[:,2]
-    pna16_V1a2 = pna16_V1a2**(k[3])
-    pna16_V1a2 /= np.sum(pna16_V1a2)
-    
-    pna16_VNEG1a2 = data_n16_VNEG1a2[:,2]
-    pna16_VNEG1a2 = pna16_VNEG1a2**(k[1])
-    pna16_VNEG1a2 /= np.sum(pna16_VNEG1a2)
+    pna16_V1a2 = data_n16_V1a2[:,1]
+    pna16_VNEG1a2 = data_n16_VNEG1a2[:,1]
 
     #V/t = 0.0
-    pna16_V0a2 = data_n16_V0a2[:,2]
-    pna16_V0a2 = pna16_V0a2**(k[2])
-    pna16_V0a2 /= np.sum(pna16_V0a2)
+    pna16_V0a2 = data_n16_V0a2[:,1]
 
     #Create the figure
     fig = plt.figure()
