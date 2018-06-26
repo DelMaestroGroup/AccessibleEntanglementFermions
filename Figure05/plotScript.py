@@ -96,9 +96,11 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off',labelleft='on', direction='in')
     ax1.xaxis.set_ticks(np.arange(0, 16, 3))
+    #ax1.yaxis.set_ticks(10.0**np.linspace(-100, 0, 4))
     ax1.set_yscale('log')
+    ax1.set_yticks([1E+0, 1E-25, 1E-50, 1E-75, 1E-100])
+
     ax1.set_ylabel(r'$(P_{n,2,K})^{K}$')
-    #ax1.set_ylim(1E-11,1E+04)
     ax1.text(13,1E-06,r'$N=15$')
     
     lgnd = plt.legend(loc=(0.355,0.125), fontsize=11,ncol=1,frameon=False,handletextpad=0.08,title=r'$K, V/t$')
@@ -117,9 +119,9 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.tick_params(axis='both', which='both', right='off', top='off',labelright='off', labelleft='on',direction='in')
     ax2.xaxis.set_ticks(np.arange(0, 17, 4))
     ax2.set_yscale('log')
+    ax2.yaxis.set_ticks([1E+0, 1E-25, 1E-50, 1E-75, 1E-100, 1E-125])
     ax2.set_xlabel(r'$n$')
     ax2.set_ylabel(r'$(P_{n,2,K})^{K}$')
-    #ax2.set_ylim(1E-11,1E+4)
     ax2.text(13.9,1E-06,r'$N=16$')
 
 ###################################
