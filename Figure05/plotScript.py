@@ -94,8 +94,6 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax1.plot(n15List, pna15_VNEG1a2, 'o', label=r'$%.2f, -1.0$'%(k[1]), markersize = ms[2], markerfacecolor = blue[2], markeredgewidth = '0.25',color=blue[0],zorder=4)
     ax1.plot(n15List, pna15_VNEG1d5a2, 'o', label=r'$%.2f, -1.5$'%(k[0]), markersize = ms[1], markerfacecolor = blue[1], markeredgewidth = '0.25',color=blue[0],zorder=4)
 
-
-
     ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off',labelleft='on', direction='in')
     ax1.xaxis.set_ticks(np.arange(0, 16, 3))
     ax1.set_yscale('log')
@@ -124,7 +122,26 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #ax2.set_ylim(1E-11,1E+4)
     ax2.text(13.9,1E-06,r'$N=16$')
 
-          
+###################################
+ #Inset Plot
+    insetData = np.loadtxt("n8probsVsK.dat")
+    n8Probs = insetData[:,0]
+    K = insetData[:,1]
+    
+    left,bottom,width,height = [0.408,0.125,0.30,0.30]
+    ax2 = fig.add_axes([left,bottom,width,height])
+    ax2.plot(K[4],n8Probs[4],'o',markersize = ms[5], markerfacecolor = blue[5], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax2.plot(K[3],n8Probs[3],'o',markersize = ms[4], markerfacecolor = blue[4], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax2.plot(K[2],n8Probs[2],'o',markersize = ms[3], markerfacecolor = blue[3], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax2.plot(K[1],n8Probs[1],'o',markersize = ms[2], markerfacecolor = blue[2], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax2.plot(K[0],n8Probs[0],'o',markersize = ms[1], markerfacecolor = blue[1], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    
+    #Add marker at the peaks
+    ax2.set_xlabel(r'$K$')
+    ax2.set_ylabel(r'$(P_{8,2,K})^{K}$')
+    ax2.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in')
+    ax2.set_aspect(1.618033*4)
+###################################          
     # remove vertical gap between subplots
     plt.subplots_adjust(hspace=0.15)
     
