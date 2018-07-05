@@ -25,7 +25,7 @@ with plt.style.context('../IOP_large.mplstyle'):
             blue.append(colors.get_alpha_hex(blue[0],beta[i]))
 
     #Load data
-    data = np.loadtxt('peakScalingOddN.dat') 
+    data = np.loadtxt('Data/peakScalingOddN.dat') 
     N = data[:,0]
     Vmax = data[:,1]
 
@@ -112,13 +112,13 @@ with plt.style.context('../IOP_large.mplstyle'):
     ax1.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in')
    
     #Inset Plot
-    dataN3 = np.loadtxt("InsetData/EOPP6F3l3a2.dat")
-    dataN5 = np.loadtxt("InsetData/EOPP10F5l5a2.dat")
-    dataN7 = np.loadtxt("InsetData/EOPP14F7l7a2.dat")
-    dataN9 = np.loadtxt("InsetData/EOPP18F9l9a2.dat")
-    dataN11 = np.loadtxt("InsetData/EOPP22F11l11a2.dat")
-    dataN13 = np.loadtxt("InsetData/EOPP26F13l13a2.dat")
-    dataN15 = np.loadtxt("InsetData/EOPP30F15l15a2.dat")
+    dataN3 = np.loadtxt("Data/InsetData/EOPP6F3l3a2.dat")
+    dataN5 = np.loadtxt("Data/InsetData/EOPP10F5l5a2.dat")
+    dataN7 = np.loadtxt("Data/InsetData/EOPP14F7l7a2.dat")
+    dataN9 = np.loadtxt("Data/InsetData/EOPP18F9l9a2.dat")
+    dataN11 = np.loadtxt("Data/InsetData/EOPP22F11l11a2.dat")
+    dataN13 = np.loadtxt("Data/InsetData/EOPP26F13l13a2.dat")
+    dataN15 = np.loadtxt("Data/InsetData/EOPP30F15l15a2.dat")
     
     xN3, yN3 = dataN3[:,0], dataN3[:,3]
     xN5, yN5 = dataN5[:,0], dataN5[:,3]
