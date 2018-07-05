@@ -1,6 +1,3 @@
-#Top Plot: One Particle Entanglement entropy dependence on the interaction potential
-#Bottom Plot: Entanglement entropies for equal particle number bipartitions at various system sizes
-
 #NOTE: IOP_large.mplstyle2 being used instead of IOP_large.mplstyle.
 #This script technically generates two figures and combines them vertically into a single figure.
 
@@ -25,19 +22,19 @@ with plt.style.context('../IOP_large.mplstyle2'):
     
     #Save Entanglement Entropies (s1=VonNeumann, s2=Renyi) to variables
     
-    s1opVNEG100M28l14 = np.loadtxt("VNEG100M28l14.dat")[:,3]
-    s1opVNEG100M28lN = np.loadtxt("VNEG100M28lN.dat")[:,3]
-    s1opVNEG1d5M28l14 = np.loadtxt("VNEG1.5M28l14.dat")[:,3]
-    s1opVNEG1d5M28lN = np.loadtxt("VNEG1.5M28lN.dat")[:,3]
-    s1opV100M28l14 = np.loadtxt("V100M28l14.dat")[:,3]
-    s1opV100M28lN = np.loadtxt("V100M28lN.dat")[:,3]
+    s1opVNEG100M28l14 = np.loadtxt("Data/VNEG100M28l14.dat")[:,3]
+    s1opVNEG100M28lN = np.loadtxt("Data/VNEG100M28lN.dat")[:,3]
+    s1opVNEG1d5M28l14 = np.loadtxt("Data/VNEG1.5M28l14.dat")[:,3]
+    s1opVNEG1d5M28lN = np.loadtxt("Data/VNEG1.5M28lN.dat")[:,3]
+    s1opV100M28l14 = np.loadtxt("Data/V100M28l14.dat")[:,3]
+    s1opV100M28lN = np.loadtxt("Data/V100M28lN.dat")[:,3]
     
-    s2opVNEG100M28l14 = np.loadtxt("VNEG100M28l14.dat")[:,8]
-    s2opVNEG100M28lN = np.loadtxt("VNEG100M28lN.dat")[:,8]
-    s2opVNEG1d5M28l14 = np.loadtxt("VNEG1.5M28l14.dat")[:,8]
-    s2opVNEG1d5M28lN = np.loadtxt("VNEG1.5M28lN.dat")[:,8]
-    s2opV100M28l14 = np.loadtxt("V100M28l14.dat")[:,8]
-    s2opV100M28lN = np.loadtxt("V100M28lN.dat")[:,8]
+    s2opVNEG100M28l14 = np.loadtxt("Data/VNEG100M28l14.dat")[:,8]
+    s2opVNEG100M28lN = np.loadtxt("Data/VNEG100M28lN.dat")[:,8]
+    s2opVNEG1d5M28l14 = np.loadtxt("Data/VNEG1.5M28l14.dat")[:,8]
+    s2opVNEG1d5M28lN = np.loadtxt("Data/VNEG1.5M28lN.dat")[:,8]
+    s2opV100M28l14 = np.loadtxt("Data/V100M28l14.dat")[:,8]
+    s2opV100M28lN = np.loadtxt("Data/V100M28lN.dat")[:,8]
     
     #Create the figure
     fig = plt.figure()
