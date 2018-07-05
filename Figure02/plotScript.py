@@ -25,7 +25,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #sigma2FF is calculated using the correlation matrix method
 
     #Negative Side
-    datFileNEG = np.loadtxt("EOPP26F13l13NEG.dat")
+    datFileNEG = np.loadtxt("Data/EOPP26F13l13NEG.dat")
     energiesNEG = datFileNEG[:,0]
     s1NEG = datFileNEG[:,2]
     s1opNEG = datFileNEG[:,3]
@@ -38,7 +38,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     dsNEGLL = 0.5*np.log(2*np.pi*np.exp(1)*sigma2NEGLL)
 
     #Positive Side
-    datFile = np.loadtxt("EOPP26F13l13.dat")
+    datFile = np.loadtxt("Data/EOPP26F13l13.dat")
     energies = datFile[:,0]
     s1 = datFile[:,2]
     s1op = datFile[:,3]
@@ -99,7 +99,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #sigma2FF is calculated using the correlation matrix method
 
     #Negative Side
-    datFileNEG = np.loadtxt("EOPA28F14l14NEG.dat")
+    datFileNEG = np.loadtxt("Data/EOPA28F14l14NEG.dat")
     energiesNEG = datFileNEG[:,0]
     s1NEG = datFileNEG[:,2]
     s1opNEG = datFileNEG[:,3]
@@ -113,7 +113,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     
     #Positive Side
-    datFile = np.loadtxt("EOPA28F14l14.dat")
+    datFile = np.loadtxt("Data/EOPA28F14l14.dat")
     energies = datFile[:,0]
     s1 = datFile[:,2]
     s1op = datFile[:,3]
@@ -167,4 +167,3 @@ with plt.style.context('../IOP_large.mplstyle2'):
     plt.subplots_adjust(wspace = 0.030)
 
     plt.savefig('deltaS_N13N14.pdf', transparent=False)
-    plt.show()
