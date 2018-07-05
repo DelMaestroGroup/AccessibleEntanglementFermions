@@ -26,20 +26,20 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Top Plot: Probabilities vs Particle Number in Subsystem Size (For N=15); N=Total Number of Particles   
        
     #V/t = +-1.5
-    data_n15_V1d5a2 = np.loadtxt("M30F15V1.5a2Probs_toK.dat")
-    data_n16_V1d5a2 = np.loadtxt("M32F16V1.5a2Probs_toK.dat")
-    data_n15_VNEG1d5a2 = np.loadtxt("M30F15VNEG1.5a2Probs_toK.dat")
-    data_n16_VNEG1d5a2 = np.loadtxt("M32F16VNEG1.5a2Probs_toK.dat")
+    data_n15_V1d5a2 = np.loadtxt("Data/M30F15V1.5a2Probs_toK.dat")
+    data_n16_V1d5a2 = np.loadtxt("Data/M32F16V1.5a2Probs_toK.dat")
+    data_n15_VNEG1d5a2 = np.loadtxt("Data/M30F15VNEG1.5a2Probs_toK.dat")
+    data_n16_VNEG1d5a2 = np.loadtxt("Data/M32F16VNEG1.5a2Probs_toK.dat")
     
     #V/t = +- 1.0
-    data_n15_V1a2 = np.loadtxt("M30F15V1.0a2Probs_toK.dat")
-    data_n16_V1a2 = np.loadtxt("M32F16V1.0a2Probs_toK.dat")
-    data_n15_VNEG1a2 = np.loadtxt("M30F15VNEG1.0a2Probs_toK.dat")
-    data_n16_VNEG1a2 = np.loadtxt("M32F16VNEG1.0a2Probs_toK.dat")
+    data_n15_V1a2 = np.loadtxt("Data/M30F15V1.0a2Probs_toK.dat")
+    data_n16_V1a2 = np.loadtxt("Data/M32F16V1.0a2Probs_toK.dat")
+    data_n15_VNEG1a2 = np.loadtxt("Data/M30F15VNEG1.0a2Probs_toK.dat")
+    data_n16_VNEG1a2 = np.loadtxt("Data/M32F16VNEG1.0a2Probs_toK.dat")
 
     #V/t = 0
-    data_n15_V0a2 = np.loadtxt("M30F15V0.0a2Probs_toK.dat")
-    data_n16_V0a2 = np.loadtxt("M32F16V0.0a2Probs_toK.dat")
+    data_n15_V0a2 = np.loadtxt("Data/M30F15V0.0a2Probs_toK.dat")
+    data_n16_V0a2 = np.loadtxt("Data/M32F16V0.0a2Probs_toK.dat")
 
     #Load particle numbers 
     n15List = data_n15_VNEG1d5a2[:,0]
@@ -96,7 +96,6 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off',labelleft='on', direction='in')
     ax1.xaxis.set_ticks(np.arange(0, 16, 3))
-    #ax1.yaxis.set_ticks(10.0**np.linspace(-100, 0, 4))
     ax1.set_yscale('log')
     ax1.set_yticks([1E+0, 1E-25, 1E-50, 1E-75, 1E-100])
 
@@ -126,7 +125,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
 ###################################
  #Inset Plot
-    insetData = np.loadtxt("n8probsVsK.dat")
+    insetData = np.loadtxt("Data/n8probsVsK.dat")
     n8Probs = insetData[:,0]
     K = insetData[:,1]
     
@@ -144,6 +143,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in')
     ax2.set_aspect(1.618033*4)
 ###################################          
+
     # remove vertical gap between subplots
     plt.subplots_adjust(hspace=0.15)
     
