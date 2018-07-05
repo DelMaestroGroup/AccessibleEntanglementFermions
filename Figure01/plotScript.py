@@ -26,26 +26,26 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Load data files
 
     #11 particles
-    datFileNEG_M22N11 = 'EOPP22F11l11a2NEG.dat'
+    datFileNEG_M22N11 = 'Data/EOPP22F11l11a2NEG.dat'
     dataNEG_M22N11 = np.loadtxt(datFileNEG_M22N11)
     
-    datFile_M22N11 = 'EOPP22F11l11a2.dat'
+    datFile_M22N11 = 'Data/EOPP22F11l11a2.dat'
     data_M22N11 = np.loadtxt(datFile_M22N11)
     
     #13 particles
 
-    datFileNEG_M26N13 = 'EOPP26F13l13a2NEG.dat'
+    datFileNEG_M26N13 = 'Data/EOPP26F13l13a2NEG.dat'
     dataNEG_M26N13 = np.loadtxt(datFileNEG_M26N13)
     
-    datFile_M26N13 = 'EOPP26F13l13a2.dat'
+    datFile_M26N13 = 'Data/EOPP26F13l13a2.dat'
     data_M26N13 = np.loadtxt(datFile_M26N13)
     
     #15 particles
 
-    datFileNEG_M30N15 = 'EOPP30F15l15a2NEG.dat'
+    datFileNEG_M30N15 = 'Data/EOPP30F15l15a2NEG.dat'
     dataNEG_M30N15 = np.loadtxt(datFileNEG_M30N15)
     
-    datFile_M30N15 = 'EOPP30F15l15a2.dat'
+    datFile_M30N15 = 'Data/EOPP30F15l15a2.dat'
     data_M30N15 = np.loadtxt(datFile_M30N15)
     
     #Load energies (can choose them arbitrarily from any of the .dat files)
@@ -156,25 +156,25 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #12 particles
 
-    datFileNEG_M24N12 = 'EOPA24F12l12a2NEG.dat'
+    datFileNEG_M24N12 = 'Data/EOPA24F12l12a2NEG.dat'
     dataNEG_M24N12 = np.loadtxt(datFileNEG_M24N12)
     
-    datFile_M24N12 = 'EOPA24F12l12a2.dat'
+    datFile_M24N12 = 'Data/EOPA24F12l12a2.dat'
     data_M24N12 = np.loadtxt(datFile_M24N12)
     
     #14 particles
     
-    datFileNEG_M28N14 = 'EOPA28F14l14a2NEG.dat'
+    datFileNEG_M28N14 = 'Data/EOPA28F14l14a2NEG.dat'
     dataNEG_M28N14 = np.loadtxt(datFileNEG_M28N14)
     
-    datFile_M28N14 = 'EOPA28F14l14a2.dat'
+    datFile_M28N14 = 'Data/EOPA28F14l14a2.dat'
     data_M28N14 = np.loadtxt(datFile_M28N14)
     
     #16 particles
-    datFileNEG_M32N16 = 'EOPA32F16l16a2NEG.dat'
+    datFileNEG_M32N16 = 'Data/EOPA32F16l16a2NEG.dat'
     dataNEG_M32N16 = np.loadtxt(datFileNEG_M32N16)
     
-    datFile_M32N16 = 'EOPA32F16l16a2.dat'
+    datFile_M32N16 = 'Data/EOPA32F16l16a2.dat'
     data_M32N16 = np.loadtxt(datFile_M32N16)
 
     #Load energies
@@ -273,4 +273,3 @@ with plt.style.context('../IOP_large.mplstyle2'):
     plt.subplots_adjust(wspace = 0.030)
 
     plt.savefig('operationalEntanglementEntropies_SOP5.pdf', transparent=False)
-    plt.show()
