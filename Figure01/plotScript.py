@@ -112,12 +112,11 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax1.set_xlabel(' ')
     ax1.annotate(r'$\frac{14}{15}\ln{2}$', xy=(-30, 0.7 ), xytext=(-80, 0.67))
 
-    #Legend
-    lgnd = plt.legend(loc=(0.06,0.04),fontsize=7,handlelength=3,handleheight=2, title= r'$\alpha$, $N$', frameon=False)
-    lgnd = plt.legend(loc=(0.02,0.04),fontsize=7,handlelength=3,handleheight=2, title= r'$\alpha$, $N$', frameon=False)
 
-    lgnd.get_title().set_fontsize(7)
-    lgnd.get_title().set_position((12,0))
+    #Legend
+    lgnd = plt.legend(loc=(0.08,0.035), fontsize=9, handlelength=0,handleheight=1.5,title=r'$\alpha$, $N$',frameon=False)
+    lgnd.get_title().set_fontsize(9)
+    lgnd.get_title().set_position((2.13,-1))
 
     #Positive energies subplot
     ax2 = plt.subplot(gs[1])
@@ -238,9 +237,9 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     
     #Legend
-    lgnd = plt.legend(loc=(0.02,0.075), fontsize=6, handlelength=3,handleheight=2,title=r'$\alpha$, $N$',frameon=False)
-    lgnd.get_title().set_fontsize(6)
-    lgnd.get_title().set_position((10.8,0))
+    lgnd = plt.legend(loc=(0.08,0.035), fontsize=9, handlelength=0,handleheight=1.5,title=r'$\alpha$, $N$',frameon=False)
+    lgnd.get_title().set_fontsize(9)
+    lgnd.get_title().set_position((2.13,-1))
 
 
     #Positive energies subplot
