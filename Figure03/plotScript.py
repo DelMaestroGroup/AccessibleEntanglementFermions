@@ -131,8 +131,8 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.set_xscale('symlog', linthreshx = 0.000001)
 
     #Legend 
-    lgnd = plt.legend(loc=(0.01,0.40),fontsize=7,handlelength=1,handleheight=2, frameon=False)
-     
+    lgnd = plt.legend(loc=(0.00,0.34),fontsize=9,handlelength=1,handleheight=2, frameon=False)
+
     #Inset Plot
     plt.subplots_adjust(wspace = 0.030)
 
