@@ -75,7 +75,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #ax1.set_ylim(-0.15,7.8)
 
     #Legend
-    lgnd = plt.legend(loc=(0.20,0.0998),fontsize=7,handlelength=1,handleheight=1, frameon=True)
+    lgnd = plt.legend(loc=(0.35,0.0738),fontsize=9,handlelength=1,handleheight=1, frameon=False)
     frame = lgnd.get_frame()
     frame.set_edgecolor('#cccccc')
     frame.set_alpha(1.0)
