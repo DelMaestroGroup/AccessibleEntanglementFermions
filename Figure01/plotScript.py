@@ -114,7 +114,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
 
     #Legend
-    lgnd = plt.legend(loc=(0.08,0.035), fontsize=9, handlelength=0,handleheight=1.5,title=r'$\alpha$, $N$',frameon=False)
+    lgnd = plt.legend(loc=(0.08,0.031), fontsize=9, handlelength=0,handleheight=1.5,title=r'$\alpha$, $N$',frameon=False)
     lgnd.get_title().set_fontsize(9)
     lgnd.get_title().set_position((2.13,-1))
 
