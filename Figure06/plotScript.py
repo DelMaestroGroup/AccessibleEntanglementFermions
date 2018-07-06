@@ -152,5 +152,8 @@ with plt.style.context('../IOP_large.mplstyle'):
     ax2.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in')
     ax2.set_aspect(1.618033*4)
     ax2.set_xlim(0.64281684853,5.34031194547)
+    ax2.xaxis.labelpad = -2
+    ax2.yaxis.labelpad = 2
+
 
     plt.savefig('peakFitOddN.pdf')
