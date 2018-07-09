@@ -33,10 +33,12 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #13 particles
 
     #alpha=2
-    datFileNEG_M26N13 = 'Data/EOPP26F13l13a2NEG.dat'
+#    datFileNEG_M26N13 = 'Data/EOPP26F13l13a2NEG.dat'
+    datFileNEG_M26N13 = 'Data/EOPP30F15l15a2NEG.dat'
     dataNEG_M26N13 = np.loadtxt(datFileNEG_M26N13)
     
-    datFile_M26N13 = 'Data/EOPP26F13l13a2.dat'
+#    datFile_M26N13 = 'Data/EOPP26F13l13a2.dat'
+    datFile_M26N13 = 'Data/EOPP30F15l15a2.dat'
     data_M26N13 = np.loadtxt(datFile_M26N13)
     
     #alpha=4
@@ -47,10 +49,12 @@ with plt.style.context('../IOP_large.mplstyle2'):
     data_M26N13a4 = np.loadtxt(datFile_M26N13a4)
 
     #alpha=10
-    datFileNEG_M26N13a10 = 'Data/EOPP26F13l13a10NEG.dat'
+#    datFileNEG_M26N13a10 = 'Data/EOPP26F13l13a10NEG.dat'
+    datFileNEG_M26N13a10 = 'Data/EOPP30F15l15a10NEG.dat'
     dataNEG_M26N13a10 = np.loadtxt(datFileNEG_M26N13a10)
     
-    datFile_M26N13a10 = 'Data/EOPP26F13l13a10.dat'
+#    datFile_M26N13a10 = 'Data/EOPP26F13l13a10.dat'
+    datFile_M26N13a10 = 'Data/EOPP30F15l15a10.dat'
     data_M26N13a10 = np.loadtxt(datFile_M26N13a10)
 
     #Load energies
@@ -125,7 +129,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.plot(energies_M26N13, data_M26N13a10[:,4]-data_M26N13a10[:,8], 'o',  label=r'$S_{10}-S_{10}^{\rm{op}}$', markersize = 3, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
     ax2.plot(energies_M26N13, data_M26N13a10[:,7], 'o',label=r'$H_{10}$', markersize = 1.5, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3])
 
-    ax2.text(0.04,2.5,r'$N$ = 13')
+    ax2.text(0.04,2.5,r'$N$ = 15')
     ax2.set_xlim(energies_M26N13[0], energies_M26N13[-1])
     ax2.set_ylim(0,2.8)
     ax2.set_xscale('symlog', linthreshx = 0.000001)
