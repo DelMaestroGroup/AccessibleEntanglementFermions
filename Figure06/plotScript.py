@@ -156,4 +156,4 @@ with plt.style.context('../IOP_large.mplstyle'):
     ax2.yaxis.labelpad = 2
 
 
-    plt.savefig('peakFitOddN.pdf')
+    plt.savefig('peakScalingOddN.pdf')

@@ -21,24 +21,25 @@ with plt.style.context('../IOP_large.mplstyle2'):
     
 #Load the files
 
-    sigma2FF= 0.4447369456644643  
+    sigma2FF= 0.45909421031059594
     #sigma2FF is calculated using the correlation matrix method
+    #or doing a run at V/t = 0
 
     #Negative Side
-    datFileNEG = np.loadtxt("Data/EOPP26F13l13NEG.dat")
+    datFileNEG = np.loadtxt("Data/EOPP30F15l15a2NEG.dat")
     energiesNEG = datFileNEG[:,0]
     s1NEG = datFileNEG[:,2]
     s1opNEG = datFileNEG[:,3]
     #sigma2NEG = np.log(datFileNEG[:,6])
     sigma2NEG = 0.5*np.log(2*np.pi*np.exp(1)*datFileNEG[:,6])
-    l = 13 #Subsystem Size
+    l = 15 #Subsystem Size
     kNEG = pi/(2*np.arccos(-energiesNEG/2))
     sigma2NEGLL = kNEG * sigma2FF
 
     dsNEGLL = 0.5*np.log(2*np.pi*np.exp(1)*sigma2NEGLL)
 
     #Positive Side
-    datFile = np.loadtxt("Data/EOPP26F13l13.dat")
+    datFile = np.loadtxt("Data/EOPP30F15l15a2.dat")
     energies = datFile[:,0]
     s1 = datFile[:,2]
     s1op = datFile[:,3]
@@ -91,7 +92,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.set_xscale('symlog', linthreshx = 0.000001)
     ax2.set_ylim(-0.51,3.0)
     ax2.set_xlim(0.029,100)
-    ax2.text(0.04,2.65,r'$N=13$')
+    ax2.text(0.04,2.65,r'$N=15$')
 
     ################################
     
@@ -166,4 +167,4 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Adjust space between subplots
     plt.subplots_adjust(wspace = 0.030)
 
-    plt.savefig('deltaS_N13N14.pdf', transparent=False)
+    plt.savefig('deltaS1_N13N14.pdf', transparent=False)

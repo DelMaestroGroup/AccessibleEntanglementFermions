@@ -255,4 +255,4 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Adjust space between subplots
     plt.subplots_adjust(wspace = 0.030)
 
-    plt.savefig('higherAlphaDeltaS_N13N14_fullRange.pdf', transparent=False)
+    plt.savefig('higherAlphaDeltaS_N13N14.pdf', transparent=False)

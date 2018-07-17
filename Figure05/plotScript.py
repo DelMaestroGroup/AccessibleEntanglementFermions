@@ -150,4 +150,4 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Adjust space between subplots
     plt.subplots_adjust(wspace = 0.030)
     
-    plt.savefig('kDependencePna.pdf')
+    plt.savefig('TLLCollapse.pdf')

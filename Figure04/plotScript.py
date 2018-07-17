@@ -367,4 +367,4 @@ with plt.style.context('../IOP_large.mplstyle2'):
             xytext=(x2, y2), textcoords='offset points',
             )
     
-    plt.savefig('probabilities_N15N16_logn.pdf')
+    plt.savefig('alphaCollapse.pdf')
