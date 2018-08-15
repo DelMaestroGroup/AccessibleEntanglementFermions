@@ -95,7 +95,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     ################################
     
-    sigma2FF=0.55409421031059594 ######UPDATE##############################
+    sigma2FF=0.4650954313305221
     #sigma2FF is calculated using the correlation matrix method
 
     #Negative Side
