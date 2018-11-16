@@ -148,7 +148,7 @@ with plt.style.context('../IOP_large.mplstyle'):
     ax2.plot(3.1903119454707949,0.2335959173839680,marker='>',mfc=blue[3],mew=0.75,color=blue[1],label='3')
     ax2.axvline(x=2,color='#cccccc',zorder=-1)
     ax2.set_xlabel(r'$V/t$')
-    ax2.set_ylabel(r'$S_{1}^{\mathrm{op}}$')
+    ax2.set_ylabel(r'$S_{1}^{\mathrm{acc}}$')
     ax2.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in')
     ax2.set_aspect(1.618033*4)
     ax2.set_xlim(0.64281684853,5.34031194547)

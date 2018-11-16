@@ -64,7 +64,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Negative energies subplot
     ax1 = plt.subplot(gs[0])
     ax1.axvline(x=-2,color='#cccccc',zorder=-1)   #Grey vertical line at transition point
-    ax1.plot(energiesNEG[0:-1], dsNEG[0:-1], '.', label=r'$S_{1}-S_{1}^{\rm{op}}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax1.plot(energiesNEG[0:-1], dsNEG[0:-1], '.', label=r'$S_{1}-S_{1}^{\rm{acc}}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
     ax1.plot(energiesNEG[0:-1], sigma2NEG[0:-1], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
     ax1.plot(np.linspace(energiesNEG[0],energiesNEG[-1],1000), dsNEGLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e K\sigma^2_{FF})}$',linewidth = 1, color=blue[0], markerfacecolor = blue[0], markeredgewidth = '0.5',zorder=1)
     ax1.set_ylabel(r'$\Delta S_{1}$')

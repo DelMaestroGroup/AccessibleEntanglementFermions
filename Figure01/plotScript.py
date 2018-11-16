@@ -106,7 +106,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax1.plot(xNEG, exactNEG, '-', markersize = 3, markerfacecolor = 'k', markeredgewidth = '0.25',color='k',linewidth=0.6,zorder=5)
     ax1.set_xlim(-energies_M22N11[-1], -energies_M22N11[0])
     ax1.set_ylim(0,0.85)
-    ax1.set_ylabel(r'$S_{\alpha}^{\rm{op}}(\ell)$')
+    ax1.set_ylabel(r'$S_{\alpha}^{\rm{acc}}(\ell)$')
     ax1.set_xscale('symlog', linthreshx = 0.000001)       #symlog necessary to plot negative values with log scale
     ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction='in')
     ax1.set_xlabel(' ')
@@ -230,7 +230,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax4.plot(xNEG, exactNEG, '-', markersize = 3, markerfacecolor = 'k', markeredgewidth = '0.25',color='k',linewidth=0.6,zorder=5)
     ax4.set_xlim(-energies_M22N11[-1], -energies_M22N11[0])
     ax4.set_ylim(0,0.85)
-    ax4.set_ylabel(r'$S_{\alpha}^{\rm{op}}(\ell)$')
+    ax4.set_ylabel(r'$S_{\alpha}^{\rm{acc}}(\ell)$')
     ax4.set_xscale('symlog', linthreshx = 0.000001)
     ax4.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction='in')
     ax4.annotate(r'$\frac{15}{16}\ln{2}$', xy=(-30, 0.7 ), xytext=(-80, 0.67))
