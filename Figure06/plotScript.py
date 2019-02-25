@@ -25,7 +25,7 @@ with plt.style.context('../IOP_large.mplstyle'):
             blue.append(colors.get_alpha_hex(blue[0],beta[i]))
 
     #Load data
-    data = np.loadtxt('Data/peakScalingOddN.dat') 
+    data = np.loadtxt('Data/peakScalingOddN.dat')
     N = data[:,0]
     Vmax = data[:,1]
 
@@ -100,17 +100,17 @@ with plt.style.context('../IOP_large.mplstyle'):
     ax1.plot(N[3]**(-c2),Vmax[3],'d',mfc=blue[3],label='9',color=blue[1],zorder=1)
     ax1.plot(N[4]**(-c2),Vmax[4],'^',mfc=blue[3],label='11',color=blue[1],zorder=1)
     ax1.plot(N[5]**(-c2),Vmax[5],'s',mfc=blue[3],label='13',color=blue[1],zorder=1)
-    ax1.plot(N[6]**(-c2),Vmax[6],'o',mfc=blue[3],label='15',color=blue[1],zorder=1) 
-    
+    ax1.plot(N[6]**(-c2),Vmax[6],'o',mfc=blue[3],label='15',color=blue[1],zorder=1)
+
     #Set legend
     ax1.legend(loc=(0.67,0.05),fontsize=10,frameon=False,handlelength=1,handleheight=1,title=r'$N$',ncol=2)
-    
+
     ax1.plot(Nfit**(-c2),Vmaxfit,'-',label=r'$%.4f N^{-%.4f}+%.4f$'%(c1,c2,c3),color=blue[1],zorder=0,linewidth=0.75)
     ax1.set_xlim(0,0.80)
     ax1.set_xlabel(r'$N^{%.4f}$'%(-c2))
     ax1.set_ylabel(r'$V/t \vert_{\mathrm{Max}}$')
     ax1.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in')
-   
+
     #Inset Plot
     dataN3 = np.loadtxt("Data/InsetData/EOPP6F3l3a2.dat")
     dataN5 = np.loadtxt("Data/InsetData/EOPP10F5l5a2.dat")
@@ -119,7 +119,7 @@ with plt.style.context('../IOP_large.mplstyle'):
     dataN11 = np.loadtxt("Data/InsetData/EOPP22F11l11a2.dat")
     dataN13 = np.loadtxt("Data/InsetData/EOPP26F13l13a2.dat")
     dataN15 = np.loadtxt("Data/InsetData/EOPP30F15l15a2.dat")
-    
+
     xN3, yN3 = dataN3[:,0], dataN3[:,3]
     xN5, yN5 = dataN5[:,0], dataN5[:,3]
     xN7, yN7 = dataN7[:,0], dataN7[:,3]
@@ -127,7 +127,7 @@ with plt.style.context('../IOP_large.mplstyle'):
     xN11, yN11 = dataN11[:,0], dataN11[:,3]
     xN13, yN13 = dataN13[:,0], dataN13[:,3]
     xN15, yN15 = dataN15[:,0], dataN15[:,3]
-    
+
     left,bottom,width,height = [0.217,0.507,0.36,0.36]
     ax2 = fig.add_axes([left,bottom,width,height])
     ax2.plot(xN3,yN3,label='5',color=blue[1],linewidth=0.75)
@@ -137,7 +137,7 @@ with plt.style.context('../IOP_large.mplstyle'):
     ax2.plot(xN11,yN11,label='11',color=blue[1],linewidth=0.75)
     ax2.plot(xN13,yN13,label='13',color=blue[1],linewidth=0.75)
     ax2.plot(xN15,yN15,label='15',color=blue[1],linewidth=0.75)
-    
+
     #Add marker at the peaks
     ax2.plot(2.7928168485370364,0.6689827690493597,marker='o',mfc=blue[3],mew=0.75,color=blue[1],label='15')
     ax2.plot(2.8258612507925038,0.6305148711748493,marker='s',mfc=blue[3],mew=0.75,color=blue[1],label='13')

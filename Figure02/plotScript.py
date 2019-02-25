@@ -18,7 +18,7 @@ for i,c in enumerate(alpha):
         blue.append(colors.get_alpha_hex(blue[0],beta[i]))
 
 with plt.style.context('../IOP_large.mplstyle2'):
-    
+
 #Load the files
 
     sigma2FF= 0.45909421031059594
@@ -63,7 +63,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #Negative energies subplot
     ax1 = plt.subplot(gs[0])
-    ax1.axvline(x=-2,color='#cccccc',zorder=-1)   #Grey vertical line at transition point
+    ax1.axvline(x=-2,color='#cccccc',zorder=-1, linestyle='--')   #Grey vertical line at transition point
     ax1.plot(energiesNEG[0:-1], dsNEG[0:-1], '.', label=r'$S_{1}-S_{1}^{\rm{acc}}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
     ax1.plot(energiesNEG[0:-1], sigma2NEG[0:-1], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
     ax1.plot(np.linspace(energiesNEG[0],energiesNEG[-1],1000), dsNEGLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e K\sigma^2_{FF})}$',linewidth = 1, color=blue[0], markerfacecolor = blue[0], markeredgewidth = '0.5',zorder=1)
@@ -80,7 +80,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     frame = lgnd.get_frame()
     frame.set_edgecolor('#cccccc')
     frame.set_alpha(1.0)
-    
+
     #Positive energies subplot
     ax2 = plt.subplot(gs[1])
     ax2.axvline(x=2, color='#cccccc',zorder=-1)
@@ -94,7 +94,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.text(0.05,2.77,r'$N=15$')
 
     ################################
-    
+
     sigma2FF=0.4650954313305221
     #sigma2FF is calculated using the correlation matrix method
 
@@ -130,7 +130,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #Negative energies subplot
     ax4 = plt.subplot(gs[2])
-    ax4.axvline(x=-2,color='#cccccc',zorder=-1)   #Grey vertical line at transition point
+    ax4.axvline(x=-2,color='#cccccc',zorder=-1,linestyle='--')   #Grey vertical line at transition point
     ax4.plot(energiesNEG[0:-1], dsNEG[0:-1], '.', label=r'$\Delta s = s_{1}-s_{1}^{op}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
     ax4.plot(energiesNEG[0:-1], sigma2NEG[0:-1], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
     ax4.plot(np.linspace(energiesNEG[0],energiesNEG[-1],1000), dsNEGLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'w', markeredgewidth = '0.5',zorder=1)

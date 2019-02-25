@@ -28,33 +28,33 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #11 particles
     datFileNEG_M22N11 = 'Data/EOPP22F11l11a2NEG.dat'
     dataNEG_M22N11 = np.loadtxt(datFileNEG_M22N11)
-    
+
     datFile_M22N11 = 'Data/EOPP22F11l11a2.dat'
     data_M22N11 = np.loadtxt(datFile_M22N11)
-    
+
     #13 particles
 
     datFileNEG_M26N13 = 'Data/EOPP26F13l13a2NEG.dat'
     dataNEG_M26N13 = np.loadtxt(datFileNEG_M26N13)
-    
+
     datFile_M26N13 = 'Data/EOPP26F13l13a2.dat'
     data_M26N13 = np.loadtxt(datFile_M26N13)
-    
+
     #15 particles
 
     datFileNEG_M30N15 = 'Data/EOPP30F15l15a2NEG.dat'
     dataNEG_M30N15 = np.loadtxt(datFileNEG_M30N15)
-    
+
     datFile_M30N15 = 'Data/EOPP30F15l15a2.dat'
     data_M30N15 = np.loadtxt(datFile_M30N15)
-    
+
     #Load energies (can choose them arbitrarily from any of the .dat files)
     energiesNEG_M22N11 = dataNEG_M22N11[:,0]
     energies_M22N11 = data_M22N11[:,0]
-    
+
     energiesNEG_M26N13 = dataNEG_M26N13[:,0]
     energies_M26N13 = data_M26N13[:,0]
-    
+
     energiesNEG_M30N15 = dataNEG_M30N15[:,0]
     energies_M30N15 = data_M30N15[:,0]
 
@@ -62,21 +62,21 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #11 particles
     s1NEG_M22N11 = dataNEG_M22N11[:,3]
     s1_M22N11 = data_M22N11[:,3]
-    
+
     s2NEG_M22N11 = dataNEG_M22N11[:,8]
     s2_M22N11 = data_M22N11[:,8]
-    
+
     #13 particles
     s1NEG_M26N13 = dataNEG_M26N13[:,3]
     s1_M26N13 = data_M26N13[:,3]
-    
+
     s2NEG_M26N13 = dataNEG_M26N13[:,8]
     s2_M26N13 = data_M26N13[:,8]
-    
+
     #15 particles
     s1NEG_M30N15 = dataNEG_M30N15[:,3]
     s1_M30N15 = data_M30N15[:,3]
-    
+
     s2NEG_M30N15 = dataNEG_M30N15[:,8]
     s2_M30N15 = data_M30N15[:,8]
 
@@ -85,7 +85,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #Set height ratios for subplots
     gs = gridspec.GridSpec(2, 2, height_ratios=[1, 1])
-    
+
     #Make a line indicating the value at which operational
     #entanglement converges at +- infinity interaction strength.
     xNEG = np.linspace(-10,-100,1000)
@@ -96,7 +96,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #Negative energies subplot
     ax1 = plt.subplot(gs[0])
-    ax1.axvline(x=-2,color='#cccccc')   #Grey vertical line at transition point
+    ax1.axvline(x=-2,color='#cccccc', linestyle='--')   #Grey vertical line at transition point
     ax1.plot(energiesNEG_M30N15, s1NEG_M30N15, 'o',  label='1, 15', markersize = 3, markerfacecolor = blue[1], markeredgewidth = '0.25', color='#2B5080',zorder=4)
     ax1.plot(energiesNEG_M26N13, s1NEG_M26N13, 's', label='1, 13', markersize = 3, markerfacecolor = blue[2], markeredgewidth = '0.25',color='#2B5080')
     ax1.plot(energiesNEG_M22N11, s1NEG_M22N11, '^',  label='1, 11', markersize = 3, markerfacecolor = blue[3], markeredgewidth = '0.25',color='#2B5080')
@@ -133,13 +133,13 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.set_xlim(energies_M22N11[0], energies_M22N11[-1])
     ax2.set_ylim(0,0.85)
     ax2.set_xscale('symlog', linthreshx = 0.000001)
-    
+
     #plt.xlabel(r'$V/t$',x=0)
 
     #Inset Plot
     plt.subplots_adjust(wspace = 0.030)
 
-    
+
 #Bottom Plot: Operational entanglement entropies for even number of particles
 
     #Make a line indicating the value at which operational
@@ -150,39 +150,39 @@ with plt.style.context('../IOP_large.mplstyle2'):
     N = 16
     exactNEG = xNEG - xNEG + (a/(1-a))*np.log((N-1)/N * 2**((1-a)/a) + 1/N)
     exactPOS = xPOS - xPOS + np.log(2)
-    
+
     #Load data
 
     #12 particles
 
     datFileNEG_M24N12 = 'Data/EOPA24F12l12a2NEG.dat'
     dataNEG_M24N12 = np.loadtxt(datFileNEG_M24N12)
-    
+
     datFile_M24N12 = 'Data/EOPA24F12l12a2.dat'
     data_M24N12 = np.loadtxt(datFile_M24N12)
-    
+
     #14 particles
-    
+
     datFileNEG_M28N14 = 'Data/EOPA28F14l14a2NEG.dat'
     dataNEG_M28N14 = np.loadtxt(datFileNEG_M28N14)
-    
+
     datFile_M28N14 = 'Data/EOPA28F14l14a2.dat'
     data_M28N14 = np.loadtxt(datFile_M28N14)
-    
+
     #16 particles
     datFileNEG_M32N16 = 'Data/EOPA32F16l16a2NEG.dat'
     dataNEG_M32N16 = np.loadtxt(datFileNEG_M32N16)
-    
+
     datFile_M32N16 = 'Data/EOPA32F16l16a2.dat'
     data_M32N16 = np.loadtxt(datFile_M32N16)
 
     #Load energies
     energiesNEG_M24N12 = dataNEG_M24N12[:,0]
     energies_M24N12 = data_M24N12[:,0]
-    
+
     energiesNEG_M28N14 = dataNEG_M28N14[:,0]
     energies_M28N14 = data_M28N14[:,0]
-    
+
     energiesNEG_M32N16 = dataNEG_M32N16[:,0]
     energies_M32N16 = data_M32N16[:,0]
 
@@ -190,24 +190,24 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #12 particles
     s1NEG_M24N12 = dataNEG_M24N12[:,3]
     s1_M24N12 = data_M24N12[:,3]
-    
+
     s2NEG_M24N12 = dataNEG_M24N12[:,8]
     s2_M24N12 = data_M24N12[:,8]
-    
+
     #14 particles
     s1NEG_M28N14 = dataNEG_M28N14[:,3]
     s1_M28N14 = data_M28N14[:,3]
-    
+
     s2NEG_M28N14 = dataNEG_M28N14[:,8]
     s2_M28N14 = data_M28N14[:,8]
-    
+
     #16 particles
     s1NEG_M32N16 = dataNEG_M32N16[:,3]
     s1_M32N16 = data_M32N16[:,3]
-    
+
     s2NEG_M32N16 = dataNEG_M32N16[:,8]
     s2_M32N16 = data_M32N16[:,8]
-    
+
     #Make a line indicating the value at which operational
     #entanglement converges at +- infinity interaction strength.
     xNEG = np.linspace(-10,-100,1000)
@@ -215,12 +215,12 @@ with plt.style.context('../IOP_large.mplstyle2'):
     N = 16
     exactNEG = xNEG - xNEG + (N-1)/N * np.log(2)
     exactPOS = np.ones(np.size(xPOS))*np.log(2)
-    
+
     #Negative energies subplot
     ax4 = plt.subplot(gs[2], sharex=ax1)
 
     #ax4 = fig.add_subplot(223)
-    ax4.axvline(x=-2,color='#cccccc')   #Grey vertical line at transition point
+    ax4.axvline(x=-2,color='#cccccc', linestyle='--')   #Grey vertical line at transition point
     ax4.plot(energiesNEG_M32N16, s1NEG_M32N16, 'o',  label='1, 16', markersize = 3, markerfacecolor = blue[1], markeredgewidth = '0.25',color='#2B5080',zorder=4)
     ax4.plot(energiesNEG_M28N14, s1NEG_M28N14, 's', label='1, 14', markersize = 3, markerfacecolor = blue[2], markeredgewidth = '0.25',color='#2B5080')
     ax4.plot(energiesNEG_M24N12, s1NEG_M24N12, '^',  label='1, 12', markersize = 3, markerfacecolor = blue[3], markeredgewidth = '0.25',color='#2B5080')
@@ -235,7 +235,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax4.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction='in')
     ax4.annotate(r'$\frac{15}{16}\ln{2}$', xy=(-30, 0.7 ), xytext=(-80, 0.67))
 
-    
+
     #Legend
     lgnd = plt.legend(loc=(0.08,0.035), fontsize=9, handlelength=0,handleheight=1.5,title=r'$\alpha$, $N$',frameon=False)
     lgnd.get_title().set_fontsize(9)
