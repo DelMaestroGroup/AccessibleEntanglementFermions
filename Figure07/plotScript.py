@@ -224,19 +224,18 @@ with plt.style.context('../IOP_large.mplstyle'):
     
     #Save Entanglement Entropies (s1=VonNeumann, s2=Renyi) to variables
     
+    sigma2VNEG1d5M28l14= np.loadtxt("../Data/Frac_28_14_-1.5.dat")[:,6]
+    sigma2VNEG1d5M28lN= np.loadtxt("../Data/Frac_28_N_-1.5.dat")[:,6]
     
-    sigma2VNEG1d5M28l14= np.loadtxt("Data/VNEG1.5M28l14.dat")[:,6]
-    sigma2VNEG1d5M28lN= np.loadtxt("Data/VNEG1.5M28lN.dat")[:,6]
+    s1VNEG1d5M28l14 = np.loadtxt("../Data/Frac_28_14_-1.5.dat")[:,2]
+    s1opVNEG1d5M28l14 = np.loadtxt("../Data/Frac_28_14_-1.5.dat")[:,3]
+    s1VNEG1d5M28lN = np.loadtxt("../Data/Frac_28_N_-1.5.dat")[:,2]
+    s1opVNEG1d5M28lN = np.loadtxt("../Data/Frac_28_N_-1.5.dat")[:,3]
     
-    s1VNEG1d5M28l14 = np.loadtxt("Data/VNEG1.5M28l14.dat")[:,2]
-    s1opVNEG1d5M28l14 = np.loadtxt("Data/VNEG1.5M28l14.dat")[:,3]
-    s1VNEG1d5M28lN = np.loadtxt("Data/VNEG1.5M28lN.dat")[:,2]
-    s1opVNEG1d5M28lN = np.loadtxt("Data/VNEG1.5M28lN.dat")[:,3]
-    
-    s2VNEG1d5M28l14 = np.loadtxt("Data/VNEG1.5M28l14.dat")[:,4]
-    s2opVNEG1d5M28l14 = np.loadtxt("Data/VNEG1.5M28l14.dat")[:,5]
-    s2VNEG1d5M28lN = np.loadtxt("Data/VNEG1.5M28lN.dat")[:,4]
-    s2opVNEG1d5M28lN = np.loadtxt("Data/VNEG1.5M28lN.dat")[:,5]
+    s2VNEG1d5M28l14 = np.loadtxt("../Data/Frac_28_14_-1.5.dat")[:,4]
+    s2opVNEG1d5M28l14 = np.loadtxt("../Data/Frac_28_14_-1.5.dat")[:,5]
+    s2VNEG1d5M28lN = np.loadtxt("../Data/Frac_28_N_-1.5.dat")[:,4]
+    s2opVNEG1d5M28lN = np.loadtxt("../Data/Frac_28_N_-1.5.dat")[:,5]
 
     fillingFractions = np.linspace(1,14,14)/28#[i/28 for i in range(1,15)]
     f=fillingFractions
