@@ -1,6 +1,3 @@
-#Top Plot: One Particle Entanglement entropy dependence on the interaction potential
-#Bottom Plot: Entanglement entropies for equal particle number bipartitions at various system sizes
-
 #NOTE: IOP_large.mplstyle2 being used instead of IOP_large.mplstyle.
 #This script technically generates two figures and combines them vertically into a single figure.
 
@@ -32,34 +29,35 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Top Plot: Probabilities vs Particle Number in Subsystem Size (For N=15); N=Total Number of Particles
 
     #V/t = -10
-    data_n15_VNEG10a2 = np.loadtxt("Data/M30F15VNEG10.0a2Probs.dat")
-    data_n16_VNEG10a2 = np.loadtxt("Data/M32F16VNEG10.0a2Probs.dat")
+    data_n15_VNEG10a2 = np.loadtxt("../Data/Pn_PBC_30_15_15_2_-10.0.dat")
+    data_n16_VNEG10a2 = np.loadtxt("../Data/Pn_ABC_32_16_16_2_-10.0.dat")
 
-    data_n15_VNEG10a5 = np.loadtxt("Data/M30F15VNEG10.0a5Probs.dat")
-    data_n16_VNEG10a5 = np.loadtxt("Data/M32F16VNEG10.0a5Probs.dat")
+    data_n15_VNEG10a5 = np.loadtxt("../Data/Pn_PBC_30_15_15_5_-10.0.dat")
+    data_n16_VNEG10a5 = np.loadtxt("../Data/Pn_ABC_32_16_16_5_-10.0.dat")
 
-    data_n15_VNEG10a10 = np.loadtxt("Data/M30F15VNEG10.0a10Probs.dat")
-    data_n16_VNEG10a10 = np.loadtxt("Data/M32F16VNEG10.0a10Probs.dat")
+    data_n15_VNEG10a10 = np.loadtxt("../Data/Pn_PBC_30_15_15_10_-10.0.dat")
+    data_n16_VNEG10a10 = np.loadtxt("../Data/Pn_ABC_32_16_16_10_-10.0.dat")
 
     #V/t = -1.5
-    data_n15_VNEG1d5a2 = np.loadtxt("Data/M30F15VNEG1.5a2Probs.dat")
-    data_n16_VNEG1d5a2 = np.loadtxt("Data/M32F16VNEG1.5a2Probs.dat")
+    data_n15_VNEG1d5a2 = np.loadtxt("../Data/Pn_PBC_30_15_15_2_-1.5.dat")
+    #data_n15_VNEG1d5a2_alpha = np.loadtxt("../Data/M30F15VNEG1.5a2Probs.dat")
+    data_n16_VNEG1d5a2 = np.loadtxt("../Data/Pn_ABC_32_16_16_2_-1.5.dat")
 
-    data_n15_VNEG1d5a5 = np.loadtxt("Data/M30F15VNEG1.5a5Probs.dat")
-    data_n16_VNEG1d5a5 = np.loadtxt("Data/M32F16VNEG1.5a5Probs.dat")
+    data_n15_VNEG1d5a5 = np.loadtxt("../Data/Pn_PBC_30_15_15_5_-1.5.dat")
+    data_n16_VNEG1d5a5 = np.loadtxt("../Data/Pn_ABC_32_16_16_5_-1.5.dat")
 
-    data_n15_VNEG1d5a10 = np.loadtxt("Data/M30F15VNEG1.5a10Probs.dat")
-    data_n16_VNEG1d5a10 = np.loadtxt("Data/M32F16VNEG1.5a10Probs.dat")
+    data_n15_VNEG1d5a10 = np.loadtxt("../Data/Pn_PBC_30_15_15_10_-1.5.dat")
+    data_n16_VNEG1d5a10 = np.loadtxt("../Data/Pn_ABC_32_16_16_10_-1.5.dat")
 
     #V/t = 10
-    data_n15_V10a2 = np.loadtxt("Data/M30F15V10.0a2Probs.dat")
-    data_n16_V10a2 = np.loadtxt("Data/M32F16V10.0a2Probs.dat")
+    data_n15_V10a2 = np.loadtxt("../Data/Pn_PBC_30_15_15_2_10.0.dat")
+    data_n16_V10a2 = np.loadtxt("../Data/Pn_ABC_32_16_16_2_10.0.dat")
 
-    data_n15_V10a5 = np.loadtxt("Data/M30F15V10.0a5Probs.dat")
-    data_n16_V10a5 = np.loadtxt("Data/M32F16V10.0a5Probs.dat")
+    data_n15_V10a5 = np.loadtxt("../Data/Pn_PBC_30_15_15_5_10.0.dat")
+    data_n16_V10a5 = np.loadtxt("../Data/Pn_ABC_32_16_16_5_10.0.dat")
 
-    data_n15_V10a10 = np.loadtxt("Data/M30F15V10.0a10Probs.dat")
-    data_n16_V10a10 = np.loadtxt("Data/M32F16V10.0a10Probs.dat")
+    data_n15_V10a10 = np.loadtxt("../Data/Pn_PBC_30_15_15_10_10.0.dat")
+    data_n16_V10a10 = np.loadtxt("../Data/Pn_ABC_32_16_16_10_10.0.dat")
 
     #Load particle numbers
     n15List = data_n15_VNEG1d5a2[:,0]
@@ -232,11 +230,9 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.plot(n16List, pna16_V10a2, 'o', label=r'$\ln{P_{(n,\alpha=2)}}$', markersize = 5.5, markerfacecolor =blue[2], markeredgewidth = '0.25',color=blue[0],zorder=5)
 
     #alpha=5
-    #ax2.plot(n16List, pn16_V10, 'o', label=r'$\ln{P_{n}^{(\alpha=2)}}$', markersize = 4, markerfacecolor = green[3], markeredgewidth = '0.25',color=green[0])
     ax2.plot(n16List, pna16_V10a5, 'o', label=r'$\ln{P_{(n,\alpha=2)}}$', markersize = 3.75, markerfacecolor =green[2], markeredgewidth = '0.25',color=green[0],zorder=5)
 
     #alpha=10
-    #ax2.plot(n16List, pn16_V10, 'o', label=r'$\ln{P_{n}^{(\alpha=2)}}$', markersize = 4, markerfacecolor = red[3], markeredgewidth = '0.25',color=red[0])
     ax2.plot(n16List, pna16_V10a10, 'o', label=r'$\ln{P_{(n,\alpha=2)}}$', markersize = 1.50, markerfacecolor =red[2], markeredgewidth = '0.25',color=red[0],zorder=5)
 
     ax2.tick_params(axis='both', which='both', right='off', top='off',labelright='off', labelleft='off',direction='in')
@@ -249,6 +245,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #alpha=2
     ax3.plot(n15List, pn15_VNEG1d5, 'o', label=r'$P_n$', markersize = 7.5, markerfacecolor = orange[2], markeredgewidth = '0.25',color=orange[0],zorder=4)
+
     ax3.plot(n15List, pna15_VNEG1d5a2, 'o', label=r'$(P_{n,2})^{1/2}$', markersize = 5.5, markerfacecolor =blue[2], markeredgewidth = '0.25',color=blue[0],zorder=5)
 
     #alpha=5
@@ -260,8 +257,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax3.tick_params(axis='both', which='both', right='off', top='off',labelright='off', labelleft='on', direction='in')
     ax3.set_yscale('log')
     ax3.set_ylim(1E-27,1E+01)
-
-    plt.legend(loc=(0.236,0.058), fontsize=11,ncol=1,frameon=False,handletextpad=0.08)
+    #plt.legend(loc=(0.236,0.058), fontsize=11,ncol=1,frameon=False,handletextpad=0.08)
 
     #V/t=-1.5 , N=16
     ax4 = plt.subplot(gs[3])
@@ -280,7 +276,6 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax4.xaxis.set_ticks(np.arange(0, 17, 4))
     ax4.set_yscale('log')
     ax4.set_ylim(1E-27,1E+01)
-
     #plt.legend(loc=(0.236,0.058), fontsize=11,ncol=1,frameon=False,handletextpad=0.08)
 
     #V/t=-10 , N=15
@@ -288,18 +283,19 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #alpha=2
     ax5.plot(n15List, pn15_VNEG10, 'o', label=r'$P_n$', markersize = 7.5, markerfacecolor = orange[2], markeredgewidth = '0.25',color=orange[0],zorder=4)
-    ax5.plot(n15List, pna15_VNEG10a2, 'o', label=r'$(P_{n,2})^{\frac{1}{2}}$', markersize = 5.5, markerfacecolor =blue[2], markeredgewidth = '0.25',color=blue[0],zorder=5)
+    ax5.plot(n15List, pna15_VNEG10a2, 'o', label=r'$\mathcal{A}_2(P_{n,2})^{\frac{1}{2}}$', markersize = 5.5, markerfacecolor =blue[2], markeredgewidth = '0.25',color=blue[0],zorder=5)
 
     #alpha=5
-    ax5.plot(n15List, pna15_VNEG10a5, 'o', label=r'$(P_{n,5})^{\frac{1}{5}}$', markersize = 3.75, markerfacecolor =green[2], markeredgewidth = '0.25',color=green[0],zorder=5)
+    ax5.plot(n15List, pna15_VNEG10a5, 'o', label=r'$\mathcal{A}_5(P_{n,5})^{\frac{1}{5}}$', markersize = 3.75, markerfacecolor =green[2], markeredgewidth = '0.25',color=green[0],zorder=5)
 
     #alpha=10
-    ax5.plot(n15List, pna15_VNEG10a10, 'o', label=r'$(P_{n,10})^{\frac{1}{10}}$', markersize = 1.50, markerfacecolor =red[2], markeredgewidth = '0.25',color=red[0],zorder=5)
+    ax5.plot(n15List, pna15_VNEG10a10, 'o', label=r'$\mathcal{A}_{10}(P_{n,10})^{\frac{1}{10}}$', markersize = 1.50, markerfacecolor =red[2], markeredgewidth = '0.25',color=red[0],zorder=5)
 
     ax5.tick_params(axis='both', which='both', right='off', top='off',labelright='off', labelleft='on', direction='in')
     ax5.set_yscale('log')
     ax5.set_ylim(3E-02 - 0.0008,7E-02 + 0.003)
     ax5.set_xlabel(r'$n$')
+    plt.legend(loc=(0.120,0.020), fontsize=11,ncol=1,frameon=False,handletextpad=0.08)
 
     #V/t=-10 , N=16
     ax6 = plt.subplot(gs[5])
@@ -366,5 +362,4 @@ with plt.style.context('../IOP_large.mplstyle2'):
             xy=(x1, y1), xycoords='axes fraction',
             xytext=(x2, y2), textcoords='offset points',
             )
-
     plt.savefig('alphaCollapse.pdf')

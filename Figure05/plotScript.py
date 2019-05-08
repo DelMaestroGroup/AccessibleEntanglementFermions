@@ -99,7 +99,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax1.set_yscale('log')
     ax1.set_yticks([1E+0, 1E-25, 1E-50, 1E-75, 1E-100])
 
-    ax1.set_ylabel(r'$(P_{n,2,K})^{K}$')
+    ax1.set_ylabel(r'$\mathcal{A}_2(K)(P_{n,2})^{K}$')
     ax1.text(13,1E-06,r'$N=15$')
     
     lgnd = plt.legend(loc=(0.355,0.125), fontsize=11,ncol=1,frameon=False,handletextpad=0.08,title=r'$K, V/t$')
@@ -120,7 +120,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.set_yscale('log')
     ax2.yaxis.set_ticks([1E+0, 1E-25, 1E-50, 1E-75, 1E-100, 1E-125])
     ax2.set_xlabel(r'$n$')
-    ax2.set_ylabel(r'$(P_{n,2,K})^{K}$')
+    ax2.set_ylabel(r'$\mathcal{A}_2(K)(P_{n,2})^{K}$')
     ax2.text(13.9,1E-06,r'$N=16$')
 
 ###################################
@@ -129,7 +129,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     n8Probs = insetData[:,0]
     K = insetData[:,1]
     
-    left,bottom,width,height = [0.408,0.125,0.30,0.30]
+    left,bottom,width,height = [0.408,0.118,0.30,0.30]
     ax2 = fig.add_axes([left,bottom,width,height])
     ax2.plot(K[4],n8Probs[4],'o',markersize = ms[5], markerfacecolor = blue[5], markeredgewidth = '0.25',color=blue[0],zorder=4)
     ax2.plot(K[3],n8Probs[3],'o',markersize = ms[4], markerfacecolor = blue[4], markeredgewidth = '0.25',color=blue[0],zorder=4)
@@ -139,9 +139,11 @@ with plt.style.context('../IOP_large.mplstyle2'):
     
     #Add marker at the peaks
     ax2.set_xlabel(r'$K$')
-    ax2.set_ylabel(r'$(P_{8,2,K})^{K}$')
+    ax2.set_ylabel(r'$\mathcal{A}_2(K)(P_{8,2})^{K}$')
     ax2.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in')
     ax2.set_aspect(1.618033*4)
+    ax2.set_xticks([1, 1.5,2])
+
 ###################################          
 
     # remove vertical gap between subplots
