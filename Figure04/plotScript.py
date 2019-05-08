@@ -1,365 +1,212 @@
-#NOTE: IOP_large.mplstyle2 being used instead of IOP_large.mplstyle.
-#This script technically generates two figures and combines them vertically into a single figure.
+#Calculates the difference between the Von Neumann and Von Neumann Opearational
+#Entanglement Entropies
 
-import matplotlib
-matplotlib.use('Agg')
+import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
-import numpy as np
+from math import pi
 import colors
 
-orange = ["#4173b3"]  #Actually blue
-blue = ["#ff8c00"]    #Actually orange
+orange = ["#ff8c00"]
+blue = ["#4173b3"]
 green = ["#66cdaa"]
 red = ["#e85c47"]
+green = ["#66cdaa"]
 
-alpha = [1.0,0.6,0.2]
+alpha = [0.2,0.1,0.0]
+beta = [1.0,0.6,0.2]
 
 for i,c in enumerate(alpha):
-        blue.append(colors.get_alpha_hex(blue[0],alpha[i]))
-        orange.append(colors.get_alpha_hex(orange[0],alpha[i]))
-        green.append(colors.get_alpha_hex(green[0],alpha[i]))
-        red.append(colors.get_alpha_hex(red[0],alpha[i]))
-
-#orange[0] = 'k'
-#orange[2] = 'None'
+        orange.append(colors.get_alpha_hex(orange[0],beta[i]))
+        blue.append(colors.get_alpha_hex(blue[0],beta[i]))
+        green.append(colors.get_alpha_hex(green[0],beta[i]))
+        red.append(colors.get_alpha_hex(red[0],beta[i]))
 
 with plt.style.context('../IOP_large.mplstyle2'):
+    
+#Load the files
 
-    #Top Plot: Probabilities vs Particle Number in Subsystem Size (For N=15); N=Total Number of Particles
+    sigma2FF= 0.45909421031059594
+    #sigma2FF is calculated using the correlation matrix method
+    #or doing a run at V/t = 0
 
-    #V/t = -10
-    data_n15_VNEG10a2 = np.loadtxt("../Data/Pn_PBC_30_15_15_2_-10.0.dat")
-    data_n16_VNEG10a2 = np.loadtxt("../Data/Pn_ABC_32_16_16_2_-10.0.dat")
+    #Negative Side
+    datFileNEG = np.loadtxt("Data/EOPP30F15l15a2NEG.dat")
+    energiesNEG = datFileNEG[:,0]
+    s1NEG = datFileNEG[:,2]
+    s1opNEG = datFileNEG[:,3]
+    #sigma2NEG = np.log(datFileNEG[:,6])
+    sigma2NEG = 0.5*np.log(2*np.pi*np.exp(1)*datFileNEG[:,6])
+    l = 15 #Subsystem Size
+    kNEG = pi/(2*np.arccos(-np.linspace(energiesNEG[0],energiesNEG[-1],1000)/2))
+    sigma2NEGLL = kNEG * sigma2FF
 
-    data_n15_VNEG10a5 = np.loadtxt("../Data/Pn_PBC_30_15_15_5_-10.0.dat")
-    data_n16_VNEG10a5 = np.loadtxt("../Data/Pn_ABC_32_16_16_5_-10.0.dat")
+    dsNEGLL = 0.5*np.log(2*np.pi*np.exp(1)*sigma2NEGLL)
 
-    data_n15_VNEG10a10 = np.loadtxt("../Data/Pn_PBC_30_15_15_10_-10.0.dat")
-    data_n16_VNEG10a10 = np.loadtxt("../Data/Pn_ABC_32_16_16_10_-10.0.dat")
+    #Positive Side
+    datFile = np.loadtxt("Data/EOPP30F15l15a2.dat")
+    energies = datFile[:,0]
+    s1 = datFile[:,2]
+    s1op = datFile[:,3]
+    sigma2 = 0.5*np.log(2*np.pi*np.exp(1)*datFile[:,6])
+    #k = pi/(2*np.arccos(-energies/2))
+    k = pi/(2*np.arccos(-np.linspace(energies[0],energies[-1],1000)/2))
+    sigma2LL = k * sigma2FF
 
-    #V/t = -1.5
-    data_n15_VNEG1d5a2 = np.loadtxt("../Data/Pn_PBC_30_15_15_2_-1.5.dat")
-    #data_n15_VNEG1d5a2_alpha = np.loadtxt("../Data/M30F15VNEG1.5a2Probs.dat")
-    data_n16_VNEG1d5a2 = np.loadtxt("../Data/Pn_ABC_32_16_16_2_-1.5.dat")
-
-    data_n15_VNEG1d5a5 = np.loadtxt("../Data/Pn_PBC_30_15_15_5_-1.5.dat")
-    data_n16_VNEG1d5a5 = np.loadtxt("../Data/Pn_ABC_32_16_16_5_-1.5.dat")
-
-    data_n15_VNEG1d5a10 = np.loadtxt("../Data/Pn_PBC_30_15_15_10_-1.5.dat")
-    data_n16_VNEG1d5a10 = np.loadtxt("../Data/Pn_ABC_32_16_16_10_-1.5.dat")
-
-    #V/t = 10
-    data_n15_V10a2 = np.loadtxt("../Data/Pn_PBC_30_15_15_2_10.0.dat")
-    data_n16_V10a2 = np.loadtxt("../Data/Pn_ABC_32_16_16_2_10.0.dat")
-
-    data_n15_V10a5 = np.loadtxt("../Data/Pn_PBC_30_15_15_5_10.0.dat")
-    data_n16_V10a5 = np.loadtxt("../Data/Pn_ABC_32_16_16_5_10.0.dat")
-
-    data_n15_V10a10 = np.loadtxt("../Data/Pn_PBC_30_15_15_10_10.0.dat")
-    data_n16_V10a10 = np.loadtxt("../Data/Pn_ABC_32_16_16_10_10.0.dat")
-
-    #Load particle numbers
-    n15List = data_n15_VNEG1d5a2[:,0]
-    n16List = data_n16_VNEG1d5a2[:,0]
-
-    #Save probabilities
-
-    #15 particles
-    #V/t = -10
-    pntoa15_VNEG10a2 = data_n15_VNEG10a2[:,1]
-    pn15_VNEG10 = pntoa15_VNEG10a2**(1/2)
-    pn15_VNEG10 /= np.sum(pn15_VNEG10)
-    pntoa15_VNEG10a2 = pn15_VNEG10
-    pna15_VNEG10a2 = data_n15_VNEG10a2[:,2]
-    pna15_VNEG10a2 = pna15_VNEG10a2**(1/2)
-    pna15_VNEG10a2 /= np.sum(pna15_VNEG10a2)
-
-    pntoa15_VNEG10a5 = data_n15_VNEG10a5[:,1]
-    pntoa15_VNEG10a5 = pn15_VNEG10
-    pna15_VNEG10a5 = data_n15_VNEG10a5[:,2]
-    pna15_VNEG10a5 = pna15_VNEG10a5**(1/5)
-    pna15_VNEG10a5 /= np.sum(pna15_VNEG10a5)
-
-    pntoa15_VNEG10a10 = data_n15_VNEG10a10[:,1]
-    pntoa15_VNEG10a10 = pn15_VNEG10
-    pna15_VNEG10a10 = data_n15_VNEG10a10[:,2]
-    pna15_VNEG10a10 = pna15_VNEG10a10**(1/10)
-    pna15_VNEG10a10 /= np.sum(pna15_VNEG10a10)
+    dsLL = 0.5*np.log(2*np.pi*np.exp(1)*sigma2LL)
 
 
-    #V/t = -1.5
-    pntoa15_VNEG1d5a2 = data_n15_VNEG1d5a2[:,1]
-    pn15_VNEG1d5 = pntoa15_VNEG1d5a2**(1/2)
-    pn15_VNEG1d5 /= np.sum(pn15_VNEG1d5)
-    pntoa15_VNEG1d5a2 = pn15_VNEG1d5
-    pna15_VNEG1d5a2 = data_n15_VNEG1d5a2[:,2]
-    pna15_VNEG1d5a2 = pna15_VNEG1d5a2**(1/2)
-    pna15_VNEG1d5a2 /= np.sum(pna15_VNEG1d5a2)
-
-    pntoa15_VNEG1d5a5 = data_n15_VNEG1d5a5[:,1]
-    pntoa15_VNEG1d5a5 = pn15_VNEG1d5
-    pna15_VNEG1d5a5 = data_n15_VNEG1d5a5[:,2]
-    pna15_VNEG1d5a5 = pna15_VNEG1d5a5**(1/5)
-    pna15_VNEG1d5a5 /= np.sum(pna15_VNEG1d5a5)
-
-    pntoa15_VNEG1d5a10 = data_n15_VNEG1d5a10[:,1]
-    pntoa15_VNEG1d5a10 = pn15_VNEG1d5
-    pna15_VNEG1d5a10 = data_n15_VNEG1d5a10[:,2]
-    pna15_VNEG1d5a10 = pna15_VNEG1d5a10**(1/10)
-    pna15_VNEG1d5a10 /= np.sum(pna15_VNEG1d5a10)
-
-    #V/t = 10
-    pntoa15_V10a2 = data_n15_V10a2[:,1]
-    pn15_V10 = pntoa15_V10a2**(1/2)
-    pn15_V10 /= np.sum(pn15_V10)
-    pntoa15_V10a2 = pn15_V10
-    pna15_V10a2 = data_n15_V10a2[:,2]
-    pna15_V10a2 = pna15_V10a2**(1/2)
-    pna15_V10a2 /= np.sum(pna15_V10a2)
-
-    pntoa15_V10a5 = data_n15_V10a5[:,1]
-    pntoa15_V10a5 = pn15_V10
-    pna15_V10a5 = data_n15_V10a5[:,2]
-    pna15_V10a5 = pna15_V10a5**(1/5)
-    pna15_V10a5 /= np.sum(pna15_V10a5)
-
-    pntoa15_V10a10 = data_n15_V10a10[:,1]
-    pntoa15_V10a10 = pn15_V10
-    pna15_V10a10 = data_n15_V10a10[:,2]
-    pna15_V10a10 = pna15_V10a10**(1/10)
-    pna15_V10a10 /= np.sum(pna15_V10a10)
-
-    #16 particles
-    #V/t = -10
-    pntoa16_VNEG10a2 = data_n16_VNEG10a2[:,1]
-    pn16_VNEG10 = pntoa16_VNEG10a2**(1/2)
-    pn16_VNEG10 /= np.sum(pn16_VNEG10)
-    pntoa16_VNEG10a2 = pn16_VNEG10
-    pna16_VNEG10a2 = data_n16_VNEG10a2[:,2]
-    pna16_VNEG10a2 = pna16_VNEG10a2**(1/2)
-    pna16_VNEG10a2 /= np.sum(pna16_VNEG10a2)
-
-    pntoa16_VNEG10a5 = data_n16_VNEG10a5[:,1]
-    pntoa16_VNEG10a5 = pn16_VNEG10
-    pna16_VNEG10a5 = data_n16_VNEG10a5[:,2]
-    pna16_VNEG10a5 = pna16_VNEG10a5**(1/5)
-    pna16_VNEG10a5 /= np.sum(pna16_VNEG10a5)
-
-    pntoa16_VNEG10a10 = data_n16_VNEG10a10[:,1]
-    pntoa16_VNEG10a10 = pn16_VNEG10
-    pna16_VNEG10a10 = data_n16_VNEG10a10[:,2]
-    pna16_VNEG10a10 = pna16_VNEG10a10**(1/10)
-    pna16_VNEG10a10 /= np.sum(pna16_VNEG10a10)
-
-    #V/t = -1.5
-    pntoa16_VNEG1d5a2 = data_n16_VNEG1d5a2[:,1]
-    pn16_VNEG1d5 = pntoa16_VNEG1d5a2**(1/2)
-    pn16_VNEG1d5 /= np.sum(pn16_VNEG1d5)
-    pntoa16_VNEG1d5a2 = pn16_VNEG1d5
-    pna16_VNEG1d5a2 = data_n16_VNEG1d5a2[:,2]
-    pna16_VNEG1d5a2 = pna16_VNEG1d5a2**(1/2)
-    pna16_VNEG1d5a2 /= np.sum(pna16_VNEG1d5a2)
-
-    pntoa16_VNEG1d5a5 = data_n16_VNEG1d5a5[:,1]
-    pntoa16_VNEG1d5a5 = pn16_VNEG1d5
-    pna16_VNEG1d5a5 = data_n16_VNEG1d5a5[:,2]
-    pna16_VNEG1d5a5 = pna16_VNEG1d5a5**(1/5)
-    pna16_VNEG1d5a5 /= np.sum(pna16_VNEG1d5a5)
-
-    pntoa16_VNEG1d5a10 = data_n16_VNEG1d5a10[:,1]
-    pntoa16_VNEG1d5a10 = pn16_VNEG1d5
-    pna16_VNEG1d5a10 = data_n16_VNEG1d5a10[:,2]
-    pna16_VNEG1d5a10 = pna16_VNEG1d5a10**(1/10)
-    pna16_VNEG1d5a10 /= np.sum(pna16_VNEG1d5a10)
-
-    #V/t = 10
-    pntoa16_V10a2 = data_n16_V10a2[:,1]
-    pn16_V10 = pntoa16_V10a2**(1/2)
-    pn16_V10 /= np.sum(pn16_V10)
-    pntoa16_V10a2 = pn16_V10
-    pna16_V10a2 = data_n16_V10a2[:,2]
-    pna16_V10a2 = pna16_V10a2**(1/2)
-    pna16_V10a2 /= np.sum(pna16_V10a2)
-
-    pntoa16_V10a5 = data_n16_V10a5[:,1]
-    pntoa16_V10a5 = pn16_V10
-    pna16_V10a5 = data_n16_V10a5[:,2]
-    pna16_V10a5 = pna16_V10a5**(1/5)
-    pna16_V10a5 /= np.sum(pna16_V10a5)
-
-    pntoa16_V10a10 = data_n16_V10a10[:,1]
-    pntoa16_V10a10 = pn16_V10
-    pna16_V10a10 = data_n16_V10a10[:,2]
-    pna16_V10a10 = pna16_V10a10**(1/10)
-    pna16_V10a10 /= np.sum(pna16_V10a10)
+    #Calculate the difference
+    dsNEG = s1NEG - s1opNEG
+    ds = s1 - s1op
 
     #Create the figure
     fig = plt.figure()
 
     #Set height ratios for subplots
-    gs = gridspec.GridSpec(3,2)
+    gs = gridspec.GridSpec(2, 2, height_ratios=[1,1])
 
-    #Shift V/t=-10,-1.5,10 data sets vertically
-    shiftV10 = 0
-    shiftVNEG1d5 = 0
-    shiftVNEG10 = 0
-
-    #V/t=10 , N=15
+    #Negative energies subplot
     ax1 = plt.subplot(gs[0])
+    ax1.axvline(x=-2,linestyle='--',color='#cccccc',zorder=-1)   #Grey vertical line at transition point
+    ax1.plot(energiesNEG[0:-1], dsNEG[0:-1], '.', label=r'$S_{1}-S_{1}^{\rm{acc}}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax1.plot(energiesNEG[0:-1], sigma2NEG[0:-1], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax1.plot(np.linspace(energiesNEG[0],energiesNEG[-1],1000), dsNEGLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e K\sigma^2_{FF})}$',linewidth = 1, color=blue[0], markerfacecolor = blue[0], markeredgewidth = '0.5',zorder=1)
+    ax1.set_ylabel(r'$\Delta S_{1}$')
+    ax1.set_xscale('symlog', linthreshx = 0.000001)       #symlog necessary to plot negative values with log scale
+    ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction = 'in')
+    ax1.set_xscale('symlog', linthreshx = 0.000001)
+    ax1.set_xlim(-100,-0.029)
+    ax1.set_ylim(0,3.1)
+    #ax1.set_ylim(-0.15,7.8)
+    ax1.text(-0.80,2.8,r'$N=15$')
 
-    #alpha=2
-    ax1.plot(n15List, pn15_V10, 'o', label=r'$\ln{P_{n}^{(\alpha=2)}}$', markersize = 7.5, markerfacecolor = orange[2], markeredgewidth = '0.25',color=orange[0],zorder=4)
-    ax1.plot(n15List, pna15_V10a2, 'o', label=r'$\ln{P_{(n,\alpha=2)}}$', markersize = 5.5, markerfacecolor =blue[2], markeredgewidth = '0.25',color=blue[0],zorder=5)
 
-    #alpha=5
-    ax1.plot(n15List, pna15_V10a5, 'o', label=r'$\ln{P_{(n,\alpha=2)}}$', markersize = 3.75, markerfacecolor = green[2], markeredgewidth = '0.25',color=green[0],zorder=5)
-
-    #alpha=10
-    ax1.plot(n15List, pna15_V10a10, 'o', label=r'$\ln{P_{(n,\alpha=2)}}$', markersize = 1.50, markerfacecolor = red[2], markeredgewidth = '0.25',color=red[0],zorder=5)
-
-    ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off',labelleft='on', direction='in')
-    ax1.set_yscale('log')
-    ax1.set_ylim(1E-35,1E+02)
-
-    #V/t=10 , N=16
+    
+    #Positive energies subplot
     ax2 = plt.subplot(gs[1])
+    ax2.axvline(x=2, color='#cccccc',zorder=-1)
+    ax2.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction = 'in')
+    ax2.plot(energies[0:-1], ds[0:-1], '.',  label=r'$S_{1}-S_{1}^{\rm{acc}}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax2.plot(energies[0:-1], sigma2[0:-1], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$', linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax2.plot(np.linspace(energies[0],energies[-1],1000), dsLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e K\sigma^2_{FF})}$', linewidth = 1, color=blue[0],markerfacecolor = blue[0], markeredgewidth = '0.5',zorder=1)
+    ax2.set_xscale('symlog', linthreshx = 0.000001)
+    ax2.set_xlim(0.029,100)
+    ax2.set_ylim(0,3.1)
 
-    #alpha=2
-    ax2.plot(n16List, pn16_V10, 'o', label=r'$\ln{P_{n}^{(\alpha=2)}}$', markersize = 7.5, markerfacecolor = orange[2], markeredgewidth = '0.25',color=orange[0],zorder=4)
-    ax2.plot(n16List, pna16_V10a2, 'o', label=r'$\ln{P_{(n,\alpha=2)}}$', markersize = 5.5, markerfacecolor =blue[2], markeredgewidth = '0.25',color=blue[0],zorder=5)
+    #Legend
+    lgnd = plt.legend(loc=(0.245,0.567),fontsize=9,handlelength=1,handleheight=1, frameon=True, facecolor='w', framealpha=0.8,edgecolor='w')
 
-    #alpha=5
-    ax2.plot(n16List, pna16_V10a5, 'o', label=r'$\ln{P_{(n,\alpha=2)}}$', markersize = 3.75, markerfacecolor =green[2], markeredgewidth = '0.25',color=green[0],zorder=5)
+    ################################
+    
+    sigma2FF=0.4650954313305221
+    #sigma2FF is calculated using the correlation matrix method
 
-    #alpha=10
-    ax2.plot(n16List, pna16_V10a10, 'o', label=r'$\ln{P_{(n,\alpha=2)}}$', markersize = 1.50, markerfacecolor =red[2], markeredgewidth = '0.25',color=red[0],zorder=5)
+    #Negative Side
+    datFileNEG = np.loadtxt("Data/EOPA32F16l16a2NEG.dat")
+    energiesNEG = datFileNEG[:,0]
+    s1NEG = datFileNEG[:,2]
+    s1opNEG = datFileNEG[:,3]
+    #sigma2NEG = np.log(datFileNEG[:,6])
+    sigma2NEG = 0.5*np.log(2*np.pi*np.exp(1)*datFileNEG[:,6])
+    l = 16 #Subsystem Size
+    kNEG = pi/(2*np.arccos(-np.linspace(energiesNEG[1],energiesNEG[-1],1000)/2))
+    sigma2NEGLL = kNEG *sigma2FF
 
-    ax2.tick_params(axis='both', which='both', right='off', top='off',labelright='off', labelleft='off',direction='in')
-    ax2.xaxis.set_ticks(np.arange(0, 17, 4))
-    ax2.set_yscale('log')
-    ax2.set_ylim(1E-35,1E+02)
+    dsNEGLL = 0.5*np.log(2*np.pi*np.exp(1)*sigma2NEGLL)
 
-    #V/t=-1.5 , N=15
-    ax3 = plt.subplot(gs[2])
+    #Positive Side
+    datFile = np.loadtxt("Data/EOPA32F16l16a2.dat")
+    energies = datFile[:,0]
+    s1 = datFile[:,2]
+    s1op = datFile[:,3]
+    sigma2 = 0.5*np.log(2*np.pi*np.exp(1)*datFile[:,6])  #ACTUALLY Delta S
+    #k = pi/(2*np.arccos(-energies/2))
+    k = pi/(2*np.arccos(-np.linspace(energies[0],energies[-1],1000)/2))
+    sigma2LL = k * sigma2FF
 
-    #alpha=2
-    ax3.plot(n15List, pn15_VNEG1d5, 'o', label=r'$P_n$', markersize = 7.5, markerfacecolor = orange[2], markeredgewidth = '0.25',color=orange[0],zorder=4)
+    dsLL = 0.5*np.log(2*np.pi*np.exp(1)*sigma2LL)
 
-    ax3.plot(n15List, pna15_VNEG1d5a2, 'o', label=r'$(P_{n,2})^{1/2}$', markersize = 5.5, markerfacecolor =blue[2], markeredgewidth = '0.25',color=blue[0],zorder=5)
 
-    #alpha=5
-    ax3.plot(n15List, pna15_VNEG1d5a5, 'o', label=r'$(P_{n,5})^{1/5}$', markersize = 3.75, markerfacecolor =green[2], markeredgewidth = '0.25',color=green[0],zorder=5)
+    #Calculate the difference
+    dsNEG = s1NEG - s1opNEG
+    ds = s1 - s1op
 
-    #alpha=10
-    ax3.plot(n15List, pna15_VNEG1d5a10, 'o', label=r'$(P_{n,10})^{1/10}$', markersize = 1.50, markerfacecolor =red[2], markeredgewidth = '0.25',color=red[0],zorder=5)
+    #Negative energies subplot
+    ax4 = plt.subplot(gs[2])
+    ax4.axvline(x=-2,linestyle='--',color='#cccccc',zorder=-1)   #Grey vertical line at transition point
+    ax4.plot(energiesNEG[0:-1], dsNEG[0:-1], '.', label=r'$\Delta s = s_{1}-s_{1}^{op}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax4.plot(energiesNEG[0:-1], sigma2NEG[0:-1], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax4.plot(np.linspace(energiesNEG[0],energiesNEG[-1],1000), dsNEGLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'w', markeredgewidth = '0.5',zorder=1)
+    ax4.set_xlim(-energies[-1], -energies[0])
+    ax4.set_ylabel(r'$\Delta S_{1}$')
+    ax4.set_xscale('symlog', linthreshx = 0.000001)       #symlog necessary to plot negative values with log scale
+    ax4.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction = 'in')
+    ax4.set_xscale('symlog', linthreshx = 0.000001)
+    ax4.set_xlim(-100,-0.029)
+    ax4.set_ylim(0,3.1)
+    ax4.text(-0.80,2.8,r'$N=16$')
+    
+    #Positive energies subplot
+    ax5 = plt.subplot(gs[3])
+    ax5.axvline(x=2, color='#cccccc',zorder=-1)
+    ax5.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction = 'in')
+    ax5.plot(energies[0:-1], ds[0:-1], '.', label='1, 13', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax5.plot(energies[0:-1], sigma2[0:-1], '.', linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax5.plot(np.linspace(energies[0],energies[-1],1000), dsLL, '-', linewidth = 1, color=blue[0], markerfacecolor = 'w', markeredgewidth = '0.5',zorder=1)
+    ax5.set_xlim(energies[0], energies[-1])
+    ax5.set_xscale('symlog', linthreshx = 0.000001)
+    ax5.set_ylim(0,3.1)
+    ax5.set_xlim(0.029,100)
+###################################
+    #V/t = -1.5
+    data_n16_VNEG1d5a2 = np.loadtxt("../Data/Pn_ABC_32_16_16_2_-1.5.dat")    
+    
+    #Load particle numbers 
+    n16List = data_n16_VNEG1d5a2[:,0]
 
-    ax3.tick_params(axis='both', which='both', right='off', top='off',labelright='off', labelleft='on', direction='in')
-    ax3.set_yscale('log')
-    ax3.set_ylim(1E-27,1E+01)
-    #plt.legend(loc=(0.236,0.058), fontsize=11,ncol=1,frameon=False,handletextpad=0.08)
+    #Save probabilities
+    #16 particles
 
-    #V/t=-1.5 , N=16
-    ax4 = plt.subplot(gs[3])
+    #V/t = -1.5
+    pntoa16_VNEG1d5a2 = data_n16_VNEG1d5a2[:,1]
+    pn16_VNEG1d5 = pntoa16_VNEG1d5a2**(1/2)
+    pn16_VNEG1d5 /= np.sum(pn16_VNEG1d5)
+    
+    nav=0.0
+    sigma216=0.0
+    for i,c in enumerate(pn16_VNEG1d5):
+        nav=nav+i*c
+    for i,c in enumerate(pn16_VNEG1d5):
+        sigma216=sigma216+(i-nav)**2*c
+    plt.xlabel(r'$V/t$',x=0)
 
-    #alpha=2
-    ax4.plot(n16List, pn16_VNEG1d5, 'o', label=r'$P_n$', markersize = 7.5, markerfacecolor = orange[2], markeredgewidth = '0.25',color=orange[0],zorder=4)
-    ax4.plot(n16List, pna16_VNEG1d5a2, 'o', label=r'$(P_{n,2})^{1/2}$', markersize = 5.5, markerfacecolor =blue[2], markeredgewidth = '0.25',color=blue[0],zorder=5)
-
-    #alpha=5
-    ax4.plot(n16List, pna16_VNEG1d5a5, 'o', label=r'$(P_{n,5})^{1/5}$', markersize = 3.75, markerfacecolor =green[2], markeredgewidth = '0.25',color=green[0],zorder=5)
-
-    #alpha=10
-    ax4.plot(n16List, pna16_VNEG1d5a10, 'o', label=r'$(P_{n,10})^{1/10}$', markersize = 1.50, markerfacecolor =red[2], markeredgewidth = '0.25',color=red[0],zorder=5)
-
-    ax4.tick_params(axis='both', which='both', right='off', top='off',labelright='off', labelleft='off', direction='in')
-    ax4.xaxis.set_ticks(np.arange(0, 17, 4))
-    ax4.set_yscale('log')
-    ax4.set_ylim(1E-27,1E+01)
-    #plt.legend(loc=(0.236,0.058), fontsize=11,ncol=1,frameon=False,handletextpad=0.08)
-
-    #V/t=-10 , N=15
-    ax5 = plt.subplot(gs[4])
-
-    #alpha=2
-    ax5.plot(n15List, pn15_VNEG10, 'o', label=r'$P_n$', markersize = 7.5, markerfacecolor = orange[2], markeredgewidth = '0.25',color=orange[0],zorder=4)
-    ax5.plot(n15List, pna15_VNEG10a2, 'o', label=r'$\mathcal{A}_2(P_{n,2})^{\frac{1}{2}}$', markersize = 5.5, markerfacecolor =blue[2], markeredgewidth = '0.25',color=blue[0],zorder=5)
-
-    #alpha=5
-    ax5.plot(n15List, pna15_VNEG10a5, 'o', label=r'$\mathcal{A}_5(P_{n,5})^{\frac{1}{5}}$', markersize = 3.75, markerfacecolor =green[2], markeredgewidth = '0.25',color=green[0],zorder=5)
-
-    #alpha=10
-    ax5.plot(n15List, pna15_VNEG10a10, 'o', label=r'$\mathcal{A}_{10}(P_{n,10})^{\frac{1}{10}}$', markersize = 1.50, markerfacecolor =red[2], markeredgewidth = '0.25',color=red[0],zorder=5)
-
-    ax5.tick_params(axis='both', which='both', right='off', top='off',labelright='off', labelleft='on', direction='in')
-    ax5.set_yscale('log')
-    ax5.set_ylim(3E-02 - 0.0008,7E-02 + 0.003)
-    ax5.set_xlabel(r'$n$')
-    plt.legend(loc=(0.120,0.020), fontsize=11,ncol=1,frameon=False,handletextpad=0.08)
-
-    #V/t=-10 , N=16
-    ax6 = plt.subplot(gs[5])
-
-    #alpha=2
-    ax6.plot(n16List, pn16_VNEG10, 'o', label=r'$P_n$', markersize = 7.5, markerfacecolor = orange[2], markeredgewidth = '0.25',color=orange[0],zorder=4)
-    ax6.plot(n16List, pna16_VNEG10a2, 'o', label=r'$(P_{n,2})^{\frac{1}{2}}$', markersize = 5.5, markerfacecolor =blue[2], markeredgewidth = '0.25',color=blue[0],zorder=5)
-
-    #alpha=5
-    ax6.plot(n16List, pna16_VNEG10a5, 'o', label=r'$(P_{n,5})^{\frac{1}{5}}$', markersize =3.75, markerfacecolor =green[2], markeredgewidth = '0.25',color=green[0],zorder=5)
-
-    #alpha=10
-    ax6.plot(n16List, pna16_VNEG10a10, 'o', label=r'$(P_{n,10})^{\frac{1}{10}}$', markersize = 1.50, markerfacecolor =red[2], markeredgewidth = '0.25',color=red[0],zorder=5)
-
-    ax6.tick_params(axis='both', which='both', right='off', top='off',labelright='off', labelleft='off', direction='in')
+#Inset Plot
+    z = np.linspace(0,16,1000)
+    left,bottom,width,height = [0.635,0.320,0.25,0.146]
+    ax6=plt.subplot
+    ax6 = fig.add_axes([left,bottom,width,height])
+    ax6.plot(n16List, pn16_VNEG1d5, 'o', label=r'$P_n$', markersize = 5.5, markerfacecolor = 'None', markeredgewidth = '1.0',color=green[0],zorder=4)
+    ax6.plot(z, np.exp(-1*(z-nav)**2/2/sigma216)/(2*np.pi*sigma216)**(1/2), '-', linewidth=1,color="#000000",zorder=1,label=r'$\mathcal{N}(\langle n\rangle,\sigma^2)$')
     ax6.xaxis.set_ticks(np.arange(0, 17, 4))
     ax6.set_yscale('log')
-    ax6.set_ylim(3E-02 - 0.0008,7E-02 + 0.003)
+    ax6.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction = 'in')
+    #ax2.set_ylim(1E-6,1E+0)
+    #ax2.set_ylim(0,0.6)
     ax6.set_xlabel(r'$n$')
+    plt.legend(loc=(0.120,0.020),fontsize=9,ncol=1,frameon=False,handletextpad=0.08)
 
+###################################
+    
+
+
+    #Remove numbers from real axes of top plots
+    plt.setp(ax1.get_xticklabels(), visible=False)
+    plt.setp(ax2.get_xticklabels(), visible=False)
     # remove vertical gap between subplots
-    plt.subplots_adjust(hspace=0.15)
+    plt.subplots_adjust(hspace=0.023)
 
     #Adjust space between subplots
     plt.subplots_adjust(wspace = 0.030)
 
-    #Inlude annotations denoting the interaction strength V/t
-    x1,y1 = 0.355,0.085
-    x2,y2 = 0.5,0.5
-    fs = 13
-    #ax1.annotate(r'$\frac{V}{t}=10$',
-    #        xy=(x1, y1), xycoords='axes fraction',
-    #        xytext=(x2, y2), textcoords='offset points',
-    #        )
-    ax2.annotate(r'$\frac{V}{t}=10$',
-            xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points', fontsize = fs
-            )
-    #ax3.annotate(r'$\frac{V}{t}=-1.5$',
-    #        xy=(x1, y1), xycoords='axes fraction',
-    #        xytext=(x2, y2), textcoords='offset points',
-    #        )
-    ax4.annotate(r'$\frac{V}{t}=-1.5$',
-            xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points', fontsize = fs
-            )
-    #ax5.annotate(r'$\frac{V}{t}=-10$',
-    #        xy=(x1, y1), xycoords='axes fraction',
-    #        xytext=(x2, y2), textcoords='offset points',
-    #        )
-    ax6.annotate(r'$\frac{V}{t}=-10$',
-            xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points', fontsize = fs
-            )
-
-    #Inlude annotations denoting the interaction strength V/t
-    x1,y1 = 0.02,0.86
-    x2,y2 = 0.5,0.5
-    ax1.annotate(r'$N=15$',
-            xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points',
-            )
-    ax2.annotate(r'$N=16$',
-            xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points',
-            )
-    plt.savefig('alphaCollapse.pdf')
+    plt.savefig('deltaS1_N15N16.pdf', transparent=False)

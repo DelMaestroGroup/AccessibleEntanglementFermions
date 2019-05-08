@@ -1,13 +1,11 @@
-#Top Plot: One Particle Entanglement entropy dependence on the interaction potential
-#Bottom Plot: Entanglement entropies for equal particle number bipartitions at various system sizes
-
-#NOTE: IOP_large.mplstyle2 being used instead of IOP_large.mplstyle.
-#This script technically generates two figures and combines them vertically into a single figure.
+#Calculates the difference between the Von Neumann and Von Neumann Opearational
+#Entanglement Entropies
 
 import numpy as np
 import matplotlib.pyplot as plt
-import colors
 from matplotlib import gridspec
+from math import pi
+import colors
 
 orange = ["#ff8c00"]
 blue = ["#4173b3"]
@@ -20,121 +18,153 @@ for i,c in enumerate(alpha):
         blue.append(colors.get_alpha_hex(blue[0],beta[i]))
 
 with plt.style.context('../IOP_large.mplstyle2'):
+    
+#Load the files
 
-    #Top Plot: Probabilities vs Particle Number in Subsystem Size (For N=13); N=Total Number of Particles
+    sigma2FF= 0.4447369456644643  
+    #sigma2FF is calculated using the correlation matrix method
 
-    #Load data files
-    #data_n13 = np.loadtxt("M26F13VNEG1.5Probs.dat")
-    #data_n14 = np.loadtxt("M28F14VNEG1.5Probs.dat")
-    
-    #data_n13 = np.loadtxt("M26F13VNEG1.0Probs.dat")
-    #data_n14 = np.loadtxt("M28F14VNEG1.0Probs.dat")
-    
-    #data_n13 = np.loadtxt("M26F13V1.0Probs.dat")
-    #data_n14 = np.loadtxt("M28F14V1.0Probs.dat")
-    
-    data_n13 = np.loadtxt("M26F13V2.826Probs.dat")
-    data_n14 = np.loadtxt("M28F14V3.638Probs.dat")
- 
-    #Load particle numbers 
-    n13List = data_n13[:,0]
-    n14List = data_n14[:,0]
+    #Negative Side
+    datFileNEG = np.loadtxt("EOPP26F13l13NEG.dat")
+    energiesNEG = datFileNEG[:,0]
+    s1NEG = datFileNEG[:,2]
+    s1opNEG = datFileNEG[:,3]
+    #sigma2NEG = np.log(datFileNEG[:,6])
+    sigma2NEG = 0.5*np.log(2*np.pi*np.exp(1)*datFileNEG[:,6])
+    l = 13 #Subsystem Size
+    kNEG = pi/(2*np.arccos(-energiesNEG/2))
+    sigma2NEGLL = kNEG * sigma2FF
 
-    #Save probabilities
+    dsNEGLL = 0.5*np.log(2*np.pi*np.exp(1)*sigma2NEGLL)
 
-    #13 particles
-    pntoa13 = data_n13[:,1]
-    pna13 = data_n13[:,2]
+    #Positive Side
+    datFile = np.loadtxt("EOPP26F13l13.dat")
+    energies = datFile[:,0]
+    s1 = datFile[:,2]
+    s1op = datFile[:,3]
+    sigma2 = 0.5*np.log(2*np.pi*np.exp(1)*datFile[:,6])
+    k = pi/(2*np.arccos(-energies/2))
+    sigma2LL = k * sigma2FF
 
-    #14 particles
-    pntoa14 = data_n14[:,1]
-    pna14 = data_n14[:,2]
-    
-    #Fit Quadratic to test Gaussian Hypothesis
-    ############################################################################################################
-    
-    #Determine average n_A
-    n13Ave = 6.5
-    n14Ave = 7.0
-    
-    lnpntoa13 = np.log(pntoa13)
-    lnpna13 = np.log(pna13)
-    
-    lnpntoa14 = np.log(pntoa14)
-    lnpna14 = np.log(pna14)
+    dsLL = 0.5*np.log(2*np.pi*np.exp(1)*sigma2LL)
 
-    coeffs13 = np.polyfit((n13List[2:-2]-n13Ave), lnpntoa13[2:-2], deg=2)
-    coeffs14 = np.polyfit((n14List[2:-2]-n14Ave), lnpntoa14[2:-2], deg=2)
-    
-    var13 = np.sum(n13List**2 * pntoa13) - n13Ave**2
-    var14 = np.sum(n14List**2 * pntoa14) - n14Ave**2
-    
-    print("Variance N=13: ", var13)
-    print("Variance N=14: ", var14)
- 
-    A13 , B13, C13 = coeffs13[0], coeffs13[1], coeffs13[2]
-    A14 , B14, C14 = coeffs14[0], coeffs14[1], coeffs14[2]
-    
-    #A13 = - 1/(2*var13) 
-    #A14 = - 1/(2*var14) 
-    
-    #C13 = (0.5)*np.log(1/(2*np.pi*var13))
-    #C14 = (0.5)*np.log(1/(2*np.pi*var14))
-    
-    print("Coeffs of N=13: ", coeffs13)
-    print("Coeffs of N=14: ", coeffs14)
-        
-    n13fit = np.linspace(0,13,1000)
-    n14fit = np.linspace(0,14,1000)
-    
-    lnpntoa13fit = A13*(n13fit-n13Ave)**2 + B13*(n13fit-n13Ave) + C13
-    lnpntoa14fit = A14*(n14fit-n14Ave)**2 + B14*(n14fit-n14Ave) + C14
 
-    
-    ############################################################################################################
+    #Calculate the difference
+    dsNEG = s1NEG - s1opNEG
+    ds = s1 - s1op
 
     #Create the figure
     fig = plt.figure()
 
     #Set height ratios for subplots
-    gs = gridspec.GridSpec(2, 1)
+    gs = gridspec.GridSpec(2, 2, height_ratios=[1,1])
 
     #Negative energies subplot
     ax1 = plt.subplot(gs[0])
-    ax1.plot(n13List, lnpntoa13, 'o', label=r'$\ln{P_{n}^{(\alpha=2)}}$', markersize = 4, markerfacecolor = blue[3], markeredgewidth = '0.25',color='#2B5080')
-    ax1.plot(n13List, lnpna13, '.', label=r'$\ln{P_{(n,\alpha=2)}}$', markersize = 4, markerfacecolor =blue[0], markeredgewidth = '0.25',color='#2B5080')
-    ax1.plot(n13fit, lnpntoa13fit, color='k',label=r'$\ln{P_{n}^{(\alpha=2)}} (Fit)$')
-    ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction='in')
-    ax1.set_xlabel('n')
-    ax1.annotate(r'$N=13,\frac{V}{t}=2.826$', xy=(8,0.01), xytext=(10.0,-12.5),fontsize=9)
-    ax1.xaxis.set_ticks(np.arange(0, 15, 1))
- 
+    ax1.axvline(x=-2,color='#cccccc',zorder=-1)   #Grey vertical line at transition point
+    ax1.plot(energiesNEG[0::2], dsNEG[0::2], '.', label=r'$S_{1}-S_{1}^{\rm{op}}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax1.plot(energiesNEG[0::2], sigma2NEG[0::2], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax1.plot(energiesNEG, dsNEGLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e K\sigma^2_{FF})}$',linewidth = 1, color=blue[0], markerfacecolor = blue[0], markeredgewidth = '0.5',zorder=1)
+    ax1.set_xlim(-energies[-1], -energies[0])
+    ax1.set_ylabel(r'$\Delta S_{1}$')
+    ax1.set_xscale('symlog', linthreshx = 0.000001)       #symlog necessary to plot negative values with log scale
+    ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction = 'in')
+    ax1.set_xscale('symlog', linthreshx = 0.000001)
+    ax1.set_ylim(-0.51,3.0)
+    ax1.set_xlim(-100,-0.029)
+    #ax1.set_ylim(-0.15,7.8)
+
     #Legend
-    lgnd = plt.legend(loc=(0.28,0.35), fontsize=9, handlelength=3,handleheight=2,title=r'',frameon=False)
-    lgnd.get_title().set_fontsize(9)
-    lgnd.get_title().set_position((6,0))
-
-    #Bottom Plot: Probabilities vs Subsystem Size for N=14
+    lgnd = plt.legend(loc=(0.20,0.0998),fontsize=7,handlelength=1,handleheight=1, frameon=True)
+    frame = lgnd.get_frame()
+    frame.set_edgecolor('#cccccc')
+    frame.set_alpha(1.0)
     
+    #Positive energies subplot
+    ax2 = plt.subplot(gs[1])
+    ax2.axvline(x=2, color='#cccccc',zorder=-1)
+    ax2.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction = 'in')
+    ax2.plot(energies[0::2], ds[0::2], '.', label='1, 13', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax2.plot(energies[0::2], sigma2[0::2], '.', linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax2.plot(energies, dsLL, '-', linewidth = 1, color=blue[0],markerfacecolor = blue[0], markeredgewidth = '0.5',zorder=1)
+    ax2.set_xlim(energies[0], energies[-1])
+    ax2.set_xscale('symlog', linthreshx = 0.000001)
+    ax2.set_ylim(-0.51,3.0)
+    ax2.set_xlim(0.029,100)
+    ax2.text(0.04,2.65,r'$N=13$')
+
+    ################################
+    
+    sigma2FF=0.4515333623486861
+    #sigma2FF is calculated using the correlation matrix method
+
+    #Negative Side
+    datFileNEG = np.loadtxt("EOPA28F14l14NEG.dat")
+    energiesNEG = datFileNEG[:,0]
+    s1NEG = datFileNEG[:,2]
+    s1opNEG = datFileNEG[:,3]
+    #sigma2NEG = np.log(datFileNEG[:,6])
+    sigma2NEG = 0.5*np.log(2*np.pi*np.exp(1)*datFileNEG[:,6])
+    l = 14 #Subsystem Size
+    kNEG = pi/(2*np.arccos(-energiesNEG/2))
+    sigma2NEGLL = kNEG *sigma2FF
+
+    dsNEGLL = 0.5*np.log(2*np.pi*np.exp(1)*sigma2NEGLL)
+
+    
+    #Positive Side
+    datFile = np.loadtxt("EOPA28F14l14.dat")
+    energies = datFile[:,0]
+    s1 = datFile[:,2]
+    s1op = datFile[:,3]
+    sigma2 = 0.5*np.log(2*np.pi*np.exp(1)*datFile[:,6])  #ACTUALLY Delta S
+    k = pi/(2*np.arccos(-energies/2))
+    sigma2LL = k * sigma2FF
+
+    dsLL = 0.5*np.log(2*np.pi*np.exp(1)*sigma2LL)
+
+
+    #Calculate the difference
+    dsNEG = s1NEG - s1opNEG
+    ds = s1 - s1op
+
     #Negative energies subplot
-    ax2 = plt.subplot(gs[1], sharex=ax1)
+    ax4 = plt.subplot(gs[2])
+    ax4.axvline(x=-2,color='#cccccc',zorder=-1)   #Grey vertical line at transition point
+    ax4.plot(energiesNEG[0::2], dsNEG[0::2], '.', label=r'$\Delta s = s_{1}-s_{1}^{op}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax4.plot(energiesNEG[0::2], sigma2NEG[0::2], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax4.plot(energiesNEG, dsNEGLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'w', markeredgewidth = '0.5',zorder=1)
+    ax4.set_xlim(-energies[-1], -energies[0])
+    ax4.set_ylabel(r'$\Delta S_{1}$')
+    ax4.set_xscale('symlog', linthreshx = 0.000001)       #symlog necessary to plot negative values with log scale
+    ax4.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction = 'in')
+    ax4.set_xscale('symlog', linthreshx = 0.000001)
+    ax4.set_ylim(-0.51,3.0)
+    ax4.set_xlim(-100,-0.029)
 
-    ax2.plot(n14List, lnpntoa14, 'o', label='1, 14', markersize = 4, markerfacecolor = blue[3], markeredgewidth = '0.25',color='#2B5080')
-    ax2.plot(n14List, lnpna14, '.', label='1, 14', markersize = 4, markerfacecolor = blue[0], markeredgewidth = '0.25',color='#2B5080')
-    ax2.plot(n14fit, lnpntoa14fit, color='k', label=r'$\ln{P_{n}^{(\alpha=2)}} (Fit)$')
-    ax2.set_xlabel(r'$n$')
-    ax2.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction='in')
-    ax2.annotate(r'$N=14,\frac{V}{t}=3.638$', xy=(8,0.01), xytext=(10.0,-12.5),fontsize=9)
-    
+    #Positive energies subplot
+    ax5 = plt.subplot(gs[3])
+    ax5.axvline(x=2, color='#cccccc',zorder=-1)
+    ax5.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction = 'in')
+    ax5.plot(energies[0::2], ds[0::2], '.', label='1, 13', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax5.plot(energies[0::2], sigma2[0::2], '.', linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax5.plot(energies, dsLL, '-', linewidth = 1, color=blue[0], markerfacecolor = 'w', markeredgewidth = '0.5',zorder=1)
+    ax5.set_xlim(energies[0], energies[-1])
+    ax5.set_xscale('symlog', linthreshx = 0.000001)
+    ax5.set_ylim(-0.51,3.0)
+    ax5.set_xlim(0.029,100)
+    ax5.text(0.04,2.65,r'$N=14$')
+
+
+    #Remove numbers from real axes of top plots
+    plt.setp(ax1.get_xticklabels(), visible=False)
+    plt.setp(ax2.get_xticklabels(), visible=False)
     # remove vertical gap between subplots
     plt.subplots_adjust(hspace=0.023)
-    
+    plt.xlabel(r'$V/t$',x=0)
+
     #Adjust space between subplots
     plt.subplots_adjust(wspace = 0.030)
 
-    #plt.savefig('probabilities_N13N14_VNEG1.5_log.pdf', transparent=False)
-    #plt.savefig('probabilities_N13N14_VNEG1.0_log.pdf', transparent=False)   
-    #plt.savefig('probabilities_N13N14_V1.0_log.pdf', transparent=False)
-    plt.savefig('probabilities_N13N14_VMax_log.pdf', transparent=False)
-
+    plt.savefig('deltaS_N13N14.pdf', transparent=False)
     plt.show()

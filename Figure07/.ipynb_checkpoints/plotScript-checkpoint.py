@@ -1,146 +1,156 @@
-#Top Plot: One Particle Entanglement entropy dependence on the interaction potential
-#Bottom Plot: Entanglement entropies for equal particle number bipartitions at various system sizes
-
 #NOTE: IOP_large.mplstyle2 being used instead of IOP_large.mplstyle.
 #This script technically generates two figures and combines them vertically into a single figure.
 
-import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import colors
 from matplotlib import gridspec
+import numpy as np
+import colors
 
-orange = ["#ff8c00"]
-blue = ["#4173b3"]
+orange = ["#4173b3"] #Actually blue  
+blue = ["#ff8c00"]   #Actually orange 
+green = ["#66cdaa"]
+red = ["#e85c47"]
 
-alpha = [1.0,0.6,0.2]
+alpha = [1.0,0.70,0.45,0.2,0.05]
+
 for i,c in enumerate(alpha):
-        orange.append(colors.get_alpha_hex(orange[0],alpha[i]))
         blue.append(colors.get_alpha_hex(blue[0],alpha[i]))
-
+        orange.append(colors.get_alpha_hex(orange[0],alpha[i]))
+        green.append(colors.get_alpha_hex(green[0],alpha[i]))
+        red.append(colors.get_alpha_hex(red[0],alpha[i]))
+        
 with plt.style.context('../IOP_large.mplstyle2'):
+
+    #Top Plot: Probabilities vs Particle Number in Subsystem Size (For N=15); N=Total Number of Particles   
+       
+    #V/t = +-1.5
+    data_n15_V1d5a2 = np.loadtxt("M30F15V1.5a2Probs.dat")
+    data_n16_V1d5a2 = np.loadtxt("M32F16V1.5a2Probs.dat")
+    data_n15_VNEG1d5a2 = np.loadtxt("M30F15VNEG1.5a2Probs.dat")
+    data_n16_VNEG1d5a2 = np.loadtxt("M32F16VNEG1.5a2Probs.dat")
     
-    #Load filling fractions
-    fillingFractions = [i/28 for i in range(1,15)]
+    #V/t = +- 1.0
+    data_n15_V1a2 = np.loadtxt("M30F15V1.0a2Probs.dat")
+    data_n16_V1a2 = np.loadtxt("M32F16V1.0a2Probs.dat")
+    data_n15_VNEG1a2 = np.loadtxt("M30F15VNEG1.0a2Probs.dat")
+    data_n16_VNEG1a2 = np.loadtxt("M32F16VNEG1.0a2Probs.dat")
+
+    #V/t = 0
+    data_n15_V0a2 = np.loadtxt("M30F15V0.0a2Probs.dat")
+    data_n16_V0a2 = np.loadtxt("M32F16V0.0a2Probs.dat")
+
+    #Load particle numbers 
+    n15List = data_n15_VNEG1d5a2[:,0]
+    n16List = data_n16_VNEG1d5a2[:,0]
+
+    #Lists of Interaction Strengths and Luttinger Parameters
+    VotList = [-1.5,-1.0,0.0,1.0,1.5]       
+    k = [np.pi/(2*np.arccos(-Vot/2)) for Vot in VotList] 
     
-    #Save Entanglement Entropies (s1=VonNeumann, s2=Renyi) to variables
+    #Save probabilities and rescale with Luttinger Parameter
     
-    s1opVNEG100M28l14 = np.loadtxt("VNEG100M28l14.dat")[:,3]
-    s1opVNEG100M28lN = np.loadtxt("VNEG100M28lN.dat")[:,3]
-    s1opVNEG1d5M28l14 = np.loadtxt("VNEG1.5M28l14.dat")[:,3]
-    s1opVNEG1d5M28lN = np.loadtxt("VNEG1.5M28lN.dat")[:,3]
-    s1opV100M28l14 = np.loadtxt("V100M28l14.dat")[:,3]
-    s1opV100M28lN = np.loadtxt("V100M28lN.dat")[:,3]
+    #15 particles
+    #V/t = +-1.5
+    pna15_V1d5a2 = data_n15_V1d5a2[:,2]
+    pna15_V1d5a2 = pna15_V1d5a2**(k[4])
+    pna15_V1d5a2 /= np.sum(pna15_V1d5a2)
+     
+    pna15_VNEG1d5a2 = data_n15_VNEG1d5a2[:,2]
+    pna15_VNEG1d5a2 = pna15_VNEG1d5a2**(k[0])
+    pna15_VNEG1d5a2 /= np.sum(pna15_VNEG1d5a2)
     
-    s2opVNEG100M28l14 = np.loadtxt("VNEG100M28l14.dat")[:,8]
-    s2opVNEG100M28lN = np.loadtxt("VNEG100M28lN.dat")[:,8]
-    s2opVNEG1d5M28l14 = np.loadtxt("VNEG1.5M28l14.dat")[:,8]
-    s2opVNEG1d5M28lN = np.loadtxt("VNEG1.5M28lN.dat")[:,8]
-    s2opV100M28l14 = np.loadtxt("V100M28l14.dat")[:,8]
-    s2opV100M28lN = np.loadtxt("V100M28lN.dat")[:,8]
+    #V/t = +-1.0
+    pna15_V1a2 = data_n15_V1a2[:,2]
+    pna15_V1a2 = pna15_V1a2**(k[3])
+    pna15_V1a2 /= np.sum(pna15_V1a2)
     
+    pna15_VNEG1a2 = data_n15_VNEG1a2[:,2]
+    pna15_VNEG1a2 = pna15_VNEG1a2**(k[1])
+    pna15_VNEG1a2 /= np.sum(pna15_VNEG1a2)
+
+    #V/t = 0.0
+    pna15_V0a2 = data_n15_V0a2[:,2]
+    pna15_V0a2 = pna15_V0a2**(k[2])
+    pna15_V0a2 /= np.sum(pna15_V0a2)
+
+    
+    #16 particles
+    #V/t = +-1.5
+    pna16_V1d5a2 = data_n16_V1d5a2[:,2]
+    pna16_V1d5a2 = pna16_V1d5a2**(k[4])
+    pna16_V1d5a2 /= np.sum(pna16_V1d5a2)
+    
+    pna16_VNEG1d5a2 = data_n16_VNEG1d5a2[:,2]
+    pna16_VNEG1d5a2 = pna16_VNEG1d5a2**(k[0])
+    pna16_VNEG1d5a2 /= np.sum(pna16_VNEG1d5a2)
+    
+    #V/t = +-1.0
+    pna16_V1a2 = data_n16_V1a2[:,2]
+    pna16_V1a2 = pna16_V1a2**(k[3])
+    pna16_V1a2 /= np.sum(pna16_V1a2)
+    
+    pna16_VNEG1a2 = data_n16_VNEG1a2[:,2]
+    pna16_VNEG1a2 = pna16_VNEG1a2**(k[1])
+    pna16_VNEG1a2 /= np.sum(pna16_VNEG1a2)
+
+    #V/t = 0.0
+    pna16_V0a2 = data_n16_V0a2[:,2]
+    pna16_V0a2 = pna16_V0a2**(k[2])
+    pna16_V0a2 /= np.sum(pna16_V0a2)
+
     #Create the figure
     fig = plt.figure()
 
     #Set height ratios for subplots
-    #gs = gridspec.GridSpec(2, 2, height_ratios=[20,20])
-    gs = gridspec.GridSpec(3, 2)
-        
+    gs = gridspec.GridSpec(2,1)
+    
+    #N=15
     ax1 = plt.subplot(gs[0])
-    ax1.plot(fillingFractions, s1opV100M28l14, '.', label=r'$S_{1}^{op}$', linewidth = 1, color='#4173b3',markeredgewidth='0.5',mfc= blue[2],zorder=10)
-    ax1.plot(fillingFractions, s2opV100M28l14, '.', label=r'$S_{2}^{op}$', linewidth = 1, color='#ff8c00',markeredgewidth='0.5',mfc= orange[2],zorder=10)
-    ax1.plot(fillingFractions, s1opV100M28l14, '-', linewidth = 0.5, color='#4173b3',markeredgewidth='0.5')
-    ax1.plot(fillingFractions, s2opV100M28l14, '-', linewidth = 0.5, color='#ff8c00',markeredgewidth='0.5')
-    ax1.set_xlim(fillingFractions[0], fillingFractions[-1])
-    ax1.set_ylim(0.0, 0.95)
-    ax1.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in',labelbottom='off')
-    ax1.set_ylabel(r'$S_{\alpha}^{\rm{op}}$')
     
-    #Legend
-    lgnd = plt.legend(loc=(0.06,0.65),fontsize=9,frameon=False,handlelength=1,handleheight=1)
+    #List of Markersizes
+    ms = ['Nan',2.50,5.25,8.00,10.75,13.50]
+
+    #alpha=2
+    ax1.plot(n15List, pna15_V1d5a2, 'o', label=r'$%.2f, 1.5$'%(k[4]), markersize = ms[5], markerfacecolor = blue[5], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax1.plot(n15List, pna15_V1a2, 'o', label=r'$%.2f, 1.0$'%(k[3]), markersize = ms[4], markerfacecolor = blue[4], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax1.plot(n15List, pna15_V0a2, 'o', label=r'$%.2f, 0.0$'%(k[2]), markersize = ms[3], markerfacecolor = blue[3], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax1.plot(n15List, pna15_VNEG1a2, 'o', label=r'$%.2f, -1.0$'%(k[1]), markersize = ms[2], markerfacecolor = blue[2], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax1.plot(n15List, pna15_VNEG1d5a2, 'o', label=r'$%.2f, -1.5$'%(k[0]), markersize = ms[1], markerfacecolor = blue[1], markeredgewidth = '0.25',color=blue[0],zorder=4)
+
+
+
+    ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off',labelleft='on', direction='in')
+    ax1.xaxis.set_ticks(np.arange(0, 16, 3))
+    ax1.set_yscale('log')
+    ax1.set_ylabel(r'$(P_{n,2,K})^{K}$')
+    #ax1.set_ylim(1E-35,1E+02)
     
+    lgnd = plt.legend(loc=(0.355,0.125), fontsize=11,ncol=1,frameon=False,handletextpad=0.08,title=r'$K, V/t$')
+    lgnd.get_title().set_position((7.0,0))
+  
+    #N=16
     ax2 = plt.subplot(gs[1])
-    ax2.plot(fillingFractions, s1opV100M28lN, '.', label = r'$S_{1}^{op}$', linewidth = 1, color='#4173b3',markeredgewidth='0.5',mfc= blue[2],zorder=10)
-    ax2.plot(fillingFractions, s2opV100M28lN, '.', label = r'$S_{2}^{op}$', linewidth = 1, color='#ff8c00',markeredgewidth='0.5',mfc= orange[2],zorder=10)
-    ax2.plot(fillingFractions, s1opV100M28lN , '-', linewidth = 0.5, color='#4173b3',markeredgewidth='0.5')
-    ax2.plot(fillingFractions, s2opV100M28lN, '-', linewidth = 0.5, color='#ff8c00',markeredgewidth='0.5')
-    ax2.set_xlim(fillingFractions[0], fillingFractions[-1])
-    ax2.set_ylim(0.0, 0.95)
-    ax2.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='off', direction = 'in',labelbottom='off')
-        
-    ax3 = plt.subplot(gs[2])
-    ax3.plot(fillingFractions, s1opVNEG1d5M28l14, '.', label=r'$S_{1}^{op}$', linewidth = 1, color='#4173b3',markeredgewidth='0.5',mfc= blue[2],zorder=10)
-    ax3.plot(fillingFractions, s2opVNEG1d5M28l14, '.', label=r'$S_{2}^{op}$', linewidth = 1, color='#ff8c00',markeredgewidth='0.5',mfc= orange[2],zorder=10)
-    ax3.plot(fillingFractions, s1opVNEG1d5M28l14, '-', label=r'$S_{1}^{op}$', linewidth = 0.5, color='#4173b3',markeredgewidth='0.5')
-    ax3.plot(fillingFractions, s2opVNEG1d5M28l14, '-', label=r'$S_{2}^{op}$', linewidth = 0.5, color='#ff8c00',markeredgewidth='0.5')
-    ax3.set_xlim(fillingFractions[0], fillingFractions[-1])
-    ax3.set_ylim(0.0, 0.23)
-    ax3.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in',labelbottom='off')
-    ax3.set_ylabel(r'$S_{\alpha}^{\rm{op}}$')
-    
-    ax4 = plt.subplot(gs[3])
-    ax4.plot(fillingFractions, s1opVNEG1d5M28lN , '.', label=r'$S_{1}^{op}$', linewidth = 1, color='#4173b3',markeredgewidth='0.5',mfc= blue[2],zorder=10)
-    ax4.plot(fillingFractions, s2opVNEG1d5M28lN, '.', label=r'$S_{2}^{op}$', linewidth = 1, color='#ff8c00',markeredgewidth='0.5',mfc= orange[2],zorder=10)
-    ax4.plot(fillingFractions, s1opVNEG1d5M28lN , '-', linewidth = 0.5, color='#4173b3',markeredgewidth='0.5')
-    ax4.plot(fillingFractions, s2opVNEG1d5M28lN, '-', linewidth = 0.5, color='#ff8c00',markeredgewidth='0.5')
-    ax4.set_xlim(fillingFractions[0], fillingFractions[-1])
-    ax4.set_ylim(0.0, 0.23)
-    ax4.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='off', direction = 'in',labelbottom='off')
 
-    ax5 = plt.subplot(gs[4])
-    ax5.plot(fillingFractions, s1opVNEG100M28l14, '.', label=r'$S_{1}^{\rm op}$', linewidth = 1, color='#4173b3',markeredgewidth='0.5',mfc= blue[2],zorder=10)
-    ax5.plot(fillingFractions, s2opVNEG100M28l14, '.', label=r'$S_{2}^{\rm op}$', linewidth = 1, color='#ff8c00',markeredgewidth='0.5',mfc= orange[2],zorder=10)
-    ax5.plot(fillingFractions, s1opVNEG100M28l14, '-', linewidth = 0.5, color='#4173b3',markeredgewidth='0.5')
-    ax5.plot(fillingFractions, s2opVNEG100M28l14, '-', linewidth = 0.5, color='#ff8c00',markeredgewidth='0.5')
-    ax5.set_xlim(fillingFractions[0], fillingFractions[-1])
-    ax5.set_ylim(0.0, 0.65)
-    ax5.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='on', direction = 'in')
-    ax5.set_xlabel(r'$f$')
-    ax5.set_ylabel(r'$S_{\alpha}^{\rm{op}}$')
-    
-    ax6 = plt.subplot(gs[5])
-    ax6.plot(fillingFractions, s1opVNEG100M28lN, '.', label=r'$S_{1}^{\rm{op}}$', linewidth = 1, color='#4173b3',markeredgewidth='0.5',mfc= blue[2],zorder=10)
-    ax6.plot(fillingFractions, s2opVNEG100M28lN, '.', label=r'$S_{2}^{\rm{op}}$', linewidth = 1, color='#ff8c00',markeredgewidth='0.5',mfc= orange[2],zorder=10)
-    ax6.plot(fillingFractions, s1opVNEG100M28lN, '-', label=r'$S_{1}^{\rm{op}}$', linewidth = 0.5, color='#4173b3',markeredgewidth='0.5')
-    ax6.plot(fillingFractions, s2opVNEG100M28lN, '-', label=r'$S_{2}^{\rm{op}}$', linewidth = 0.5, color='#ff8c00',markeredgewidth='0.5')
-    ax6.set_xlim(fillingFractions[0], fillingFractions[-1])
-    ax6.set_ylim(0.0, 0.65)
-    ax6.tick_params(axis='both', which='both', left='on', right='off', top='off', bottom='on', labelleft='off', direction = 'in')
-    ax6.set_xlabel(r'$f$')
-    
-    #Annotations for the interaction strength and type of partition
-    x1,y1 = 0.415,0.085
-    x2,y2 = 0.5,0.5
-    fs = 8
-    ax1.annotate(r'$V/t=100,\ell = L/2$',
-            xy=(x1-0.1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points', fontsize = fs
-            )
-    ax2.annotate(r'$V/t=100,\ell = N$',
-            xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points', fontsize = fs
-            )
-    ax3.annotate(r'$V/t=-1.5,\ell = L/2$',
-            xy=(x1-0.1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points', fontsize = fs
-            )
-    ax4.annotate(r'$V/t=-1.5,\ell = N$',
-            xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points', fontsize = fs
-            )
-    ax5.annotate(r'$V/t=-100,\ell = L/2$',
-            xy=(x1-0.1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points', fontsize = fs
-            )
-    ax6.annotate(r'$V/t=-100,\ell = N$',
-            xy=(x1, y1), xycoords='axes fraction',
-            xytext=(x2, y2), textcoords='offset points', fontsize = fs
-            )
+    #alpha=2
+    ax2.plot(n16List, pna16_V1d5a2, 'o', label=r'$a$', markersize = ms[5], markerfacecolor = blue[5], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax2.plot(n16List, pna16_V1a2, 'o', label=r'$a$', markersize = ms[4], markerfacecolor = blue[4], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax2.plot(n16List, pna16_V0a2, 'o', label=r'$a$', markersize = ms[3], markerfacecolor = blue[3], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax2.plot(n16List, pna16_VNEG1a2, 'o', label=r'$a$', markersize = ms[2], markerfacecolor = blue[2], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    ax2.plot(n16List, pna16_VNEG1d5a2, 'o', label=r'$a$', markersize = ms[1], markerfacecolor = blue[1], markeredgewidth = '0.25',color=blue[0],zorder=4)
 
-    
+    ax2.tick_params(axis='both', which='both', right='off', top='off',labelright='off', labelleft='on',direction='in')
+    ax2.xaxis.set_ticks(np.arange(0, 17, 4))
+    ax2.set_yscale('log')
+    ax2.set_xlabel(r'$n$')
+    ax2.set_ylabel(r'$(P_{n,2,K})^{K}$')
+    #ax2.set_ylim(1E-35,1E+02)
+          
     # remove vertical gap between subplots
-    plt.subplots_adjust(hspace=0.050)
-
-    #Adjust space between subplots
-    plt.subplots_adjust(wspace = 0.040)
+    plt.subplots_adjust(hspace=0.15)
     
-    plt.savefig('fillingFractionDependence.pdf', transparent=False)
+    #Adjust space between subplots
+    plt.subplots_adjust(wspace = 0.030)
+    
+    plt.savefig('kDependencePna.pdf')

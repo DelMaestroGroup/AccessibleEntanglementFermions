@@ -1,156 +1,337 @@
+#Top Plot: One Particle Entanglement entropy dependence on the interaction potential
+#Bottom Plot: Entanglement entropies for equal particle number bipartitions at various system sizes
+
 #NOTE: IOP_large.mplstyle2 being used instead of IOP_large.mplstyle.
 #This script technically generates two figures and combines them vertically into a single figure.
 
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-from matplotlib import gridspec
 import numpy as np
+import matplotlib.pyplot as plt
 import colors
+from matplotlib import gridspec
+from math import pi,e
 
-orange = ["#4173b3"] #Actually blue  
-blue = ["#ff8c00"]   #Actually orange 
-green = ["#66cdaa"]
-red = ["#e85c47"]
+orange = ["#ff8c00"]
+#purple = ["#7dcca4"] #Actually green
+purple = ["#e85c47"] #Actually red
+#blue = ["#4173b3"]
 
-alpha = [1.0,0.70,0.45,0.2,0.05]
+beta = [0.9,0.6,0.2,0.05]
 
-for i,c in enumerate(alpha):
-        blue.append(colors.get_alpha_hex(blue[0],alpha[i]))
-        orange.append(colors.get_alpha_hex(orange[0],alpha[i]))
-        green.append(colors.get_alpha_hex(green[0],alpha[i]))
-        red.append(colors.get_alpha_hex(red[0],alpha[i]))
-        
+for i,c in enumerate(beta):
+    orange.append(colors.get_alpha_hex(orange[0],beta[i]))
+ #   blue.append(colors.get_alpha_hex(blue[0],beta[i]))
+    purple.append(colors.get_alpha_hex(purple[0],beta[i]))
+
+print(len(orange))
+
+
 with plt.style.context('../IOP_large.mplstyle2'):
 
-    #Top Plot: Probabilities vs Particle Number in Subsystem Size (For N=15); N=Total Number of Particles   
-       
-    #V/t = +-1.5
-    data_n15_V1d5a2 = np.loadtxt("M30F15V1.5a2Probs.dat")
-    data_n16_V1d5a2 = np.loadtxt("M32F16V1.5a2Probs.dat")
-    data_n15_VNEG1d5a2 = np.loadtxt("M30F15VNEG1.5a2Probs.dat")
-    data_n16_VNEG1d5a2 = np.loadtxt("M32F16VNEG1.5a2Probs.dat")
-    
-    #V/t = +- 1.0
-    data_n15_V1a2 = np.loadtxt("M30F15V1.0a2Probs.dat")
-    data_n16_V1a2 = np.loadtxt("M32F16V1.0a2Probs.dat")
-    data_n15_VNEG1a2 = np.loadtxt("M30F15VNEG1.0a2Probs.dat")
-    data_n16_VNEG1a2 = np.loadtxt("M32F16VNEG1.0a2Probs.dat")
+#Top Plot: One Particle Entanglement entropy dependence on the interaction potential
 
-    #V/t = 0
-    data_n15_V0a2 = np.loadtxt("M30F15V0.0a2Probs.dat")
-    data_n16_V0a2 = np.loadtxt("M32F16V0.0a2Probs.dat")
+    #Load data files
+    
+    #13 particles
 
-    #Load particle numbers 
-    n15List = data_n15_VNEG1d5a2[:,0]
-    n16List = data_n16_VNEG1d5a2[:,0]
+    #alpha=2
+    datFileNEG_M26N13 = 'EOPP26F13l13a2NEG.dat'
+    dataNEG_M26N13 = np.loadtxt(datFileNEG_M26N13)
+    
+    datFile_M26N13 = 'EOPP26F13l13a2.dat'
+    data_M26N13 = np.loadtxt(datFile_M26N13)
+    
+    #alpha=4
+    datFileNEG_M26N13a4 = 'EOPP26F13l13a4NEG.dat'
+    dataNEG_M26N13a4 = np.loadtxt(datFileNEG_M26N13a4)
+    
+    datFile_M26N13a4 = 'EOPP26F13l13a4.dat'
+    data_M26N13a4 = np.loadtxt(datFile_M26N13a4)
 
-    #Lists of Interaction Strengths and Luttinger Parameters
-    VotList = [-1.5,-1.0,0.0,1.0,1.5]       
-    k = [np.pi/(2*np.arccos(-Vot/2)) for Vot in VotList] 
+    #alpha=10
+    datFileNEG_M26N13a10 = 'EOPP26F13l13a10NEG.dat'
+    dataNEG_M26N13a10 = np.loadtxt(datFileNEG_M26N13a10)
     
-    #Save probabilities and rescale with Luttinger Parameter
-    
-    #15 particles
-    #V/t = +-1.5
-    pna15_V1d5a2 = data_n15_V1d5a2[:,2]
-    pna15_V1d5a2 = pna15_V1d5a2**(k[4])
-    pna15_V1d5a2 /= np.sum(pna15_V1d5a2)
-     
-    pna15_VNEG1d5a2 = data_n15_VNEG1d5a2[:,2]
-    pna15_VNEG1d5a2 = pna15_VNEG1d5a2**(k[0])
-    pna15_VNEG1d5a2 /= np.sum(pna15_VNEG1d5a2)
-    
-    #V/t = +-1.0
-    pna15_V1a2 = data_n15_V1a2[:,2]
-    pna15_V1a2 = pna15_V1a2**(k[3])
-    pna15_V1a2 /= np.sum(pna15_V1a2)
-    
-    pna15_VNEG1a2 = data_n15_VNEG1a2[:,2]
-    pna15_VNEG1a2 = pna15_VNEG1a2**(k[1])
-    pna15_VNEG1a2 /= np.sum(pna15_VNEG1a2)
+    datFile_M26N13a10 = 'EOPP26F13l13a10.dat'
+    data_M26N13a10 = np.loadtxt(datFile_M26N13a10)
 
-    #V/t = 0.0
-    pna15_V0a2 = data_n15_V0a2[:,2]
-    pna15_V0a2 = pna15_V0a2**(k[2])
-    pna15_V0a2 /= np.sum(pna15_V0a2)
+    #Load energies
+    energiesNEG_M26N13 = dataNEG_M26N13[:,0]
+    energies_M26N13 = data_M26N13[:,0]
 
-    
-    #16 particles
-    #V/t = +-1.5
-    pna16_V1d5a2 = data_n16_V1d5a2[:,2]
-    pna16_V1d5a2 = pna16_V1d5a2**(k[4])
-    pna16_V1d5a2 /= np.sum(pna16_V1d5a2)
-    
-    pna16_VNEG1d5a2 = data_n16_VNEG1d5a2[:,2]
-    pna16_VNEG1d5a2 = pna16_VNEG1d5a2**(k[0])
-    pna16_VNEG1d5a2 /= np.sum(pna16_VNEG1d5a2)
-    
-    #V/t = +-1.0
-    pna16_V1a2 = data_n16_V1a2[:,2]
-    pna16_V1a2 = pna16_V1a2**(k[3])
-    pna16_V1a2 /= np.sum(pna16_V1a2)
-    
-    pna16_VNEG1a2 = data_n16_VNEG1a2[:,2]
-    pna16_VNEG1a2 = pna16_VNEG1a2**(k[1])
-    pna16_VNEG1a2 /= np.sum(pna16_VNEG1a2)
+    #Save Operational Entanglement Entropies (s1=VonNeumann, s2=Renyi) to variables
 
-    #V/t = 0.0
-    pna16_V0a2 = data_n16_V0a2[:,2]
-    pna16_V0a2 = pna16_V0a2**(k[2])
-    pna16_V0a2 /= np.sum(pna16_V0a2)
+    #13 particles
+
+    #alpha=1,2
+    s1NEG_M26N13 = dataNEG_M26N13[:,3]
+    s1_M26N13 = data_M26N13[:,3]
+    
+    s2NEG_M26N13 = dataNEG_M26N13[:,5]
+    s2_M26N13 = data_M26N13[:,5]
+
+    #alpha=4
+    s4NEG_M26N13 = dataNEG_M26N13a4[:,5]
+    s4_M26N13 = data_M26N13a4[:,5]
+
+    #alpha=10
+    s10NEG_M26N13 = dataNEG_M26N13a10[:,5]
+    s10_M26N13 = data_M26N13a10[:,5]
+
+    #Exact Variance (With Luttinger Parameter Dependence)
+    xNEG = np.linspace(-2,-0.03,1000)
+    x = np.linspace(0.03,2,1000)
+    
+    K = pi/(2*np.arccos(-x/2))
+    KNEG = pi/(2*np.arccos(-xNEG/2))
+    
+    l=13
+    sigma2LLNEG = KNEG*np.log(l)/(2*pi) #\ell = partition size
+    sigma2LL = K*np.log(l)/(2*pi)
 
     #Create the figure
     fig = plt.figure()
 
     #Set height ratios for subplots
-    gs = gridspec.GridSpec(2,1)
-    
-    #N=15
+    gs = gridspec.GridSpec(2, 2, height_ratios=[1, 1])
+
+    #Negative energies subplot
     ax1 = plt.subplot(gs[0])
-    
-    #List of Markersizes
-    ms = ['Nan',2.50,5.25,8.00,10.75,13.50]
+    #ax1 = fig.add_subplot(221)
+
+    ax1.axvline(x=-2,color='#cccccc')   #Grey vertical line at transition point
+
+#    #alpha=1
+#    ax1.plot(energiesNEG_M26N13, dataNEG_M26N13[:,2]-dataNEG_M26N13[:,3], 'o',  label=r'1, $S_{1}-S_{1}^{op}$', markersize = 3, markerfacecolor = 'None', markeredgewidth = '0.25', color='#4173b3')
+#    ax1.plot(energiesNEG_M26N13, 0.5*np.log(2*pi*e*dataNEG_M26N13[:,6]), '*', label=r'1, $\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$', markersize = 2, markerfacecolor = '#4173b3', markeredgewidth ='0.25',color='#4173b3')
+#    ax1.plot(xNEG, 0.5*np.log(2*pi*e*sigma2LLNEG), '-',label=r'1, $\frac{1}{2}\ln{(2 \pi e \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = 'w', markeredgewidth = '0.25',color='#4173b3')
 
     #alpha=2
-    ax1.plot(n15List, pna15_V1d5a2, 'o', label=r'$%.2f, 1.5$'%(k[4]), markersize = ms[5], markerfacecolor = blue[5], markeredgewidth = '0.25',color=blue[0],zorder=4)
-    ax1.plot(n15List, pna15_V1a2, 'o', label=r'$%.2f, 1.0$'%(k[3]), markersize = ms[4], markerfacecolor = blue[4], markeredgewidth = '0.25',color=blue[0],zorder=4)
-    ax1.plot(n15List, pna15_V0a2, 'o', label=r'$%.2f, 0.0$'%(k[2]), markersize = ms[3], markerfacecolor = blue[3], markeredgewidth = '0.25',color=blue[0],zorder=4)
-    ax1.plot(n15List, pna15_VNEG1a2, 'o', label=r'$%.2f, -1.0$'%(k[1]), markersize = ms[2], markerfacecolor = blue[2], markeredgewidth = '0.25',color=blue[0],zorder=4)
-    ax1.plot(n15List, pna15_VNEG1d5a2, 'o', label=r'$%.2f, -1.5$'%(k[0]), markersize = ms[1], markerfacecolor = blue[1], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    #ax1.plot(energiesNEG_M26N13, dataNEG_M26N13[:,4]-dataNEG_M26N13[:,5], 's',  label=r'2, $S_{2}-S_{2}^{op}$', markersize = 3, markerfacecolor = orange[1], markeredgewidth = '0.25',color=orange[0])
+    ax1.plot(energiesNEG_M26N13, dataNEG_M26N13[:,4]-dataNEG_M26N13[:,8], 'o',  label=r'$S_{2}-S_{2}^{\rm{op}}$', markersize = 3, markerfacecolor = orange[3], markeredgewidth = '0.25',color=orange[0])
+#    ax1.plot(energiesNEG_M26N13, 0.5*np.log(4*pi*dataNEG_M26N13[:,6]), 'd',label=r'2, $\frac{1}{2}\ln{(4 \pi \sigma^{2})}$', markersize = 2, markerfacecolor = orange[2], markeredgewidth = '0.25',color='#ff8c00')
+#    ax1.plot(xNEG, 0.5*np.log(4*pi*sigma2LLNEG), '-',label=r'2, $\frac{1}{2}\ln{(4 \pi \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = orange[3], markeredgewidth = '0.25',color='#ff8c00')
+    ax1.plot(energiesNEG_M26N13, dataNEG_M26N13[:,7], 'o',label=r'$H_2$', markersize = 1.5, markerfacecolor = orange[1], markeredgewidth = '0.08',color=orange[3])
 
+    #alpha=4
+#    ax1.plot(energiesNEG_M26N13, dataNEG_M26N13a4[:,4]-dataNEG_M26N13a4[:,5], 's',  label=r'4, $S_{4}-S_{4}^{op}$', markersize = 3, markerfacecolor = 'None', markeredgewidth = '0.25',color='#A5270B')
+#    ax1.plot(energiesNEG_M26N13, 0.5*np.log(2*(4)**(1/3)*pi*dataNEG_M26N13a4[:,6]), 'd',label=r'4, $\frac{1}{2}\ln{(2 (4)^{\frac{1}{3}} \pi \sigma^{2})}$', markersize = 2, markerfacecolor = '#A5270B', markeredgewidth = '0.25',color='#A5270B')
+#    ax1.plot(xNEG, 0.5*np.log(2*(4)**(1/3)*pi*sigma2LLNEG), '-',label=r'4, $\frac{1}{2}\ln{(2 (4)^{\frac{1}{3}} \pi \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = '#A5270B', markeredgewidth = '0.25',color='#A5270B')
 
+#    #alpha10
+    #ax1.plot(energiesNEG_M26N13, dataNEG_M26N13a10[:,4]-dataNEG_M26N13a10[:,5], 's',  label=r'10, $S_{10}-S_{10}^{op}$', markersize = 3, markerfacecolor = purple[1], markeredgewidth = '0.25',color='#760BA5')
+    ax1.plot(energiesNEG_M26N13, dataNEG_M26N13a10[:,4]-dataNEG_M26N13a10[:,8], 'o',  label=r'$S_{10}-S_{10}^{\rm{op}}$', markersize = 3, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
+   # ax1.plot(energiesNEG_M26N13, 0.5*np.log(2*(10)**(1/9)*pi*dataNEG_M26N13a10[:,6]), 'd',label=r'10, $\frac{1}{2}\ln{(2 (10)^{\frac{1}{9}} \pi \sigma^{2})}$', markersize = 2, markerfacecolor = purple[2], markeredgewidth = '0.25',color='#760BA5')
+   # ax1.plot(xNEG, 0.5*np.log(2*(10)**(1/9)*pi*sigma2LLNEG), '-',label=r'10, $\frac{1}{2}\ln{(2 (10)^{\frac{1}{9}} \pi \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = purple[3], markeredgewidth = '0.25',color='#760BA5')
+    ax1.plot(energiesNEG_M26N13, dataNEG_M26N13a10[:,7], 'o',label=r'$H_{10}$', markersize = 1.5, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3])
+    ax1.set_xlim(-energies_M26N13[-1], -energies_M26N13[0])
+    #ax1.set_xlim(-2.1,-0.029)
+    ax1.set_ylim(0,2.8)
+    ax1.set_ylabel(r'$\Delta S_{\alpha}$')
+    ax1.set_xscale('symlog', linthreshx = 0.000001)       #symlog necessary to plot negative values with log scale
+    ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction='in')
+    ax1.set_xlabel(' ')
 
-    ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off',labelleft='on', direction='in')
-    ax1.xaxis.set_ticks(np.arange(0, 16, 3))
-    ax1.set_yscale('log')
-    ax1.set_ylabel(r'$(P_{n,2,K})^{K}$')
-    #ax1.set_ylim(1E-35,1E+02)
-    
-    lgnd = plt.legend(loc=(0.355,0.125), fontsize=11,ncol=1,frameon=False,handletextpad=0.08,title=r'$K, V/t$')
-    lgnd.get_title().set_position((7.0,0))
-  
-    #N=16
+    #Positive energies subplot
     ax2 = plt.subplot(gs[1])
+    #ax2 = fig.add_subplot(222)
+    ax2.axvline(x=2, color='#cccccc')
+    ax2.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction='in')
+
+#    #alpha=1
+#    ax2.plot(energies_M26N13, data_M26N13[:,2]-data_M26N13[:,3], 'o',  label=r'1, $S_{1}-S_{1}^{op}$', markersize = 3, markerfacecolor = 'None', markeredgewidth = '0.25', color='#4173b3')
+#    ax2.plot(energies_M26N13, 0.5*np.log(2*pi*e*data_M26N13[:,6]), '*', label=r'1, $\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$', markersize = 2, markerfacecolor = '#4173b3', markeredgewidth ='0.25',color='#4173b3')
+#    ax2.plot(x, 0.5*np.log(2*pi*e*sigma2LL), '-',label=r'1, $\frac{1}{2}\ln{(2 \pi e \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = 'w', markeredgewidth = '0.25',color='#4173b3')
 
     #alpha=2
-    ax2.plot(n16List, pna16_V1d5a2, 'o', label=r'$a$', markersize = ms[5], markerfacecolor = blue[5], markeredgewidth = '0.25',color=blue[0],zorder=4)
-    ax2.plot(n16List, pna16_V1a2, 'o', label=r'$a$', markersize = ms[4], markerfacecolor = blue[4], markeredgewidth = '0.25',color=blue[0],zorder=4)
-    ax2.plot(n16List, pna16_V0a2, 'o', label=r'$a$', markersize = ms[3], markerfacecolor = blue[3], markeredgewidth = '0.25',color=blue[0],zorder=4)
-    ax2.plot(n16List, pna16_VNEG1a2, 'o', label=r'$a$', markersize = ms[2], markerfacecolor = blue[2], markeredgewidth = '0.25',color=blue[0],zorder=4)
-    ax2.plot(n16List, pna16_VNEG1d5a2, 'o', label=r'$a$', markersize = ms[1], markerfacecolor = blue[1], markeredgewidth = '0.25',color=blue[0],zorder=4)
+    #ax2.plot(energies_M26N13, data_M26N13[:,4]-data_M26N13[:,5], 's',  label=r'2, $S_{2}-S_{2}^{op}$', markersize = 3, markerfacecolor = orange[1], markeredgewidth = '0.25',color=orange[0])
+    ax2.plot(energies_M26N13, data_M26N13[:,4]-data_M26N13[:,8], 'o',  label=r'$S_{2}-S_{2}^{\rm{op}}$', markersize = 3, markerfacecolor = orange[3], markeredgewidth = '0.25',color=orange[0])
+#    ax2.plot(energies_M26N13, 0.5*np.log(4*pi*data_M26N13[:,6]), 'd',label=r'2, $\frac{1}{2}\ln{(4 \pi \sigma^{2})}$', markersize = 2, markerfacecolor = orange[2], markeredgewidth = '0.25',color='#ff8c00')
+#    ax2.plot(x, 0.5*np.log(4*pi*sigma2LL), '-',label=r'2, $\frac{1}{2}\ln{(4 \pi \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = orange[3], markeredgewidth = '0.25',color='#ff8c00')
+    ax2.plot(energies_M26N13, data_M26N13[:,7], 'o',label=r'$H_2$', markersize = 1.5, markerfacecolor = orange[1], markeredgewidth = '0.08',color=orange[3])
 
-    ax2.tick_params(axis='both', which='both', right='off', top='off',labelright='off', labelleft='on',direction='in')
-    ax2.xaxis.set_ticks(np.arange(0, 17, 4))
-    ax2.set_yscale('log')
-    ax2.set_xlabel(r'$n$')
-    ax2.set_ylabel(r'$(P_{n,2,K})^{K}$')
-    #ax2.set_ylim(1E-35,1E+02)
-          
-    # remove vertical gap between subplots
-    plt.subplots_adjust(hspace=0.15)
+    #alpha=4
+#    ax2.plot(energies_M26N13, data_M26N13a4[:,4]-data_M26N13a4[:,5], 's',  label=r'4, $S_{4}-S_{4}^{op}$', markersize = 3, markerfacecolor = 'None', markeredgewidth = '0.25',color='#A5270B')
+#    ax2.plot(energies_M26N13, 0.5*np.log(2*(4)**(1/3)*pi*data_M26N13a4[:,6]), 'd',label=r'4, $\frac{1}{2}\ln{(2 (4)^{\frac{1}{3}} \pi \sigma^{2})}$', markersize = 2, markerfacecolor = '#A5270B', markeredgewidth = '0.25',color='#A5270B')
+#    ax2.plot(x, 0.5*np.log(2*(4)**(1/3)*pi*sigma2LL), '-',label=r'4, $\frac{1}{2}\ln{(2 (4)^{\frac{1}{3}} \pi \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = '#A5270B', markeredgewidth = '0.25',color='#A5270B')
+
+    #alpha10
+    #ax2.plot(energies_M26N13, data_M26N13a10[:,4]-data_M26N13a10[:,5], 's',  label=r'10, $S_{10}-S_{10}^{op}$', markersize = 3, markerfacecolor = purple[1], markeredgewidth = '0.25',color='#760BA5')
+    ax2.plot(energies_M26N13, data_M26N13a10[:,4]-data_M26N13a10[:,8], 'o',  label=r'$S_{10}-S_{10}^{\rm{op}}$', markersize = 3, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
+#    ax2.plot(energies_M26N13, 0.5*np.log(2*(10)**(1/9)*pi*data_M26N13a10[:,6]), 'd',label=r'10, $\frac{1}{2}\ln{(2 (10)^{\frac{1}{9}} \pi \sigma^{2})}$', markersize = 2, markerfacecolor = purple[2], markeredgewidth = '0.25',color='#760BA5')
+#    ax2.plot(x, 0.5*np.log(2*(10)**(1/9)*pi*sigma2LL), '-',label=r'10, $\frac{1}{2}\ln{(2 (10)^{\frac{1}{9}} \pi \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = purple[3], markeredgewidth = '0.25',color='#760BA5')
+    ax2.plot(energies_M26N13, data_M26N13a10[:,7], 'o',label=r'$H_{10}$', markersize = 1.5, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3])
+
+    ax2.text(0.04,2.5,r'$N$ = 13')
+    ax2.set_xlim(energies_M26N13[0], energies_M26N13[-1])
+    #ax2.set_xlim(0.029,2.1)
+    ax2.set_ylim(0,2.8)
+    ax2.set_xscale('symlog', linthreshx = 0.000001)
+
+    #Legend 
     
+    #lgnd = plt.legend(loc=(0.060,0.45),fontsize=4.5,handlelength=1,handleheight=2, title= r'$\alpha$, $\Delta S$', frameon=False)
+    lgnd = plt.legend(loc=(0.01,0.40),fontsize=7,handlelength=1,handleheight=2, frameon=False)
+    
+    #plt.xlabel(r'$V/t$',x=0)
+    
+    #Inset Plot
+    plt.subplots_adjust(wspace = 0.030)
+
+    
+#Bottom Plot: Operational entanglement entropies for even number of particles
+
+    #Load data
+    
+    #14 particles
+    
+    #alpha=2
+    datFileNEG_M28N14 = 'EOPA28F14l14a2NEG.dat'
+    dataNEG_M28N14 = np.loadtxt(datFileNEG_M28N14)
+    
+    datFile_M28N14 = 'EOPA28F14l14a2.dat'
+    data_M28N14 = np.loadtxt(datFile_M28N14)
+     
+    #alpha=4
+    datFileNEG_M28N14a4 = 'EOPA28F14l14a4NEG.dat'
+    dataNEG_M28N14a4 = np.loadtxt(datFileNEG_M28N14a4)
+    
+    datFile_M28N14a4 = 'EOPA28F14l14a4.dat'
+    data_M28N14a4 = np.loadtxt(datFile_M28N14a4)
+
+    #alpha=10
+    datFileNEG_M28N14a10 = 'EOPA28F14l14a10NEG.dat'
+    dataNEG_M28N14a10 = np.loadtxt(datFileNEG_M28N14a10)
+    
+    datFile_M28N14a10 = 'EOPA28F14l14a10.dat'
+    data_M28N14a10 = np.loadtxt(datFile_M28N14a10)
+    
+    #Load energies
+    
+    energiesNEG_M28N14 = dataNEG_M28N14[:,0]
+    energies_M28N14 = data_M28N14[:,0]
+
+
+    #Load operational entanglement entropies.
+    
+    #14 particles
+    
+    #alpha=1,2
+    s1NEG_M28N14 = dataNEG_M28N14[:,3]
+    s1_M28N14 = data_M28N14[:,3]
+    
+    s2NEG_M28N14 = dataNEG_M28N14[:,5]
+    s2_M28N14 = data_M28N14[:,5]
+    
+    #alpha=4
+    s4NEG_M28N14 = dataNEG_M28N14[:,3]
+    s4_M28N14 = data_M28N14[:,3]
+
+    #alpha=10
+    s10NEG_M28N14 = dataNEG_M28N14[:,3]
+    s10_M28N14 = data_M28N14[:,3]
+
+    #Exact Variance (With Luttinger Parameter Dependence)
+    xNEG_14 = np.linspace(-2,-0.03,1000)
+    x_14 = np.linspace(0.03,2,1000)
+    
+    K_14 = pi/(2*np.arccos(-x_14/2))
+    KNEG_14 = pi/(2*np.arccos(-xNEG_14/2))
+   
+    l_even = 14 #partition size.
+    sigma2LLNEG_14 = KNEG_14*np.log(l_even)/(2*pi)
+    sigma2LL_14 = K_14*np.log(l_even)/(2*pi)
+    
+    #Negative energies subplot
+    ax4 = plt.subplot(gs[2], sharex=ax1)
+
+    #ax4 = fig.add_subplot(223)
+    ax4.axvline(x=-2,color='#cccccc')   #Grey vertical line at transition point
+
+#    #alpha=1
+#    ax4.plot(energiesNEG_M28N14, dataNEG_M28N14[:,2]-dataNEG_M28N14[:,3], 'o',  label=r'1, $S_{1}-S_{1}^{op}$', markersize = 3, markerfacecolor = 'None', markeredgewidth = '0.25', color='#4173b3')
+#    ax4.plot(energiesNEG_M28N14, 0.5*np.log(2*pi*e*dataNEG_M28N14[:,6]), '*', label=r'1, $\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$', markersize = 2, markerfacecolor = '#4173b3', markeredgewidth ='0.25',color='#4173b3')
+#    ax4.plot(xNEG, 0.5*np.log(2*pi*e*sigma2LLNEG_14), '-',label=r'1, $\frac{1}{2}\ln{(2 \pi e \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = 'w', markeredgewidth = '0.25',color='#4173b3')
+
+    #alpha=2
+    #ax4.plot(energiesNEG_M28N14, dataNEG_M28N14[:,4]-dataNEG_M28N14[:,5], 's',  label=r'2, $S_{2}-S_{2}^{op}$', markersize = 3, markerfacecolor = orange[1], markeredgewidth = '0.25',color=orange[0])
+    ax4.plot(energiesNEG_M28N14, dataNEG_M28N14[:,4]-dataNEG_M28N14[:,8], 'o',  label=r'2, $S_{2}-S_{2}^{\mathrm{op}}$', markersize = 3, markerfacecolor = orange[3], markeredgewidth = '0.25',color=orange[0])
+    #ax4.plot(energiesNEG_M28N14, 0.5*np.log(4*pi*dataNEG_M28N14[:,6]), 'd',label=r'2, $\frac{1}{2}\ln{(4 \pi \sigma^{2})}$', markersize = 2, markerfacecolor = orange[2], markeredgewidth = '0.25',color='#ff8c00')
+    #ax4.plot(xNEG, 0.5*np.log(4*pi*sigma2LLNEG_14), '-',label=r'2, $\frac{1}{2}\ln{(4 \pi \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = orange[3], markeredgewidth = '0.25',color='#ff8c00')
+    ax4.plot(energiesNEG_M28N14, dataNEG_M28N14[:,7], 'o',label=r'$H_2$', markersize = 1.5, markerfacecolor = orange[1], markeredgewidth = '0.08',color=orange[3])
+
+    #alpha=4
+#    ax4.plot(energiesNEG_M28N14, dataNEG_M28N14a4[:,4]-dataNEG_M28N14a4[:,5], 's',  label=r'4, $S_{4}-S_{4}^{op}$', markersize = 3, markerfacecolor = 'None', markeredgewidth = '0.25',color='#A5270B')
+#    ax4.plot(energiesNEG_M28N14, 0.5*np.log(2*(4)**(1/3)*pi*dataNEG_M28N14a4[:,6]), 'd',label=r'4, $\frac{1}{2}\ln{(2 (4)^{\frac{1}{3}} \pi \sigma^{2})}$', markersize = 2, markerfacecolor = '#A5270B', markeredgewidth = '0.25',color='#A5270B')
+#    ax4.plot(xNEG, 0.5*np.log(2*(4)**(1/3)*pi*sigma2LLNEG_14), '-',label=r'4, $\frac{1}{2}\ln{(2 (4)^{\frac{1}{3}} \pi \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = '#A5270B', markeredgewidth = '0.25',color='#A5270B')
+
+    #alpha10
+    #ax4.plot(energiesNEG_M28N14, dataNEG_M28N14a10[:,4]-dataNEG_M28N14a10[:,5], 's',  label=r'10, $S_{10}-S_{10}^{op}$', markersize = 3, markerfacecolor = purple[1], markeredgewidth = '0.25',color='#760BA5')
+    ax4.plot(energiesNEG_M28N14, dataNEG_M28N14a10[:,4]-dataNEG_M28N14a10[:,8], 'o',  label=r'10, $S_{10}-S_{10}^{\mathrm{op}}$', markersize = 3, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
+   # ax4.plot(energiesNEG_M28N14, 0.5*np.log(2*(10)**(1/9)*pi*dataNEG_M28N14a10[:,6]), 'd',label=r'10, $\frac{1}{2}\ln{(2 (10)^{\frac{1}{9}} \pi \sigma^{2})}$', markersize = 2, markerfacecolor = purple[2], markeredgewidth = '0.25',color='#760BA5')
+   # ax4.plot(xNEG, 0.5*np.log(2*(10)**(1/9)*pi*sigma2LLNEG_14), '-',label=r'10, $\frac{1}{2}\ln{(2 (10)^{\frac{1}{9}} \pi \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = purple[3], markeredgewidth = '0.25',color='#760BA5')
+    ax4.plot(energiesNEG_M28N14, dataNEG_M28N14a10[:,7], 'o',label=r'10, $H(\alpha=2)$', markersize = 1.5, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3])
+
+    ax4.set_xlim(-energies_M28N14[-1], -energies_M28N14[0])
+    #ax4.set_xlim(-2.1,-0.029)
+    ax4.set_ylim(0,2.8)
+    ax4.set_ylabel(r'$\Delta S_{\alpha}$')
+    ax4.set_xscale('symlog', linthreshx = 0.000001)
+    ax4.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction='in')
+    
+    #Legend
+    #lgnd = plt.legend(loc=(0.28,0.42),fontsize=6,handlelength=1,handleheight=2, title= r'$\alpha$, $\Delta S$', frameon=False)
+
+    #lgnd.get_title().set_fontsize(6)
+    #lgnd.get_title().set_position((-13.02,0))
+
+
+    #Positive energies subplot
+    ax5 = plt.subplot(gs[3], sharex=ax2)
+
+    #ax5 = fig.add_subplot(224)
+    ax5.axvline(x=2,color='#cccccc')   #Grey vertical line at transition point
+
+#    #alpha=1
+#    ax5.plot(energies_M28N14, data_M28N14[:,2]-data_M28N14[:,3], 'o',  label=r'1, $S_{1}-S_{1}^{op}$', markersize = 3, markerfacecolor = 'None', markeredgewidth = '0.25', color='#4173b3')
+#    ax5.plot(energies_M28N14, 0.5*np.log(2*pi*e*data_M28N14[:,6]), '*', label=r'1, $\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$', markersize = 2, markerfacecolor = '#4173b3', markeredgewidth ='0.25',color='#4173b3')
+#    ax5.plot(x, 0.5*np.log(2*pi*e*sigma2LL_14), '-',label=r'1, $\frac{1}{2}\ln{(2 \pi e \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = 'w', markeredgewidth = '0.25',color='#4173b3')
+
+#    #alpha=2
+    #ax5.plot(energies_M28N14, data_M28N14[:,4]-data_M28N14[:,5], 's',  label=r'2, $S_{2}-S_{2}^{op}$', markersize = 3, markerfacecolor = orange[1], markeredgewidth = '0.25',color=orange[0])
+    ax5.plot(energies_M28N14, data_M28N14[:,4]-data_M28N14[:,8], 'o',  label=r'2, $S_{2}-S_{2}^{op(5)}$', markersize = 3, markerfacecolor = orange[3], markeredgewidth = '0.25',color=orange[0])
+#    ax5.plot(energies_M28N14, 0.5*np.log(4*pi*data_M28N14[:,6]), 'd',label=r'2, $\frac{1}{2}\ln{(4 \pi \sigma^{2})}$', markersize = 2, markerfacecolor = orange[2], markeredgewidth = '0.25',color='#ff8c00')
+#    ax5.plot(x, 0.5*np.log(4*pi*sigma2LL_14), '-',label=r'2, $\frac{1}{2}\ln{(4 \pi \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = orange[3], markeredgewidth = '0.25',color='#ff8c00')
+    ax5.plot(energies_M28N14, data_M28N14[:,7], 'o',label=r'$H_2$', markersize = 1.5, markerfacecolor = orange[1], markeredgewidth = '0.08',color=orange[3])
+
+    #alpha=4
+#    ax5.plot(energies_M28N14, data_M28N14a4[:,4]-data_M26N13a4[:,5], 's',  label=r'4, $S_{4}-S_{4}^{op}$', markersize = 3, markerfacecolor = 'None', markeredgewidth = '0.25',color='#A5270B')
+#    ax5.plot(energies_M28N14, 0.5*np.log(2*(4)**(1/3)*pi*data_M28N14a4[:,6]), 'd',label=r'4, $\frac{1}{2}\ln{(2 (4)^{\frac{1}{3}} \pi \sigma^{2})}$', markersize = 2, markerfacecolor = '#A5270B', markeredgewidth = '0.25',color='#A5270B')
+#    ax5.plot(x, 0.5*np.log(2*(4)**(1/3)*pi*sigma2LL_14), '-',label=r'4, $\frac{1}{2}\ln{(2 (4)^{\frac{1}{3}} \pi \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = '#A5270B', markeredgewidth = '0.25',color='#A5270B')
+
+#    #alpha10
+    #ax5.plot(energies_M28N14, data_M28N14a10[:,4]-data_M28N14a10[:,5], 's',  label=r'10, $S_{10}-S_{10}^{op}$', markersize = 3, markerfacecolor = purple[1], markeredgewidth = '0.25',color='#760BA5')
+    ax5.plot(energies_M28N14, data_M28N14a10[:,4]-data_M28N14a10[:,8], 'o',  label=r'10, $S_{10}-S_{10}^{\mathrm{op}}$', markersize = 3, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
+    #ax5.plot(energies_M28N14, 0.5*np.log(2*(10)**(1/9)*pi*data_M28N14a10[:,6]), 'd',label=r'10, $\frac{1}{2}\ln{(2 (10)^{\frac{1}{9}} \pi \sigma^{2})}$', markersize = 2, markerfacecolor = purple[2], markeredgewidth = '0.25',color='#760BA5')
+    #ax5.plot(x, 0.5*np.log(2*(10)**(1/9)*pi*sigma2LL_14), '-',label=r'10, $\frac{1}{2}\ln{(2 (10)^{\frac{1}{9}} \pi \sigma^{2}_{LL})}$', markersize = 3, markerfacecolor = purple[3], markeredgewidth = '0.25',color='#760BA5')
+    ax5.plot(energies_M28N14, data_M28N14a10[:,7], 'o',label=r'2, $H(\alpha=2)$', markersize = 1.5, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3])
+    ax5.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction='in')
+    ax5.text(0.04,2.5,r'$N$ = 14')
+    ax5.set_xlim(energies_M28N14[0], energies_M28N14[-1])
+    #ax5.set_xlim(0.029,2.1)
+    ax5.set_ylim(0,2.8)
+    ax5.set_xscale('symlog', linthreshx = 0.000001)  #symlog necessary for log scale on negative values
+    plt.xlabel(r'$V/t$',x=0)
+
+    #Remove numbers from real axes of top plots
+    plt.setp(ax1.get_xticklabels(), visible=False)
+    plt.setp(ax2.get_xticklabels(), visible=False)
+    # remove vertical gap between subplots
+    plt.subplots_adjust(hspace=0.023)
+
     #Adjust space between subplots
     plt.subplots_adjust(wspace = 0.030)
-    
-    plt.savefig('kDependencePna.pdf')
+
+    plt.savefig('higherAlphaDeltaS_N13N14_fullRange.pdf', transparent=False)
+    #plt.savefig('higherAlphaFluctuations_N13N14_LLPhase.pdf', transparent=False)
+
+    plt.show()
