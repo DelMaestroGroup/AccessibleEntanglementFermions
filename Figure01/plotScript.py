@@ -30,7 +30,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     dataNEG_M22N11 = np.loadtxt(datFileNEG_M22N11)
 
     datFile_M22N11 = '../Data/OP_PBC_22_11_11_2.dat'
-    data_M22N11 = np.loadtxt(datFile_M22N11)[80:160,:]  # Slicing to only plot the positive/neg interaction strengths, accordingly
+    data_M22N11 = np.loadtxt(datFile_M22N11)[80:,:]  # Slicing to only plot the positive/neg interaction strengths, accordingly
 
     #13 particles
 
