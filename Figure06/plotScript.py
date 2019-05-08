@@ -26,7 +26,7 @@ with plt.style.context('../IOP_large.mplstyle'):
         blue.append(colors.get_alpha_hex(blue[0],beta[i]))
 
     #Load data
-    data = np.loadtxt('Data/peakScalingOddN.dat')
+    data = np.loadtxt('../Data/Peak_OP_PBC_VN_OddN.dat')
     N = data[:,0]
     Vmax = data[:,1]
 
@@ -167,30 +167,30 @@ with plt.style.context('../IOP_large.mplstyle'):
     #dataN3 = np.loadtxt("Data/InsetData/EOPP6F3l3a2.dat")
     #dataN5 = np.loadtxt("Data/InsetData/EOPP10F5l5a2.dat")
     #dataN7 = np.loadtxt("Data/InsetData/EOPP14F7l7a2.dat")
-    dataN9 = np.loadtxt("Data/InsetData/EOPP18F9l9a2.dat")
-    dataN11 = np.loadtxt("Data/InsetData/EOPP22F11l11a2.dat")
-    dataN13 = np.loadtxt("Data/InsetData/EOPP26F13l13a2.dat")
-    dataN15 = np.loadtxt("Data/InsetData/EOPP30F15l15a2.dat")
+    dataN9 = np.loadtxt("../Data/Peak_OP_PBC_18_9_9_2.dat")
+    dataN11 = np.loadtxt("../Data/Peak_OP_PBC_22_11_11_2.dat")
+    dataN13 = np.loadtxt("../Data/Peak_OP_PBC_26_13_13_2.dat")
+    dataN15 = np.loadtxt("../Data/Peak_OP_PBC_30_15_15_2.dat")
     #DMRG results
-    datFile = 'Data/InsetData/dmrg_acc_EE_0030_0015_+2.61000e+00_+2.96000e+00.dat'
+    datFile = '../Data/dmrg_acc_EE_0030_0015_+2.61000e+00_+2.96000e+00.dat'
     data = np.loadtxt(datFile,skiprows=1)
     xN15dmrg, yN15dmrg = data[:,0], data[:,4]
-    datFile = 'Data/InsetData/dmrg_acc_EE_0034_0017_+2.62000e+00_+2.95000e+00.dat'
+    datFile = '../Data/dmrg_acc_EE_0034_0017_+2.62000e+00_+2.95000e+00.dat'
     data = np.loadtxt(datFile,skiprows=1)
     xN17dmrg, yN17dmrg = data[:,0], data[:,4]
-    datFile = 'Data/InsetData/dmrg_acc_EE_0042_0021_+2.62000e+00_+2.94000e+00.dat'
+    datFile = '../Data/dmrg_acc_EE_0042_0021_+2.62000e+00_+2.94000e+00.dat'
     data = np.loadtxt(datFile,skiprows=1)
     xN21dmrg, yN21dmrg = data[:,0], data[:,4]
-    datFile = 'Data/InsetData/dmrg_acc_EE_0050_0025_+2.62000e+00_+2.94000e+00.dat'
+    datFile = '../Data/dmrg_acc_EE_0050_0025_+2.62000e+00_+2.94000e+00.dat'
     data = np.loadtxt(datFile,skiprows=1)
     xN25dmrg, yN25dmrg = data[:,0], data[:,4]
-    datFile = 'Data/InsetData/dmrg_acc_EE_0058_0029_+2.50390e+00_+2.79290e+00.dat'
+    datFile = '../Data/dmrg_acc_EE_0058_0029_+2.50390e+00_+2.79290e+00.dat'
     data = np.loadtxt(datFile,skiprows=1)
     xN29dmrg, yN29dmrg = data[:,0], data[:,4]
-    datFile = 'Data/InsetData/dmrg_acc_EE_0074_0037_+2.45286e+00_+2.74186e+00.dat'
+    datFile = '../Data/dmrg_acc_EE_0074_0037_+2.45286e+00_+2.74186e+00.dat'
     data = np.loadtxt(datFile,skiprows=1)
     xN37dmrg, yN37dmrg = data[:,0], data[:,4]
-    datFile = 'Data/InsetData/dmrg_acc_EE_0098_0049_+2.50390e+00_+2.79290e+00.dat'
+    datFile = '../Data/dmrg_acc_EE_0098_0049_+2.50390e+00_+2.79290e+00.dat'
     data = np.loadtxt(datFile,skiprows=1)
     xN49dmrg, yN49dmrg = data[:,0], data[:,4]
     
@@ -219,8 +219,6 @@ with plt.style.context('../IOP_large.mplstyle'):
     ax2.plot(xN29dmrg,yN29dmrg,label='29',color=blue[2],linewidth=0.75)
     ax2.plot(xN37dmrg,yN37dmrg,label='37',color=blue[2],linewidth=0.75)
     ax2.plot(xN49dmrg,yN49dmrg,label='49',color=blue[2],linewidth=0.75)
-    
-    
     
     #Add marker at the peaks
     ax2.plot(2.7928168485370364,0.6689827690493597,marker='o',mfc=blue[3],mew=0.75,color=blue[1],label='15')
