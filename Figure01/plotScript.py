@@ -26,26 +26,28 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Load data files
 
     #11 particles
-    datFileNEG_M22N11 = 'Data/EOPP22F11l11a2NEG.dat'
+    datFileNEG_M22N11 = '../Data/OP_PBC_22_11_11_2.dat'
     dataNEG_M22N11 = np.loadtxt(datFileNEG_M22N11)
 
-    datFile_M22N11 = 'Data/EOPP22F11l11a2.dat'
-    data_M22N11 = np.loadtxt(datFile_M22N11)
+    datFile_M22N11 = '../Data/OP_PBC_22_11_11_2.dat'
+    data_M22N11 = np.loadtxt(datFile_M22N11)[80:160,:]  # Slicing to only plot the positive/neg interaction strengths, accordingly
 
     #13 particles
 
-    datFileNEG_M26N13 = 'Data/EOPP26F13l13a2NEG.dat'
+    datFileNEG_M26N13 = '../Data/OP_PBC_26_13_13_2.dat'
     dataNEG_M26N13 = np.loadtxt(datFileNEG_M26N13)
+    #dataNEG_M26N13 = dataNEG_M26N13[0:81,:]
 
-    datFile_M26N13 = 'Data/EOPP26F13l13a2.dat'
+    datFile_M26N13 = '../Data/OP_PBC_26_13_13_2.dat'
     data_M26N13 = np.loadtxt(datFile_M26N13)
+
 
     #15 particles
 
-    datFileNEG_M30N15 = 'Data/EOPP30F15l15a2NEG.dat'
+    datFileNEG_M30N15 = '../Data/OP_PBC_30_15_15_2.dat'
     dataNEG_M30N15 = np.loadtxt(datFileNEG_M30N15)
 
-    datFile_M30N15 = 'Data/EOPP30F15l15a2.dat'
+    datFile_M30N15 = '../Data/OP_PBC_30_15_15_2.dat'
     data_M30N15 = np.loadtxt(datFile_M30N15)
 
     #Load energies (can choose them arbitrarily from any of the .dat files)
@@ -155,25 +157,27 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #12 particles
 
-    datFileNEG_M24N12 = 'Data/EOPA24F12l12a2NEG.dat'
+    datFileNEG_M24N12 = '../Data/OP_ABC_24_12_12_2.dat'
     dataNEG_M24N12 = np.loadtxt(datFileNEG_M24N12)
 
-    datFile_M24N12 = 'Data/EOPA24F12l12a2.dat'
+    datFile_M24N12 = '../Data/OP_ABC_24_12_12_2.dat'
     data_M24N12 = np.loadtxt(datFile_M24N12)
+
 
     #14 particles
 
-    datFileNEG_M28N14 = 'Data/EOPA28F14l14a2NEG.dat'
+    datFileNEG_M28N14 = '../Data/OP_ABC_28_14_14_2.dat'
     dataNEG_M28N14 = np.loadtxt(datFileNEG_M28N14)
 
-    datFile_M28N14 = 'Data/EOPA28F14l14a2.dat'
+    datFile_M28N14 = '../Data/OP_ABC_28_14_14_2.dat'
     data_M28N14 = np.loadtxt(datFile_M28N14)
 
+
     #16 particles
-    datFileNEG_M32N16 = 'Data/EOPA32F16l16a2NEG.dat'
+    datFileNEG_M32N16 = '../Data/OP_ABC_32_16_16_2.dat'
     dataNEG_M32N16 = np.loadtxt(datFileNEG_M32N16)
 
-    datFile_M32N16 = 'Data/EOPA32F16l16a2.dat'
+    datFile_M32N16 = '../Data/OP_ABC_32_16_16_2.dat'
     data_M32N16 = np.loadtxt(datFile_M32N16)
 
     #Load energies
