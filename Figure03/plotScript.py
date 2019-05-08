@@ -31,32 +31,29 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #alpha=2
 #    datFileNEG_M26N13 = 'Data/EOPP26F13l13a2NEG.dat'
-    datFileNEG_M26N13 = 'Data/EOPP30F15l15a2NEG.dat'
+    datFileNEG_M26N13 = '../Data/OP_PBC_30_15_15_2.dat'
     dataNEG_M26N13 = np.loadtxt(datFileNEG_M26N13)
     
 #    datFile_M26N13 = 'Data/EOPP26F13l13a2.dat'
-    datFile_M26N13 = 'Data/EOPP30F15l15a2.dat'
-    data_M26N13 = np.loadtxt(datFile_M26N13)
-    
-    #alpha=4
-    datFileNEG_M26N13a4 = 'Data/EOPP26F13l13a4NEG.dat'
-    dataNEG_M26N13a4 = np.loadtxt(datFileNEG_M26N13a4)
-    
-    datFile_M26N13a4 = 'Data/EOPP26F13l13a4.dat'
-    data_M26N13a4 = np.loadtxt(datFile_M26N13a4)
+    datFile_M26N13 = '../Data/OP_PBC_30_15_15_2.dat'
+    data_M26N13 = np.loadtxt(datFile_M26N13)[28:,:] # Slicing to plot neg/pos interactions correctly
 
     #alpha=10
 #    datFileNEG_M26N13a10 = 'Data/EOPP26F13l13a10NEG.dat'
-    datFileNEG_M26N13a10 = 'Data/EOPP30F15l15a10NEG.dat'
+    datFileNEG_M26N13a10 = '../Data/OP_PBC_30_15_15_10.dat'
     dataNEG_M26N13a10 = np.loadtxt(datFileNEG_M26N13a10)
     
 #    datFile_M26N13a10 = 'Data/EOPP26F13l13a10.dat'
-    datFile_M26N13a10 = 'Data/EOPP30F15l15a10.dat'
+    datFile_M26N13a10 = '../Data/OP_PBC_30_15_15_10.dat'
     data_M26N13a10 = np.loadtxt(datFile_M26N13a10)
 
     #Load energies
     energiesNEG_M26N13 = dataNEG_M26N13[:,0]
     energies_M26N13 = data_M26N13[:,0]
+
+    energiesNEG_M26N13a10 = dataNEG_M26N13a10[:,0]
+    energies_M26N13a10 = data_M26N13a10[:,0]
+
 
     #Save Operational Entanglement Entropies (s1=VonNeumann, s2=Renyi) to variables
 
@@ -68,10 +65,6 @@ with plt.style.context('../IOP_large.mplstyle2'):
     
     s2NEG_M26N13 = dataNEG_M26N13[:,5]
     s2_M26N13 = data_M26N13[:,5]
-
-    #alpha=4
-    s4NEG_M26N13 = dataNEG_M26N13a4[:,5]
-    s4_M26N13 = data_M26N13a4[:,5]
 
     #alpha=10
     s10NEG_M26N13 = dataNEG_M26N13a10[:,5]
@@ -104,8 +97,8 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax1.plot(energiesNEG_M26N13, dataNEG_M26N13[:,7], '.',label=r'$H_2$', markersize = 4, markerfacecolor = orange[1], markeredgewidth = '0.08',color=orange[3])
 
     #alpha10
-    ax1.plot(energiesNEG_M26N13, dataNEG_M26N13a10[:,4]-dataNEG_M26N13a10[:,8], '.',  label=r'$S_{10}-S_{10}^{\rm{acc}}$', markersize = 9, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
-    ax1.plot(energiesNEG_M26N13, dataNEG_M26N13a10[:,7], '.',label=r'$H_{10}$', markersize = 4, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3])
+    ax1.plot(energiesNEG_M26N13a10, dataNEG_M26N13a10[:,4]-dataNEG_M26N13a10[:,8], '.',  label=r'$S_{10}-S_{10}^{\rm{acc}}$', markersize = 9, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
+    ax1.plot(energiesNEG_M26N13a10, dataNEG_M26N13a10[:,7], '.',label=r'$H_{10}$', markersize = 4, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3])
     ax1.set_xlim(-energies_M26N13[-1], -energies_M26N13[0])
     ax1.set_ylim(0,2.9)
     ax1.set_ylabel(r'$\Delta S_{\alpha}$')
@@ -123,8 +116,8 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.plot(energies_M26N13, data_M26N13[:,7], '.',label=r'$H_2$', markersize = 4, markerfacecolor = orange[1], markeredgewidth = '0.08',color=orange[3])
 
     #alpha10
-    ax2.plot(energies_M26N13, data_M26N13a10[:,4]-data_M26N13a10[:,8], '.',  label=r'$S_{10}-S_{10}^{\rm{acc}}$', markersize = 9, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
-    ax2.plot(energies_M26N13, data_M26N13a10[:,7], '.',label=r'$H_{10}$', markersize = 4, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3])
+    ax2.plot(energies_M26N13a10, data_M26N13a10[:,4]-data_M26N13a10[:,8], '.',  label=r'$S_{10}-S_{10}^{\rm{acc}}$', markersize = 9, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
+    ax2.plot(energies_M26N13a10, data_M26N13a10[:,7], '.',label=r'$H_{10}$', markersize = 4, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3])
 
     ax2.text(0.05,2.6,r'$N$ = 15')
     ax2.set_xlim(energies_M26N13[0], energies_M26N13[-1])
@@ -145,30 +138,26 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #14 particles
     
     #alpha=2
-    datFileNEG_M28N14 = 'Data/EOPA32F16l16a2NEG.dat'
+    datFileNEG_M28N14 = '../Data/OP_ABC_32_16_16_2.dat'
     dataNEG_M28N14 = np.loadtxt(datFileNEG_M28N14)
     
-    datFile_M28N14 = 'Data/EOPA32F16l16a2.dat'
-    data_M28N14 = np.loadtxt(datFile_M28N14)
-     
-    #alpha=4
-    datFileNEG_M28N14a4 = 'Data/EOPA28F14l14a4NEG.dat'
-    dataNEG_M28N14a4 = np.loadtxt(datFileNEG_M28N14a4)
-    
-    datFile_M28N14a4 = 'Data/EOPA28F14l14a4.dat'
-    data_M28N14a4 = np.loadtxt(datFile_M28N14a4)
+    datFile_M28N14 = '../Data/OP_ABC_32_16_16_2.dat'
+    data_M28N14 = np.loadtxt(datFile_M28N14)[28:,:]  # Slicing to plot neg/pos interactions correctly
 
     #alpha=10
-    datFileNEG_M28N14a10 = 'Data/EOPA32F16l16a10NEG.dat'
+    datFileNEG_M28N14a10 = '../Data/OP_ABC_32_16_16_10.dat'
     dataNEG_M28N14a10 = np.loadtxt(datFileNEG_M28N14a10)
     
-    datFile_M28N14a10 = 'Data/EOPA32F16l16a10.dat'
+    datFile_M28N14a10 = '../Data/OP_ABC_32_16_16_10.dat'
     data_M28N14a10 = np.loadtxt(datFile_M28N14a10)
     
     #Load energies
     
     energiesNEG_M28N14 = dataNEG_M28N14[:,0]
     energies_M28N14 = data_M28N14[:,0]
+
+    energiesNEG_M28N14a10 = dataNEG_M28N14a10[:,0]
+    energies_M28N14a10 = data_M28N14a10[:,0]
 
 
     #Load operational entanglement entropies.
@@ -213,8 +202,8 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax4.plot(energiesNEG_M28N14, dataNEG_M28N14[:,7], '.',label=r'$H_2$', markersize = 4, markerfacecolor = orange[1], markeredgewidth = '0.08',color=orange[3])
 
     #alpha10
-    ax4.plot(energiesNEG_M28N14, dataNEG_M28N14a10[:,4]-dataNEG_M28N14a10[:,8], '.',  label=r'10, $S_{10}-S_{10}^{\mathrm{acc}}$', markersize = 9, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
-    ax4.plot(energiesNEG_M28N14, dataNEG_M28N14a10[:,7], '.',label=r'10, $H(\alpha=2)$', markersize = 4, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3])
+    ax4.plot(energiesNEG_M28N14a10, dataNEG_M28N14a10[:,4]-dataNEG_M28N14a10[:,8], '.',  label=r'10, $S_{10}-S_{10}^{\mathrm{acc}}$', markersize = 9, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
+    ax4.plot(energiesNEG_M28N14a10, dataNEG_M28N14a10[:,7], '.',label=r'10, $H(\alpha=2)$', markersize = 4, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3])
 
     ax4.set_xlim(-energies_M28N14[-1], -energies_M28N14[0])
     #ax4.set_xlim(-2.1,-0.029)
@@ -234,8 +223,8 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax5.plot(energies_M28N14, data_M28N14[:,7], '.',label=r'$H_2$', markersize = 4, markerfacecolor = orange[1], markeredgewidth = '0.08',color=orange[3])
 
     #alpha10
-    ax5.plot(energies_M28N14, data_M28N14a10[:,4]-data_M28N14a10[:,8], '.',  label=r'10, $S_{10}-S_{10}^{\mathrm{acc}}$', markersize = 9, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
-    ax5.plot(energies_M28N14, data_M28N14a10[:,7], '.',label=r'2, $H(\alpha=2)$', markersize = 4, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3])
+    ax5.plot(energies_M28N14a10, data_M28N14a10[:,4]-data_M28N14a10[:,8], '.',  label=r'10, $S_{10}-S_{10}^{\mathrm{acc}}$', markersize = 9, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
+    ax5.plot(energies_M28N14a10, data_M28N14a10[:,7], '.',label=r'2, $H(\alpha=2)$', markersize = 4, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3])
     ax5.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction='in')
     ax5.text(0.05,2.6,r'$N$ = 16')
     ax5.set_xlim(energies_M28N14[0], energies_M28N14[-1])
