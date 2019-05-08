@@ -160,7 +160,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax5.set_xlim(0.029,100)
 ###################################
     #V/t = -1.5
-    data_n16_VNEG1d5a2 = np.loadtxt("Data/M32F16VNEG1.5a2Probs.dat")    
+    data_n16_VNEG1d5a2 = np.loadtxt("../Data/Pn_ABC_32_16_16_2_-1.5.dat")    
     
     #Load particle numbers 
     n16List = data_n16_VNEG1d5a2[:,0]
