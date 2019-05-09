@@ -1,18 +1,8 @@
-#Top Plot: One Particle Entanglement entropy dependence on the interaction potential
-#Bottom Plot: Entanglement entropies for equal particle number bipartitions at various system sizes
-
-#NOTE: IOP_large.mplstyle2 being used instead of IOP_large.mplstyle.
-#This script technically generates two figures and combines them vertically into a single figure.
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 import colors
 from matplotlib import gridspec
 from math import pi,e
-
-
-
 
 orange = ["#ff8c00"]
 #purple = ["#7dcca4"] #Actually green
@@ -39,20 +29,16 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #13 particles
 
     #alpha=2
-#    datFileNEG_M26N13 = 'Data/EOPP26F13l13a2NEG.dat'
     datFileNEG_M26N13 = '../Data/OP_PBC_30_15_15_2.dat'
-    dataNEG_M26N13 = np.loadtxt(datFileNEG_M26N13)
+    dataNEG_M26N13 = np.loadtxt(datFileNEG_M26N13)[0:28,:] # Slicing to plot neg/pos interactions correctly
     
-#    datFile_M26N13 = 'Data/EOPP26F13l13a2.dat'
     datFile_M26N13 = '../Data/OP_PBC_30_15_15_2.dat'
     data_M26N13 = np.loadtxt(datFile_M26N13)[28:,:] # Slicing to plot neg/pos interactions correctly
 
     #alpha=10
-#    datFileNEG_M26N13a10 = 'Data/EOPP26F13l13a10NEG.dat'
     datFileNEG_M26N13a10 = '../Data/OP_PBC_30_15_15_10.dat'
     dataNEG_M26N13a10 = np.loadtxt(datFileNEG_M26N13a10)
     
-#    datFile_M26N13a10 = 'Data/EOPP26F13l13a10.dat'
     datFile_M26N13a10 = '../Data/OP_PBC_30_15_15_10.dat'
     data_M26N13a10 = np.loadtxt(datFile_M26N13a10)
 
@@ -83,12 +69,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     s10NEG_M26N13 = dataNEG_M26N13a10[:,5]
     s10_M26N13 = data_M26N13a10[:,5]
 
-    #Exact Variance (With Luttinger Parameter Dependence)
-    #xNEG = np.linspace(-2,-0.03,1000)
-    #x = np.linspace(0.03,2,1000)
-    
-    #K = pi/(2*np.arccos(-x/2))
-    #KNEG = pi/(2*np.arccos(-xNEG/2))
+
     kNEG = pi/(2*np.arccos(-np.linspace(energiesNEG_M26N13[1],energiesNEG_M26N13[-1],1000)/2))
     sigma2NEGLL = kNEG *sigma2FF_15
     alpha=2.0
@@ -109,8 +90,6 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
 
     #l=13
-    #sigma2LLNEG = KNEG*np.log(l)/(2*pi) #\ell = partition size
-    #sigma2LL = K*np.log(l)/(2*pi)
 
     #Create the figure
     fig = plt.figure()
@@ -126,15 +105,13 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #alpha=2
     ax1.plot(energiesNEG_M26N13, dataNEG_M26N13[:,4]-dataNEG_M26N13[:,8], '.',  label=r'$S_{2}-S_{2}^{\rm{acc}}$', markersize = 9, markerfacecolor = orange[3], markeredgewidth = '0.25',color=orange[0])
     ax1.plot(energiesNEG_M26N13, dataNEG_M26N13[:,7], '.',label=r'$H_2$', markersize = 4, markerfacecolor = orange[1], markeredgewidth = '0.08',color=orange[3],zorder=3)
-    #ax1.plot(np.linspace(energiesNEG_M26N13[0],energiesNEG_M26N13[-1],1000), dsNEGLL2, '-', label=r'$\frac{1}{2}\ln{(K\sigma^2_{FF})}+\mathcal{B}_2$',linewidth = 1, color=orange[0], markerfacecolor = orange[0], markeredgewidth = '0.5',zorder=10)
 
     #alpha10
     ax1.plot(energiesNEG_M26N13a10, dataNEG_M26N13a10[:,4]-dataNEG_M26N13a10[:,8], '.',  label=r'$S_{10}-S_{10}^{\rm{acc}}$', markersize = 9, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
     ax1.plot(energiesNEG_M26N13a10, dataNEG_M26N13a10[:,7], '.',label=r'$H_{10}$', markersize = 4, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3],zorder=3)
-    #ax1.plot(np.linspace(energiesNEG_M26N13[0],energiesNEG_M26N13[-1],1000), dsNEGLL10, '--', label=r'$\frac{1}{2}\ln{(K\sigma^2_{FF})}+\mathcal{B}_{10}$',linewidth = 1, color=purple[0], markerfacecolor = purple[0], markeredgewidth = '0.5',zorder=10)
     
     ax1.text(-.80,2.6,r'$N = 15$')
-    ax1.set_xlim(-energies_M26N13[-1], -energies_M26N13[0])
+    ax1.set_xlim(energiesNEG_M26N13[0], energiesNEG_M26N13[-1])
     ax1.set_ylim(0,2.9)
     ax1.set_ylabel(r'$\Delta S_{\alpha}$')
     ax1.set_xscale('symlog', linthreshx = 0.000001)       #symlog necessary to plot negative values with log scale
@@ -149,11 +126,9 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #alpha=2
     ax2.plot(energies_M26N13, data_M26N13[:,4]-data_M26N13[:,8], '.',  label=r'$S_{2}-S_{2}^{\rm{acc}}$', markersize = 9, markerfacecolor = orange[3], markeredgewidth = '0.25',color=orange[0])
     ax2.plot(energies_M26N13, data_M26N13[:,7], '.',label=r'$H_2$', markersize = 4, markerfacecolor = orange[1], markeredgewidth = '0.08',color=orange[3],zorder=7)
-    #ax2.plot(np.linspace(energies_M26N13[0],energies_M26N13[-1],1000), dsLL2, '-',linewidth = 1, color=orange[0], markerfacecolor = orange[0], markeredgewidth = '0.5',zorder=10)
     #alpha10
     ax2.plot(energies_M26N13a10, data_M26N13a10[:,4]-data_M26N13a10[:,8], '.',  label=r'$S_{10}-S_{10}^{\rm{acc}}$', markersize = 9, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
     ax2.plot(energies_M26N13a10, data_M26N13a10[:,7], '.',label=r'$H_{10}$', markersize = 4, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3],zorder=7)
-    #ax2.plot(np.linspace(energies_M26N13[0],energies_M26N13[-1],1000), dsLL10, '--',linewidth = 1, color=purple[0], markerfacecolor = purple[0], markeredgewidth = '0.5',zorder=10)
 
     ax2.set_xlim(energies_M26N13[0], energies_M26N13[-1])
     ax2.set_ylim(0,2.9)
@@ -175,7 +150,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     
     #alpha=2
     datFileNEG_M28N14 = '../Data/OP_ABC_32_16_16_2.dat'
-    dataNEG_M28N14 = np.loadtxt(datFileNEG_M28N14)
+    dataNEG_M28N14 = np.loadtxt(datFileNEG_M28N14)[0:28,:]  # Slicing to plot neg/pos interactions correctly
     
     datFile_M28N14 = '../Data/OP_ABC_32_16_16_2.dat'
     data_M28N14 = np.loadtxt(datFile_M28N14)[28:,:]  # Slicing to plot neg/pos interactions correctly
@@ -219,17 +194,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     s10NEG_M28N14 = dataNEG_M28N14[:,3]
     s10_M28N14 = data_M28N14[:,3]
 
-    #Exact Variance (With Luttinger Parameter Dependence)
-    #xNEG_14 = np.linspace(-2,-0.03,1000)
-    #x_14 = np.linspace(0.03,2,1000)
-    
-    #K_14 = pi/(2*np.arccos(-x_14/2))
-    #KNEG_14 = pi/(2*np.arccos(-xNEG_14/2))
-   
-    #l_even = 14 #partition size.
-    #sigma2LLNEG_14 = KNEG_14*np.log(l_even)/(2*pi)
-    #sigma2LL_14 = K_14*np.log(l_even)/(2*pi)
-    #kNEG = pi/(2*np.arccos(-np.linspace(energiesNEG_M26N13[1],energiesNEG_M26N13[-1],1000)/2))
+
     sigma2NEGLL = kNEG *sigma2FF_16
     alpha=2.0
     B_alpha=0.5*np.log(2*np.pi*alpha**(1/(alpha-1)))
@@ -238,7 +203,6 @@ with plt.style.context('../IOP_large.mplstyle2'):
     B_alpha=0.5*np.log(2*np.pi*alpha**(1/(alpha-1)))
     dsNEGLL10 = 0.5*np.log(sigma2NEGLL)+B_alpha
 
-    #k = pi/(2*np.arccos(-np.linspace(energies_M26N13[0],energies_M26N13[-1],1000)/2))
     sigma2LL = k * sigma2FF_16
     alpha=2.0
     B_alpha=0.5*np.log(2*np.pi*alpha**(1/(alpha-1)))
@@ -250,22 +214,18 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Negative energies subplot
     ax4 = plt.subplot(gs[2], sharex=ax1)
 
-    #ax4 = fig.add_subplot(223)
     ax4.axvline(x=-2,linestyle='--',color='#cccccc')   #Grey vertical line at transition point
 
 
     #alpha=2
     ax4.plot(energiesNEG_M28N14, dataNEG_M28N14[:,4]-dataNEG_M28N14[:,8], '.',  label=r'2, $S_{2}-S_{2}^{\mathrm{acc}}$', markersize = 9, markerfacecolor = orange[3], markeredgewidth = '0.25',color=orange[0])
     ax4.plot(energiesNEG_M28N14, dataNEG_M28N14[:,7], '.',label=r'$H_2$', markersize = 4, markerfacecolor = orange[1], markeredgewidth = '0.08',color=orange[3],zorder=11)
-    #ax4.plot(np.linspace(energiesNEG_M28N14[0],energiesNEG_M28N14[-1],1000), dsNEGLL2, '-', label=r'$\frac{1}{2}\ln{(K\sigma^2_{FF})}+\mathcal{B}_2$',linewidth = 1, color=orange[0], markerfacecolor = orange[0], markeredgewidth = '0.5',zorder=10)
     #alpha10
     ax4.plot(energiesNEG_M28N14a10, dataNEG_M28N14a10[:,4]-dataNEG_M28N14a10[:,8], '.',  label=r'10, $S_{10}-S_{10}^{\mathrm{acc}}$', markersize = 9, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
     ax4.plot(energiesNEG_M28N14a10, dataNEG_M28N14a10[:,7], '.',label=r'10, $H(\alpha=2)$', markersize = 4, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3],zorder=11)
-    #ax4.plot(np.linspace(energiesNEG_M28N14[0],energiesNEG_M28N14[-1],1000), dsNEGLL10, '--', label=r'$\frac{1}{2}\ln{(K\sigma^2_{FF})}+\mathcal{B}_{10}$',linewidth = 1, color=purple[0], markerfacecolor = purple[0], markeredgewidth = '0.5',zorder=10)
 
     ax4.text(-0.80,2.6,r'$N = 16$')
-    ax4.set_xlim(-energies_M28N14[-1], -energies_M28N14[0])
-    #ax4.set_xlim(-2.1,-0.029)
+    ax4.set_xlim(energiesNEG_M28N14[0], energiesNEG_M28N14[-1])
     ax4.set_ylim(0,2.9)
     ax4.set_ylabel(r'$\Delta S_{\alpha}$')
     ax4.set_xscale('symlog', linthreshx = 0.000001)
@@ -274,26 +234,20 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Positive energies subplot
     ax5 = plt.subplot(gs[3], sharex=ax2)
 
-    #ax5 = fig.add_subplot(224)
     ax5.axvline(x=2,color='#cccccc')   #Grey vertical line at transition point
 
     #alpha=2
     ax5.plot(energies_M28N14, data_M28N14[:,4]-data_M28N14[:,8], '.', markersize = 9, markerfacecolor = orange[3], markeredgewidth = '0.25',color=orange[0])
     ax5.plot(energies_M28N14, data_M28N14[:,7], '.', markersize = 4, markerfacecolor = orange[1], markeredgewidth = '0.08',color=orange[3],zorder=15)
-    #ax5.plot(np.linspace(energies_M28N14[0],energies_M28N14[-1],1000), dsLL2, '-', label=r'$\frac{1}{2}\ln{(K\sigma^2_{FF})}+\mathcal{B}_2$',linewidth = 1, color=orange[0], markerfacecolor = orange[0], markeredgewidth = '0.5',zorder=10)
-    #alpha10
     ax5.plot(energies_M28N14a10, data_M28N14a10[:,4]-data_M28N14a10[:,8], '.', markersize = 9, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
     ax5.plot(energies_M28N14a10, data_M28N14a10[:,7], '.', markersize = 4, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3],zorder=15)
-    #ax5.plot(np.linspace(energies_M28N14[0],energies_M28N14[-1],1000), dsLL10, '--', label=r'$\frac{1}{2}\ln{(K\sigma^2_{FF})}+\mathcal{B}_{10}$',linewidth = 1, color=purple[0], markerfacecolor = purple[0], markeredgewidth = '0.5',zorder=10)
+
 
     ax5.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction='in')
     ax5.set_xlim(energies_M28N14[0], energies_M28N14[-1])
     ax5.set_ylim(0,2.9)
     ax5.set_xscale('symlog', linthreshx = 0.000001)  #symlog necessary for log scale on negative values
     plt.xlabel(r'$V/t$',x=0)
-
-    #Legend 
-    #lgnd = plt.legend(loc=(0.245,1.75),ncol=1,fontsize=9,handlelength=1,handleheight=2, frameon=False)
 
 #############################################
 #Inset Plot
@@ -316,7 +270,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     for alphai in range(2, 11): 
         Halpha[alphai-1] = np.log(np.sum(pn16_VNEG1d5**alphai))/(1-alphai)
         HalphaG[alphai-1]=0.5*np.log(sigma216*2*np.pi*(alphai)**(1/(alphai-1)))
-    left,bottom,width,height = [0.615,0.336,0.27,0.148]
+    left,bottom,width,height = [0.615,0.320,0.27,0.148]
     ax6=plt.subplot
     ax6 = fig.add_axes([left,bottom,width,height])
     ax6.plot(alpha, Halpha, 'o', markersize = 5.5, markerfacecolor = 'None', markeredgewidth = '1.0',color=green[0],zorder=4,label=r'$P_n$')

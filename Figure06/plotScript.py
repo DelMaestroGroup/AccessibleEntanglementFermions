@@ -1,6 +1,3 @@
-#NOTE: IOP_large.mplstyle2 being used instead of IOP_large.mplstyle.
-#This script technically generates two figures and combines them vertically into a single figure.
-
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt

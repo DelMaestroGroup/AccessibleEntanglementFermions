@@ -31,8 +31,9 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #or doing a run at V/t = 0
 
     #Negative Side
-    datFileNEG = np.loadtxt("Data/EOPP30F15l15a2NEG.dat")
+    datFileNEG = np.loadtxt("../Data/OP_PBC_30_15_15_2.dat")[0:28,:]
     energiesNEG = datFileNEG[:,0]
+    print(energiesNEG[-1],energiesNEG[0])
     s1NEG = datFileNEG[:,2]
     s1opNEG = datFileNEG[:,3]
     #sigma2NEG = np.log(datFileNEG[:,6])
@@ -44,8 +45,9 @@ with plt.style.context('../IOP_large.mplstyle2'):
     dsNEGLL = 0.5*np.log(2*np.pi*np.exp(1)*sigma2NEGLL)
 
     #Positive Side
-    datFile = np.loadtxt("Data/EOPP30F15l15a2.dat")
+    datFile = np.loadtxt("../Data/OP_PBC_30_15_15_2.dat")[28:,:]
     energies = datFile[:,0]
+    print(energies[-1],energies[0])
     s1 = datFile[:,2]
     s1op = datFile[:,3]
     sigma2 = 0.5*np.log(2*np.pi*np.exp(1)*datFile[:,6])
@@ -69,14 +71,15 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Negative energies subplot
     ax1 = plt.subplot(gs[0])
     ax1.axvline(x=-2,linestyle='--',color='#cccccc',zorder=-1)   #Grey vertical line at transition point
-    ax1.plot(energiesNEG[0:-1], dsNEG[0:-1], '.', label=r'$S_{1}-S_{1}^{\rm{acc}}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
-    ax1.plot(energiesNEG[0:-1], sigma2NEG[0:-1], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax1.plot(energiesNEG, dsNEG, '.', label=r'$S_{1}-S_{1}^{\rm{acc}}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax1.plot(energiesNEG, sigma2NEG, '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
     ax1.plot(np.linspace(energiesNEG[0],energiesNEG[-1],1000), dsNEGLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e K\sigma^2_{FF})}$',linewidth = 1, color=blue[0], markerfacecolor = blue[0], markeredgewidth = '0.5',zorder=1)
     ax1.set_ylabel(r'$\Delta S_{1}$')
     ax1.set_xscale('symlog', linthreshx = 0.000001)       #symlog necessary to plot negative values with log scale
     ax1.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction = 'in')
     ax1.set_xscale('symlog', linthreshx = 0.000001)
-    ax1.set_xlim(-100,-0.029)
+    ax1.set_xlim(energiesNEG[0], energiesNEG[-1])
+    #ax1.set_xlim(-100,-0.029)
     ax1.set_ylim(0,3.1)
     #ax1.set_ylim(-0.15,7.8)
     ax1.text(-0.80,2.8,r'$N=15$')
@@ -87,11 +90,12 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2 = plt.subplot(gs[1])
     ax2.axvline(x=2, color='#cccccc',zorder=-1)
     ax2.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction = 'in')
-    ax2.plot(energies[0:-1], ds[0:-1], '.',  label=r'$S_{1}-S_{1}^{\rm{acc}}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
-    ax2.plot(energies[0:-1], sigma2[0:-1], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$', linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax2.plot(energies, ds, '.',  label=r'$S_{1}-S_{1}^{\rm{acc}}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax2.plot(energies, sigma2, '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$', linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
     ax2.plot(np.linspace(energies[0],energies[-1],1000), dsLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e K\sigma^2_{FF})}$', linewidth = 1, color=blue[0],markerfacecolor = blue[0], markeredgewidth = '0.5',zorder=1)
     ax2.set_xscale('symlog', linthreshx = 0.000001)
-    ax2.set_xlim(0.029,100)
+    ax2.set_xlim(energies[0], energies[-1])
+    #ax2.set_xlim(0.029,100)
     ax2.set_ylim(0,3.1)
 
     #Legend
@@ -103,7 +107,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #sigma2FF is calculated using the correlation matrix method
 
     #Negative Side
-    datFileNEG = np.loadtxt("Data/EOPA32F16l16a2NEG.dat")
+    datFileNEG = np.loadtxt("../Data/OP_ABC_32_16_16_2.dat")[0:28,:]
     energiesNEG = datFileNEG[:,0]
     s1NEG = datFileNEG[:,2]
     s1opNEG = datFileNEG[:,3]
@@ -116,7 +120,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     dsNEGLL = 0.5*np.log(2*np.pi*np.exp(1)*sigma2NEGLL)
 
     #Positive Side
-    datFile = np.loadtxt("Data/EOPA32F16l16a2.dat")
+    datFile = np.loadtxt("../Data/OP_ABC_32_16_16_2.dat")[28:,:]
     energies = datFile[:,0]
     s1 = datFile[:,2]
     s1op = datFile[:,3]
@@ -135,15 +139,15 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #Negative energies subplot
     ax4 = plt.subplot(gs[2])
     ax4.axvline(x=-2,linestyle='--',color='#cccccc',zorder=-1)   #Grey vertical line at transition point
-    ax4.plot(energiesNEG[0:-1], dsNEG[0:-1], '.', label=r'$\Delta s = s_{1}-s_{1}^{op}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
-    ax4.plot(energiesNEG[0:-1], sigma2NEG[0:-1], '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax4.plot(energiesNEG, dsNEG, '.', label=r'$\Delta s = s_{1}-s_{1}^{op}$', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax4.plot(energiesNEG, sigma2NEG, '.', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
     ax4.plot(np.linspace(energiesNEG[0],energiesNEG[-1],1000), dsNEGLL, '-', label=r'$\frac{1}{2}\ln{(2 \pi e \sigma^{2})}$',linewidth = 1, color=blue[0], markerfacecolor = 'w', markeredgewidth = '0.5',zorder=1)
     ax4.set_xlim(-energies[-1], -energies[0])
     ax4.set_ylabel(r'$\Delta S_{1}$')
     ax4.set_xscale('symlog', linthreshx = 0.000001)       #symlog necessary to plot negative values with log scale
     ax4.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction = 'in')
     ax4.set_xscale('symlog', linthreshx = 0.000001)
-    ax4.set_xlim(-100,-0.029)
+    ax4.set_xlim(energiesNEG[0],energiesNEG[-1])
     ax4.set_ylim(0,3.1)
     ax4.text(-0.80,2.8,r'$N=16$')
     
@@ -151,8 +155,8 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax5 = plt.subplot(gs[3])
     ax5.axvline(x=2, color='#cccccc',zorder=-1)
     ax5.tick_params(axis='both', which='both', left='off', top='off',labelleft='off', direction = 'in')
-    ax5.plot(energies[0:-1], ds[0:-1], '.', label='1, 13', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
-    ax5.plot(energies[0:-1], sigma2[0:-1], '.', linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
+    ax5.plot(energies, ds, '.', label='1, 13', linewidth = 1, color=blue[0], markerfacecolor = blue[3], markeredgewidth = '0.5',markersize=9,zorder=0)
+    ax5.plot(energies, sigma2, '.', linewidth = 1, color=blue[0], markerfacecolor = 'None', markeredgewidth = '0.5',markersize=4,zorder=2)
     ax5.plot(np.linspace(energies[0],energies[-1],1000), dsLL, '-', linewidth = 1, color=blue[0], markerfacecolor = 'w', markeredgewidth = '0.5',zorder=1)
     ax5.set_xlim(energies[0], energies[-1])
     ax5.set_xscale('symlog', linthreshx = 0.000001)
