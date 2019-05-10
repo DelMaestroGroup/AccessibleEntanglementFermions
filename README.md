@@ -20,5 +20,5 @@ The creation of these materials was supported in part by the National Science Fo
 
 ### Figures
 
-#### [t-V Model Phase Diagram (Figure 1)](https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/tree/master/Figure01)
+#### [Figure 01: t-V Model Phase Diagram](https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/tree/master/Figure01)
 <img src="https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/blob/master/Figure01/phaseDiagramTV.svg">
