@@ -25,27 +25,27 @@ with plt.style.context('../IOP_large.mplstyle2'):
 #Top Plot: One Particle Entanglement entropy dependence on the interaction potential
 
     #Load data files
-    
+
     #13 particles
 
     #alpha=2
     datFileNEG_M26N13 = '../Data/OP_PBC_30_15_15_2.dat'
     dataNEG_M26N13 = np.loadtxt(datFileNEG_M26N13)[0:28,:] # Slicing to plot neg/pos interactions correctly
-    
+
     datFile_M26N13 = '../Data/OP_PBC_30_15_15_2.dat'
     data_M26N13 = np.loadtxt(datFile_M26N13)[28:,:] # Slicing to plot neg/pos interactions correctly
 
     #alpha=10
     datFileNEG_M26N13a10 = '../Data/OP_PBC_30_15_15_10.dat'
     dataNEG_M26N13a10 = np.loadtxt(datFileNEG_M26N13a10)
-    
+
     datFile_M26N13a10 = '../Data/OP_PBC_30_15_15_10.dat'
     data_M26N13a10 = np.loadtxt(datFile_M26N13a10)
 
     #Load energies
     energiesNEG_M26N13 = dataNEG_M26N13[:,0]
     energies_M26N13 = data_M26N13[:,0]
-    
+
     energiesNEG_M26N13a10 = dataNEG_M26N13a10[:,0]
     energies_M26N13a10 = data_M26N13a10[:,0]
 
@@ -54,14 +54,14 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #13 particles
 
     #alpha=1,2
-    
+
     sigma2FF_15= 0.45909421031059594
     #sigma2FF is calculated using the correlation matrix method
     #or doing a run at V/t = 0
 
     s1NEG_M26N13 = dataNEG_M26N13[:,3]
     s1_M26N13 = data_M26N13[:,3]
-    
+
     s2NEG_M26N13 = dataNEG_M26N13[:,5]
     s2_M26N13 = data_M26N13[:,5]
 
@@ -109,7 +109,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #alpha10
     ax1.plot(energiesNEG_M26N13a10, dataNEG_M26N13a10[:,4]-dataNEG_M26N13a10[:,8], '.',  label=r'$S_{10}-S_{10}^{\rm{acc}}$', markersize = 9, markerfacecolor = purple[3], markeredgewidth = '0.25',color=purple[0])
     ax1.plot(energiesNEG_M26N13a10, dataNEG_M26N13a10[:,7], '.',label=r'$H_{10}$', markersize = 4, markerfacecolor = purple[1], markeredgewidth = '0.08',color=purple[3],zorder=3)
-    
+
     ax1.text(-.80,2.6,r'$N = 15$')
     ax1.set_xlim(energiesNEG_M26N13[0], energiesNEG_M26N13[-1])
     ax1.set_ylim(0,2.9)
@@ -134,58 +134,58 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.set_ylim(0,2.9)
     ax2.set_xscale('symlog', linthreshx = 0.000001)
 
-    #Legend 
+    #Legend
     #lgnd = plt.legend(loc=(-0.0,0.44),ncol=2,fontsize=9,handlelength=1,handleheight=2, frameon=False)
     lgnd = plt.legend(loc=(0.245,0.440),fontsize=9,handlelength=1,handleheight=1, frameon=True,facecolor='w',framealpha=0.8,edgecolor='w')
 
     #Inset Plot
     plt.subplots_adjust(wspace = 0.030)
 
-    
+
 #Bottom Plot: Operational entanglement entropies for even number of particles
 
     #Load data
-    
+
     #14 particles
-    
+
     #alpha=2
     datFileNEG_M28N14 = '../Data/OP_ABC_32_16_16_2.dat'
     dataNEG_M28N14 = np.loadtxt(datFileNEG_M28N14)[0:28,:]  # Slicing to plot neg/pos interactions correctly
-    
+
     datFile_M28N14 = '../Data/OP_ABC_32_16_16_2.dat'
     data_M28N14 = np.loadtxt(datFile_M28N14)[28:,:]  # Slicing to plot neg/pos interactions correctly
 
     #alpha=10
     datFileNEG_M28N14a10 = '../Data/OP_ABC_32_16_16_10.dat'
     dataNEG_M28N14a10 = np.loadtxt(datFileNEG_M28N14a10)
-    
+
     datFile_M28N14a10 = '../Data/OP_ABC_32_16_16_10.dat'
     data_M28N14a10 = np.loadtxt(datFile_M28N14a10)
-    
+
     #Load energies
-    
+
     energiesNEG_M28N14 = dataNEG_M28N14[:,0]
     energies_M28N14 = data_M28N14[:,0]
-    
+
     energiesNEG_M28N14a10 = dataNEG_M28N14a10[:,0]
     energies_M28N14a10 = data_M28N14a10[:,0]
 
 
     #Load operational entanglement entropies.
-    
+
     #14 particles
-    
+
     #alpha=1,2
-    
+
     sigma2FF_16=0.4650954313305221
     #sigma2FF is calculated using the correlation matrix method
 
     s1NEG_M28N14 = dataNEG_M28N14[:,3]
     s1_M28N14 = data_M28N14[:,3]
-    
+
     s2NEG_M28N14 = dataNEG_M28N14[:,5]
     s2_M28N14 = data_M28N14[:,5]
-    
+
     #alpha=4
     s4NEG_M28N14 = dataNEG_M28N14[:,3]
     s4_M28N14 = data_M28N14[:,3]
@@ -230,7 +230,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax4.set_ylabel(r'$\Delta S_{\alpha}$')
     ax4.set_xscale('symlog', linthreshx = 0.000001)
     ax4.tick_params(axis='both', which='both', right='off', top='off',labelright='off', direction='in')
-    
+
     #Positive energies subplot
     ax5 = plt.subplot(gs[3], sharex=ax2)
 
@@ -251,8 +251,8 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
 #############################################
 #Inset Plot
-    data_n16_VNEG1d5a2 = np.loadtxt("../Data/Pn_ABC_32_16_16_2_-1.5.dat")    
-    pntoa16_VNEG1d5a2 = data_n16_VNEG1d5a2[:,1]    
+    data_n16_VNEG1d5a2 = np.loadtxt("../Data/Pn_ABC_32_16_16_2_-1.5.dat")
+    pntoa16_VNEG1d5a2 = data_n16_VNEG1d5a2[:,1]
     pn16_VNEG1d5 = pntoa16_VNEG1d5a2**(1/2)
     pn16_VNEG1d5 /= np.sum(pn16_VNEG1d5)
     nav=0.0
@@ -267,7 +267,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     alpha= np.linspace(1,10,10)
     Halpha[0] = np.sum(-pn16_VNEG1d5*np.log(pn16_VNEG1d5))
     HalphaG[0]=0.5*np.log(sigma216*2*np.pi*np.e)
-    for alphai in range(2, 11): 
+    for alphai in range(2, 11):
         Halpha[alphai-1] = np.log(np.sum(pn16_VNEG1d5**alphai))/(1-alphai)
         HalphaG[alphai-1]=0.5*np.log(sigma216*2*np.pi*(alphai)**(1/(alphai-1)))
     left,bottom,width,height = [0.615,0.320,0.27,0.148]

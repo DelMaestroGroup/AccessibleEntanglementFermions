@@ -48,10 +48,10 @@ Evals = []
 for cn in [n-2,n,n+2]:
     I = _I(cn)
     var_guess = np.linspace(-π,π,cn)
-    
+
     sol,info,success,mesg = fsolve(equations,var_guess,args=(L,Δ,cn,I,0),full_output=True)
     Evals.append(E0(sol,L,Δ))
-    
+
 invκ = L*(Evals[-1] + Evals[0] - 2*Evals[1])/4
 
 uoK = invκ/(π)
@@ -63,10 +63,10 @@ EΦvals = []
 for cΦ in Φ:
     I = _I(n)
     var_guess = np.linspace(-π,π,n)
-    
+
     sol,info,success,mesg = fsolve(equations,var_guess,args=(L,Δ,n,I,cΦ),full_output=True)
     EΦvals.append(E0(sol,L,Δ))
-    
+
 fEΦ = UnivariateSpline(Φ,EΦvals,s=0,k=4)
 y_spl_2d = fEΦ.derivative(n=2)
 uK = L*π*y_spl_2d(0.0)
@@ -116,7 +116,7 @@ for i,ni in enumerate(n):
         var_guess = np.linspace(-π,π,ni)
         EΦvals = []
         for cΦ in Φ:
-            I = _I(ni)    
+            I = _I(ni)
             sol,info,success,mesg = fsolve(equations,var_guess,args=(L,cΔ,ni,I,cΦ),full_output=True)
             EΦvals.append(E0(sol,L,cΔ))
             #var_guess=sol
@@ -127,7 +127,7 @@ for i,ni in enumerate(n):
         uKvals.append(uK)
         Kvals.append(np.sqrt(uK/uoK))
         #print(Kvals)
-    for k in range(len(Kvals)):    
+    for k in range(len(Kvals)):
         Kvsn[i,k]=Kvals[k]
 
 ccΔ = np.linspace(-0.75,0.75,100)
@@ -159,7 +159,7 @@ for j,cΔ in enumerate(Δ):
             cni=cn
             if (cn>int(L/2)):
                 cni=2*int(L/2)-cn
-                
+
             I = _I(cni)
             var_guess = np.linspace(-π,π,cni)
             sol,info,success,mesg = fsolve(equations,var_guess,args=(L,cΔ,cni,I,0),full_output=True)
@@ -175,7 +175,7 @@ for j,cΔ in enumerate(Δ):
         var_guess = np.linspace(-π,π,ni)
         EΦvals = []
         for cΦ in Φ:
-            I = _I(ni)    
+            I = _I(ni)
             sol,info,success,mesg = fsolve(equations,var_guess,args=(L,cΔ,ni,I,cΦ),full_output=True)
             EΦvals.append(E0(sol,L,cΔ))
             var_guess=sol
@@ -185,7 +185,7 @@ for j,cΔ in enumerate(Δ):
         Kvals.append(np.sqrt(uK/uoK))
     #Kvals.append(π/(2.0*np.arccos(-cΔ)))
     Kvals.append(2.17633069)
-    for k in range(len(Kvals)):    
+    for k in range(len(Kvals)):
         KvsV[k,j]=Kvals[k]
 
 fig = plt.figure()
@@ -218,20 +218,20 @@ for i,c in enumerate(alpha):
         blue.append(colors.get_alpha_hex(blue[0],alpha[i]))
 
 with plt.style.context('../IOP_large.mplstyle'):
-    
+
     #Load filling fractions
     fillingFractions = np.linspace(1,14,14)/28#[i/28 for i in range(1,15)]
-    
+
     #Save Entanglement Entropies (s1=VonNeumann, s2=Renyi) to variables
-    
+
     sigma2VNEG1d5M28l14= np.loadtxt("../Data/Frac_28_14_-1.5.dat")[:,6]
     sigma2VNEG1d5M28lN= np.loadtxt("../Data/Frac_28_N_-1.5.dat")[:,6]
-    
+
     s1VNEG1d5M28l14 = np.loadtxt("../Data/Frac_28_14_-1.5.dat")[:,2]
     s1opVNEG1d5M28l14 = np.loadtxt("../Data/Frac_28_14_-1.5.dat")[:,3]
     s1VNEG1d5M28lN = np.loadtxt("../Data/Frac_28_N_-1.5.dat")[:,2]
     s1opVNEG1d5M28lN = np.loadtxt("../Data/Frac_28_N_-1.5.dat")[:,3]
-    
+
     s2VNEG1d5M28l14 = np.loadtxt("../Data/Frac_28_14_-1.5.dat")[:,4]
     s2opVNEG1d5M28l14 = np.loadtxt("../Data/Frac_28_14_-1.5.dat")[:,5]
     s2VNEG1d5M28lN = np.loadtxt("../Data/Frac_28_N_-1.5.dat")[:,4]
@@ -246,8 +246,8 @@ with plt.style.context('../IOP_large.mplstyle'):
 
     #Set height ratios for subplots
     #fig, axes = plt.subplots(1,2,sharex=True, sharey=True, squeeze=True, figsize=(12,3.71))
-    #fig.subplots_adjust(wspace=0.025)   
-    
+    #fig.subplots_adjust(wspace=0.025)
+
     #Create the figure
     #fig = plt.figure(figsize=(3.403,2.104))
     fig = plt.figure()
@@ -256,7 +256,7 @@ with plt.style.context('../IOP_large.mplstyle'):
 
     #Negative energies subplot
     ax3 = plt.subplot(gs[0])
-            
+
     yy=np.pi*1.0
     y=(X[1:]*X[-1]/L*yy)**2+1
 
@@ -272,7 +272,7 @@ with plt.style.context('../IOP_large.mplstyle'):
     #y=(X[1:]*X[1:]/L)**2+1
 
     ax4 = plt.subplot(gs[1])
-    
+
     ax4.plot(KvsV[:,0]/np.pi**2/2*np.log(y), np.exp((s1VNEG1d5M28lN[1:]-s1opVNEG1d5M28lN[1:] -0.5-np.log(2*np.pi)/2.0)*2.0) , '.', label=r'$\mathcal{B}_{1}{\rm{e}}^{2\Delta S_{1}}$', linewidth = 1, color='#4173b3',markeredgewidth='0.5',markersize=9,mfc= blue[3],zorder=10)
     ax4.plot(KvsV[:,0]/np.pi**2/2*np.log(y), np.exp((s2VNEG1d5M28lN[1:]-s2opVNEG1d5M28lN[1:]-np.log(4*np.pi)/2)*2), '.', label=r'$\mathcal{B}_{2}{\rm{e}}^{2\Delta S_{2}}$', linewidth = 1, color='#ff8c00',markeredgewidth='0.5',markersize=6,mfc= orange[3],zorder=10)
     ax4.plot(KvsV[:,0]/np.pi**2/2*np.log(y), sigma2VNEG1d5M28lN[1:], '.', label=r'$ \sigma^2$', linewidth = 1, color='#000000',markeredgewidth='0.5',markersize=4,mfc= '#000000',zorder=10)
@@ -313,6 +313,6 @@ with plt.style.context('../IOP_large.mplstyle'):
     plt.subplots_adjust(bottom=0.18)
     #Adjust space between subplots
     plt.subplots_adjust(wspace = 0.040)
-    
-    
+
+
 plt.savefig('fillingFractionDependence.pdf', transparent=False)

@@ -23,7 +23,7 @@ for i,c in enumerate(alpha):
         red.append(colors.get_alpha_hex(red[0],beta[i]))
 
 with plt.style.context('../IOP_large.mplstyle2'):
-    
+
 #Load the files
 
     sigma2FF= 0.45909421031059594
@@ -85,7 +85,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax1.text(-0.80,2.8,r'$N=15$')
 
 
-    
+
     #Positive energies subplot
     ax2 = plt.subplot(gs[1])
     ax2.axvline(x=2, color='#cccccc',zorder=-1)
@@ -102,7 +102,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     lgnd = plt.legend(loc=(0.245,0.567),fontsize=9,handlelength=1,handleheight=1, frameon=True, facecolor='w', framealpha=0.8,edgecolor='w')
 
     ################################
-    
+
     sigma2FF=0.4650954313305221
     #sigma2FF is calculated using the correlation matrix method
 
@@ -150,7 +150,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax4.set_xlim(energiesNEG[0],energiesNEG[-1])
     ax4.set_ylim(0,3.1)
     ax4.text(-0.80,2.8,r'$N=16$')
-    
+
     #Positive energies subplot
     ax5 = plt.subplot(gs[3])
     ax5.axvline(x=2, color='#cccccc',zorder=-1)
@@ -164,9 +164,9 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax5.set_xlim(0.029,100)
 ###################################
     #V/t = -1.5
-    data_n16_VNEG1d5a2 = np.loadtxt("../Data/Pn_ABC_32_16_16_2_-1.5.dat")    
-    
-    #Load particle numbers 
+    data_n16_VNEG1d5a2 = np.loadtxt("../Data/Pn_ABC_32_16_16_2_-1.5.dat")
+
+    #Load particle numbers
     n16List = data_n16_VNEG1d5a2[:,0]
 
     #Save probabilities
@@ -176,7 +176,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     pntoa16_VNEG1d5a2 = data_n16_VNEG1d5a2[:,1]
     pn16_VNEG1d5 = pntoa16_VNEG1d5a2**(1/2)
     pn16_VNEG1d5 /= np.sum(pn16_VNEG1d5)
-    
+
     nav=0.0
     sigma216=0.0
     for i,c in enumerate(pn16_VNEG1d5):
@@ -201,7 +201,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     plt.legend(loc=(0.120,0.020),fontsize=9,ncol=1,frameon=False,handletextpad=0.08)
 
 ###################################
-    
+
 
 
     #Remove numbers from real axes of top plots

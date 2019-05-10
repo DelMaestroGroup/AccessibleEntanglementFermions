@@ -5,8 +5,8 @@ from matplotlib import gridspec
 import numpy as np
 import colors
 
-orange = ["#4173b3"] #Actually blue  
-blue = ["#ff8c00"]   #Actually orange 
+orange = ["#4173b3"] #Actually blue
+blue = ["#ff8c00"]   #Actually orange
 green = ["#66cdaa"]
 red = ["#e85c47"]
 
@@ -17,17 +17,17 @@ for i,c in enumerate(alpha):
         orange.append(colors.get_alpha_hex(orange[0],alpha[i]))
         green.append(colors.get_alpha_hex(green[0],alpha[i]))
         red.append(colors.get_alpha_hex(red[0],alpha[i]))
-        
+
 with plt.style.context('../IOP_large.mplstyle2'):
 
-    #Top Plot: Probabilities vs Particle Number in Subsystem Size (For N=15); N=Total Number of Particles   
-       
+    #Top Plot: Probabilities vs Particle Number in Subsystem Size (For N=15); N=Total Number of Particles
+
     #V/t = +-1.5
     data_n15_V1d5a2 = np.loadtxt("../Data/PnToK_30_15_15_1.5_2.dat")
     data_n16_V1d5a2 = np.loadtxt("../Data/PnToK_32_16_16_1.5_2.dat")
     data_n15_VNEG1d5a2 = np.loadtxt("../Data/PnToK_30_15_15_-1.5_2.dat")
     data_n16_VNEG1d5a2 = np.loadtxt("../Data/PnToK_32_16_16_-1.5_2.dat")
-    
+
     #V/t = +- 1.0
     data_n15_V1a2 = np.loadtxt("../Data/PnToK_30_15_15_1.0_2.dat")
     data_n16_V1a2 = np.loadtxt("../Data/PnToK_32_16_16_1.0_2.dat")
@@ -38,21 +38,21 @@ with plt.style.context('../IOP_large.mplstyle2'):
     data_n15_V0a2 = np.loadtxt("../Data/PnToK_30_15_15_0.0_2.dat")
     data_n16_V0a2 = np.loadtxt("../Data/PnToK_32_16_16_0.0_2.dat")
 
-    #Load particle numbers 
+    #Load particle numbers
     n15List = data_n15_VNEG1d5a2[:,0]
     n16List = data_n16_VNEG1d5a2[:,0]
 
     #Lists of Interaction Strengths and Luttinger Parameters
-    VotList = [-1.5,-1.0,0.0,1.0,1.5]       
-    k = [np.pi/(2*np.arccos(-Vot/2)) for Vot in VotList] 
-    
+    VotList = [-1.5,-1.0,0.0,1.0,1.5]
+    k = [np.pi/(2*np.arccos(-Vot/2)) for Vot in VotList]
+
     #Save probabilities and rescale with Luttinger Parameter
-    
+
     #15 particles
     #V/t = +-1.5
     pna15_V1d5a2 = data_n15_V1d5a2[:,1]
     pna15_VNEG1d5a2 = data_n15_VNEG1d5a2[:,1]
-    
+
     #V/t = +-1.0
     pna15_V1a2 = data_n15_V1a2[:,1]
     pna15_VNEG1a2 = data_n15_VNEG1a2[:,1]
@@ -64,7 +64,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     #V/t = +-1.5
     pna16_V1d5a2 = data_n16_V1d5a2[:,1]
     pna16_VNEG1d5a2 = data_n16_VNEG1d5a2[:,1]
-    
+
     #V/t = +-1.0
     pna16_V1a2 = data_n16_V1a2[:,1]
     pna16_VNEG1a2 = data_n16_VNEG1a2[:,1]
@@ -77,10 +77,10 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     #Set height ratios for subplots
     gs = gridspec.GridSpec(2,1)
-    
+
     #N=15
     ax1 = plt.subplot(gs[0])
-    
+
     #List of Markersizes
     ms = ['Nan',2.50,5.25,8.00,10.75,13.50]
 
@@ -98,10 +98,10 @@ with plt.style.context('../IOP_large.mplstyle2'):
 
     ax1.set_ylabel(r'$\mathcal{A}_2(K)(P_{n,2})^{K}$')
     ax1.text(13,1E-06,r'$N=15$')
-    
+
     lgnd = plt.legend(loc=(0.355,0.125), fontsize=11,ncol=1,frameon=False,handletextpad=0.08,title=r'$K, V/t$')
     lgnd.get_title().set_position((7.0,0))
-  
+
     #N=16
     ax2 = plt.subplot(gs[1])
 
@@ -125,7 +125,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     insetData = np.loadtxt("../Data/PnTok_n8_a2.dat")
     n8Probs = insetData[:,0]
     K = insetData[:,1]
-    
+
     left,bottom,width,height = [0.408,0.118,0.30,0.30]
     ax2 = fig.add_axes([left,bottom,width,height])
     ax2.plot(K[4],n8Probs[4],'o',markersize = ms[5], markerfacecolor = blue[5], markeredgewidth = '0.25',color=blue[0],zorder=4)
@@ -133,7 +133,7 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.plot(K[2],n8Probs[2],'o',markersize = ms[3], markerfacecolor = blue[3], markeredgewidth = '0.25',color=blue[0],zorder=4)
     ax2.plot(K[1],n8Probs[1],'o',markersize = ms[2], markerfacecolor = blue[2], markeredgewidth = '0.25',color=blue[0],zorder=4)
     ax2.plot(K[0],n8Probs[0],'o',markersize = ms[1], markerfacecolor = blue[1], markeredgewidth = '0.25',color=blue[0],zorder=4)
-    
+
     #Add marker at the peaks
     ax2.set_xlabel(r'$K$')
     ax2.set_ylabel(r'$\mathcal{A}_2(K)(P_{8,2})^{K}$')
@@ -141,12 +141,12 @@ with plt.style.context('../IOP_large.mplstyle2'):
     ax2.set_aspect(1.618033*4)
     ax2.set_xticks([1, 1.5,2])
 
-###################################          
+###################################
 
     # remove vertical gap between subplots
     plt.subplots_adjust(hspace=0.15)
-    
+
     #Adjust space between subplots
     plt.subplots_adjust(wspace = 0.030)
-    
+
     plt.savefig('TLLCollapse.pdf')
