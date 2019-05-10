@@ -14,4 +14,4 @@ The creation of these materials was supported in part by the National Science Fo
 
 #### [t-V Model Phase Diagram (Figure 1)](https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/tree/master/Figure01)
 
-<img src="https://raw.githubusercontent.com/DelMaestroGroup/AccessibleEntanglementFermions/master/Figure01/phaseDiagramTV.svg">
+<img src="https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/blob/master/Figure01/phaseDiagramTV.svg">
