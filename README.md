@@ -13,11 +13,12 @@ The data in this project was generated via exact diagonalization and the density
 * [DMRG for Accessible Entanglement](https://github.com/DelMaestroGroup/DMRG)
 * [ED for Accessible Entanglement](https://github.com/DelMaestroGroup/tV_Accessible_Entanglement)
 
-
+### Support
 The creation of these materials was supported in part by the National Science Foundation under Award No. DMR-1553991.
 
 [<img width="100px" src="https://www.nsf.gov/images/logos/NSF_4-Color_bitmap_Logo.png">](http://www.nsf.gov/awardsearch/showAward?AWD_ID=1553991)
 
+### Figures
 
 #### [t-V Model Phase Diagram (Figure 1)](https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/tree/master/Figure01)
 <img src="https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/blob/master/Figure01/phaseDiagramTV.svg">
