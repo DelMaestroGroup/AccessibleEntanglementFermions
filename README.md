@@ -7,11 +7,17 @@ For indistinguishable itinerant particles subject to a superselection rule fixin
 ### Description
 This repository includes links, code, scripts and data to generate the figures in [arXiv:1905.03312](https://arxiv.org/abs/1905.03312).
 
+### Requires
+The data in this project was generated via exact diagonalization and the density matrix renormalization group.  Everything included in the [Data](https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/tree/master/Data) directory was generated via:
+
+* [DMRG for Accessible Entanglement](https://github.com/DelMaestroGroup/DMRG)
+* [ED for Accessible Entanglement](https://github.com/DelMaestroGroup/tV_Accessible_Entanglement)
+
+
 The creation of these materials was supported in part by the National Science Foundation under Award No. DMR-1553991.
 
 [<img width="100px" src="https://www.nsf.gov/images/logos/NSF_4-Color_bitmap_Logo.png">](http://www.nsf.gov/awardsearch/showAward?AWD_ID=1553991)
 
 
 #### [t-V Model Phase Diagram (Figure 1)](https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/tree/master/Figure01)
-
 <img src="https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/blob/master/Figure01/phaseDiagramTV.svg">
