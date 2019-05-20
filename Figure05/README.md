@@ -1,3 +1,5 @@
+# Figure 05: Difference Between Full and Accessible Rényi Entanglement Entropies
+
 <img src="https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/blob/master/Figure05/higherAlphaDeltaS_N15N16.svg">
 
 Interaction dependence of the difference between the \ren and accessible entanglement entropy $\Delta S_\alpha =  S_{\alpha} - S_{\alpha}^{\mathrm{acc}}$.  Large symbols are computed via exact diagonalization for the ground state of the $t-V$ model at half-filling with a spatial partition corresponding to $L/2$ sites.  Small symbols are the classical \ren entropies $H_\alpha$ computed from $P_n$, the probability of finding $n$ particles in the spatial subregion.  We observe $H_{\alpha} \leq \Delta S_{\alpha}$ with the lower bound being nearly saturated over a wide range of interactions, but is worse for even $N$ and as $\alpha$ is increased from 2 to 10.  This is quantified in the inset which compares $H_\alpha$ computed from the exact probability distribution $P_n$ with that obtained from a Gaussian with the same mean and variance as $P_n$ for $N=16$.
