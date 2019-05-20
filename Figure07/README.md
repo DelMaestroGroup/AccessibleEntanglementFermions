@@ -1,3 +1,5 @@
+# Figure 07: Collapse of Local Particle Number Probability Distribution for Varying Luttinger Parameter
+
 <img src="https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/blob/master/Figure07/TLLCollapse.svg">
 
 The effective probability distribution $P_{n,\alpha=2}$ for the ground state of the $t-V$ model at half-filling and for different interaction strengths $V/t$ in the TLL phase is  rescaled as $[P_{n,2}]^{K}$, were $K$ is the corresponding Luttinger parameter computed from Eq.~\eqref{eq:KtV}.  While the probabilities seem to show collapse near the middle of the
