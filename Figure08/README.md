@@ -1,3 +1,5 @@
+# Figure 08: Filling Fraction Dependence of the Local Particle Number Distribution's Variance
+
 <img src="https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/blob/master/Figure08/fillingFractionDependence.svg">
 
 The filling fraction dependence of the variance $\sigma^2$  (black
