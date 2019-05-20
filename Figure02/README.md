@@ -1,4 +1,4 @@
-# t-V Model Phase Diagram
+# Figure 02: Accessible Entanglement Entropies in the t-V Model
 
 <img src="https://github.com/DelMaestroGroup/AccessibleEntanglementFermions/blob/master/Figure02/operationalEntanglementEntropies_SOP5.svg">
 
